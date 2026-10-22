@@ -1,605 +1,1476 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COTECH — Tech Repair, AI Integration &amp; Smart Home Setup</title>
-<meta name="description" content="COTECH helps people and businesses fix their technology, integrate AI into everyday workflows, learn their devices, and secure their homes.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Law Office of Edward J. O'Reilly | Long Beach Trial &amp; Business Attorney</title>
+<!-- Revision 3.3: red-white-blue palette, rotating knot mark in hero, Google reviews, Stripe payments, bar number removed -->
+<meta name="description" content="The Law Office of Edward J. O'Reilly (O'Reilly Law Associates) has represented individuals, families and businesses from 1 World Trade Center in Long Beach, California since 2006. Personal injury, real estate, business, employment, maritime and civil litigation. Se habla español.">
 
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+<!-- Tailwind (Play CDN) + config -->
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          parch:    '#F7F8FA',
+          paper:    '#FFFFFF',
+          navy:     '#0B1D3A',
+          charcoal: '#0A1530',
+          brass:    '#B31B2C',
+          'brass-lt': '#E9737C',
+          'brass-ink': '#9B1C28',
+          ink:      '#0B1D3A',
+          mute:     '#475569',
+          rule:     'rgba(11,29,58,0.15)'
+        },
+        fontFamily: {
+          serif: ['"Cormorant Garamond"', 'Georgia', '"Times New Roman"', 'serif'],
+          sans:  ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif']
+        },
+        maxWidth: { site: '1280px' }
+      }
+    }
+  };
+</script>
+
+<!-- GSAP + ScrollTrigger + Lenis -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
 <style>
-  /* ---------- Tokens ---------- */
-  :root{
-    --bg: #090c13;
-    --bg-elev: #12172333;
-    --bg-card: #121826;
-    --bg-card-hover: #161d2d;
-    --text: #e8ecf4;
-    --text-dim: #8b93a7;
-    --text-faint: #545e73;
-    --blue: #34a8ff;
-    --violet: #8b6bff;
-    --green: #38e6a0;
-    --border: rgba(255,255,255,0.09);
-    --border-bright: rgba(255,255,255,0.18);
-    --gradient: linear-gradient(135deg, var(--blue), var(--violet));
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
-    --radius: 14px;
-    --max-w: 1180px;
-  }
+  /* Lenis recommended base */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
 
-  *{ box-sizing: border-box; margin:0; padding:0; }
-  html{ scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior: auto; }
-    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  }
+  html { background: #F7F8FA; }
+  body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: clip; }
+  :focus-visible { outline: 2px solid #E9737C; outline-offset: 3px; }
+  ::selection { background: #B31B2C; color: #FFFFFF; }
 
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
+  .wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
+  .eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
 
-  /* subtle circuit-grid backdrop */
-  body::before{
-    content:"";
-    position: fixed; inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
-    pointer-events: none;
-    z-index: 0;
-  }
+  /* ---------- Masthead ---------- */
+  #utility { height: 44px; }
+  #navbar { background: #0B1D3A; transition: background-color .5s ease, box-shadow .5s ease, backdrop-filter .5s ease; }
+  #navbar .nav-row { transition: padding .45s cubic-bezier(.2,.8,.2,1); }
+  #navbar .brand-sub { transition: opacity .35s ease, max-height .45s ease; max-height: 20px; }
+  #masthead.is-compact #navbar { background: rgba(11,29,58,.9); -webkit-backdrop-filter: blur(12px) saturate(1.2); backdrop-filter: blur(12px) saturate(1.2); box-shadow: 0 14px 34px -18px rgba(0,0,0,.6); }
+  #masthead.is-compact #navbar .nav-row { padding-top: 10px; padding-bottom: 10px; }
+  #masthead.is-compact .brand-sub { opacity: 0; max-height: 0; }
+  #masthead.is-compact .crest { width: 40px; height: 40px; }
+  .crest { transition: width .45s ease, height .45s ease, background-color .3s, color .3s; }
+  .nav-link { position: relative; padding: 8px 0; }
+  .nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 2px; height: 1px; background: #B31B2C; transform: scaleX(0); transform-origin: right; transition: transform .35s ease; }
+  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
 
-  img, svg{ display:block; max-width:100%; }
-  a{ color: inherit; text-decoration:none; }
-  ul{ list-style:none; }
-  section{ position: relative; z-index:1; }
+  /* ---------- Buttons ---------- */
+  .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; font-weight: 600; font-size: 14.5px; letter-spacing: .03em; overflow: hidden; isolation: isolate; transition: color .35s ease, border-color .35s ease, transform .25s ease, box-shadow .35s ease; }
+  .btn::before { content: ''; position: absolute; inset: 0; z-index: -1; transform: scaleY(0); transform-origin: bottom; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .btn:hover::before { transform: scaleY(1); }
+  .btn:active { transform: scale(.98); }
+  .btn .arr { transition: transform .3s ease; }
+  .btn:hover .arr { transform: translateX(5px); }
+  .btn-brass { background: #B31B2C; color: #FFFFFF; }
+  .btn-brass::before { background: #8E1522; }
+  .btn-brass:hover { box-shadow: 0 16px 30px -16px rgba(179,27,44,.9); }
+  .btn-ghost { border: 1px solid rgba(11,29,58,.4); color: #0B1D3A; }
+  .btn-ghost::before { background: #0B1D3A; }
+  .btn-ghost:hover { color: #F7F8FA; border-color: #0B1D3A; }
+  .btn-ghost-lt { border: 1px solid rgba(247,248,250,.45); color: #F7F8FA; }
+  .btn-ghost-lt::before { background: #F7F8FA; }
+  .btn-ghost-lt:hover { color: #0B1D3A; border-color: #F7F8FA; }
 
-  .wrap{ max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
-
-  h1,h2,h3{ font-family: var(--font-display); letter-spacing:-0.02em; line-height:1.1; }
-
-  .eyebrow{
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
-    display:flex; align-items:center; gap:10px;
-    margin-bottom: 14px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:7px; height:7px; border-radius:50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-  }
-
-  /* ---------- Skip link ---------- */
-  .skip-link{
-    position:absolute; left:-999px; top:auto;
-    background: var(--blue); color:#04101f; padding: 10px 16px;
-    border-radius: 8px; z-index: 999; font-weight:600;
-  }
-  .skip-link:focus{ left: 16px; top: 16px; }
-
-  /* ---------- Focus visibility ---------- */
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
-    outline: 2px solid var(--blue);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-
-  /* ---------- Header ---------- */
-  header{
-    position: fixed; top:0; left:0; right:0; z-index: 100;
-    background: rgba(9,12,19,0.65);
-    backdrop-filter: blur(14px) saturate(140%);
-    border-bottom: 1px solid transparent;
-    transition: border-color .3s ease, background .3s ease;
-  }
-  header.scrolled{
-    border-bottom-color: var(--border);
-    background: rgba(9,12,19,0.88);
-  }
-  .nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding: 16px 24px; max-width: var(--max-w); margin:0 auto;
-  }
-  .logo{
-    font-family: var(--font-display); font-weight:700; font-size:1.25rem;
-    display:flex; align-items:center; gap:9px; letter-spacing:-0.01em;
-  }
-  .logo .dot{
-    width:9px; height:9px; border-radius:2px;
-    background: var(--gradient);
-    box-shadow: 0 0 12px rgba(139,107,255,0.7);
-    transform: rotate(45deg);
-  }
-  .nav-links{
-    display:flex; gap: 34px; align-items:center;
-  }
-  .nav-links a{
-    font-size: 0.94rem; color: var(--text-dim);
-    transition: color .2s ease;
-    position:relative;
-  }
-  .nav-links a:not(.nav-cta):hover{ color: var(--text); }
-  .nav-links a:not(.nav-cta)::after{
-    content:""; position:absolute; left:0; bottom:-5px; width:0; height:1px;
-    background: var(--blue); transition: width .25s ease;
-  }
-  .nav-links a:not(.nav-cta):hover::after{ width:100%; }
-
-  .btn{
-    font-family: var(--font-body); font-weight:600; font-size: 0.92rem;
-    padding: 11px 22px; border-radius: 9px; border: none; cursor:pointer;
-    display:inline-flex; align-items:center; gap:8px;
-    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-  }
-  .btn-primary{
-    background: var(--gradient); color:#04101f;
-    box-shadow: 0 4px 20px -4px rgba(139,107,255,0.5);
-  }
-  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 8px 26px -4px rgba(139,107,255,0.7); }
-  .btn-ghost{
-    background: transparent; color: var(--text); border: 1px solid var(--border-bright);
-  }
-  .btn-ghost:hover{ background: rgba(255,255,255,0.05); }
-
-  .nav-toggle{
-    display:none; background:none; border:none; color:var(--text); cursor:pointer; padding:6px;
-  }
-  .nav-toggle svg{ width:24px; height:24px; }
+  /* ---------- Lines ---------- */
+  .draw-x { transform-origin: left center; }
+  .draw-y { transform-origin: center top; }
 
   /* ---------- Hero ---------- */
-  .hero{
-    padding: 168px 0 110px;
-    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items:center;
-  }
-  .hero h1{
-    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
-    margin-bottom: 22px;
-  }
-  .hero h1 span{
-    background: var(--gradient);
-    -webkit-background-clip: text; background-clip:text; color:transparent;
-  }
-  .hero p{
-    color: var(--text-dim); font-size: 1.1rem; max-width: 480px; margin-bottom: 34px;
-  }
-  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-grid-bg { background-image: linear-gradient(rgba(11,29,58,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(11,29,58,.05) 1px, transparent 1px); background-size: 96px 96px; }
+  .hero-line { display: block; overflow: hidden; padding-bottom: .09em; margin-bottom: -.09em; }
+  .hero-line > span { display: block; will-change: transform; }
+  .mask-line { display: block; overflow: hidden; padding-bottom: .09em; margin-bottom: -.09em; }
+  .mask-line > span { display: block; }
+  .corner { position: absolute; width: 22px; height: 22px; border-color: #B31B2C; z-index: 3; pointer-events: none; }
 
-  /* terminal signature element */
-  .terminal{
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow:hidden;
-    box-shadow: 0 30px 80px -30px rgba(0,0,0,0.7);
-  }
-  .terminal-bar{
-    display:flex; align-items:center; gap:8px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,0.02);
-  }
-  .terminal-bar span{ width:10px; height:10px; border-radius:50%; background: var(--text-faint); }
-  .terminal-bar .label{
-    margin-left:8px; font-family: var(--font-mono); font-size:0.75rem; color: var(--text-faint);
-  }
-  .terminal-body{
-    padding: 22px 20px 26px;
-    font-family: var(--font-mono); font-size: 0.88rem;
-    color: var(--text-dim);
-    min-height: 210px;
-  }
-  .terminal-body .line{ margin-bottom: 10px; opacity:0; animation: reveal .4s ease forwards; }
-  .terminal-body .ok{ color: var(--green); }
-  .terminal-body .accent{ color: var(--blue); }
-  .cursor{
-    display:inline-block; width:7px; height:14px; background: var(--blue);
-    vertical-align: -2px; animation: blink 1s steps(1) infinite;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-  @keyframes reveal{ to{ opacity:1; } }
+  /* evaluator */
+  .pill { min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 14px; border: 1px solid rgba(247,248,250,.24); background: rgba(247,248,250,.04); font-size: 14px; font-weight: 500; text-align: left; transition: background-color .25s, border-color .25s, transform .25s, color .25s; }
+  .pill::after { content: ''; width: 7px; height: 7px; border-top: 1.5px solid #B31B2C; border-right: 1.5px solid #B31B2C; transform: rotate(45deg); transition: transform .25s; }
+  .pill:hover { border-color: #B31B2C; background: rgba(179,27,44,.12); transform: translateY(-2px); }
+  .pill:hover::after { transform: rotate(45deg) translate(2px,-2px); }
+  .fld { display: block; }
+  .fld > span { display: block; margin-bottom: 6px; font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+  .fld input, .fld textarea, .fld select { width: 100%; min-height: 46px; padding: 10px 14px; border-radius: 0; transition: border-color .2s, box-shadow .2s, background-color .2s; }
+  .fld textarea { min-height: 88px; resize: vertical; }
+  .fld-dk > span { color: rgba(247,248,250,.82); }
+  .fld-dk input, .fld-dk textarea { background: rgba(247,248,250,.07); border: 1px solid rgba(247,248,250,.26); color: #F7F8FA; }
+  .fld-dk input::placeholder, .fld-dk textarea::placeholder { color: rgba(247,248,250,.5); }
+  .fld-dk input:focus, .fld-dk textarea:focus { outline: none; border-color: #B31B2C; box-shadow: 0 0 0 3px rgba(179,27,44,.3); }
+  .fld-lt > span { color: #0B1D3A; }
+  .fld-lt input, .fld-lt textarea, .fld-lt select { background: #fff; border: 1px solid rgba(11,29,58,.28); color: #0B1D3A; }
+  .fld-lt input::placeholder, .fld-lt textarea::placeholder { color: #6B7180; }
+  .fld-lt input:focus, .fld-lt textarea:focus, .fld-lt select:focus { outline: none; border-color: #0B1D3A; box-shadow: 0 0 0 3px rgba(179,27,44,.45); }
+  .seg { flex: 1; height: 3px; background: rgba(247,248,250,.18); transition: background-color .4s; }
+  .seg.on { background: #B31B2C; }
 
-  /* ---------- Section shell ---------- */
-  .section{ padding: 100px 0; }
-  .section-head{ max-width: 620px; margin-bottom: 54px; }
-  .section-head h2{ font-size: clamp(1.9rem, 3.4vw, 2.5rem); margin-bottom: 14px; }
-  .section-head p{ color: var(--text-dim); font-size: 1.05rem; }
+  /* ---------- Flags marquee ---------- */
+  .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .track { display: flex; width: max-content; gap: 18px; will-change: transform; }
+  .flag { flex: none; height: 64px; width: 96px; display: grid; place-items: center; background: rgba(247,248,250,.04); border: 1px solid rgba(247,248,250,.12); padding: 7px; transition: border-color .3s, transform .3s, background-color .3s; }
+  .flag img { max-height: 100%; max-width: 100%; object-fit: contain; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+  .flag:hover { border-color: #B31B2C; background: rgba(179,27,44,.1); transform: translateY(-3px); }
 
-  /* ---------- Services ---------- */
-  .services-grid{
-    display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  /* ---------- Practice: pinned sidebar + stacked cards ---------- */
+  .pa-card { position: relative; background: #FFFFFF; border: 1px solid rgba(11,29,58,.15); transform-origin: center top; transition: border-color .35s ease, box-shadow .35s ease; }
+  .pa-card:hover { border-color: #B31B2C; box-shadow: 0 30px 60px -36px rgba(11,29,58,.55); }
+  .pa-shade { position: absolute; inset: -1px; background: #F7F8FA; opacity: 0; pointer-events: none; z-index: 2; }
+  .pa-card .pa-ic { transition: background-color .3s, color .3s, border-color .3s; }
+  .pa-card:hover .pa-ic { background: #0B1D3A; color: #B31B2C; border-color: #0B1D3A; }
+  .pa-card li { position: relative; padding-left: 18px; }
+  .pa-card li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; background: #B31B2C; transform: rotate(45deg); }
+  .pa-link .arr { transition: transform .3s; }
+  .pa-link:hover .arr { transform: translateX(6px); }
+  @media (min-width: 768px) {
+    .pa-card { position: sticky; top: calc(124px + var(--i) * 14px); min-height: 360px; }
   }
-  .service-card{
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 30px 28px;
-    transition: border-color .25s ease, transform .25s ease, background .25s ease;
-  }
-  .service-card:hover{
-    border-color: var(--border-bright);
-    background: var(--bg-card-hover);
-    transform: translateY(-4px);
-  }
-  .service-top{
-    display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;
-  }
-  .service-icon{
-    width:46px; height:46px; border-radius:10px;
-    background: rgba(52,168,255,0.09);
-    border: 1px solid rgba(52,168,255,0.25);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .service-icon svg{ width:22px; height:22px; stroke: var(--blue); }
-  .service-code{
-    font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-faint);
-    letter-spacing: 0.06em;
-  }
-  .service-card h3{ font-size: 1.18rem; margin-bottom: 10px; }
-  .service-card p{ color: var(--text-dim); font-size: 0.95rem; }
+  .pa-seg { height: 2px; flex: 1; background: rgba(11,29,58,.15); transition: background-color .4s; }
+  .pa-seg.on { background: #B31B2C; }
 
-  /* ---------- About ---------- */
-  .about{
-    display:grid; grid-template-columns: 0.95fr 1.05fr; gap: 60px; align-items:start;
-  }
-  .about-points{ display:grid; gap: 22px; margin-top: 8px; }
-  .about-point{
-    display:flex; gap: 16px; padding: 20px;
-    border: 1px solid var(--border); border-radius: 12px;
-    background: var(--bg-card);
-  }
-  .about-point .mark{
-    font-family: var(--font-mono); color: var(--green); font-size:0.85rem; flex-shrink:0; padding-top:2px;
-  }
-  .about-point h4{ font-family: var(--font-display); font-size: 1.02rem; margin-bottom: 6px; }
-  .about-point p{ color: var(--text-dim); font-size: 0.93rem; }
+  /* ---------- Heritage ---------- */
+  .chapter .dot { transition: background-color .4s, border-color .4s, box-shadow .4s; }
+  .chapter.is-lit .dot { background: #B31B2C; border-color: #B31B2C; box-shadow: 0 0 0 7px rgba(179,27,44,.18); }
+  .chapter .ch-body { transition: opacity .5s ease; }
 
-  /* ---------- Contact ---------- */
-  .contact-shell{
-    display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 50px;
-  }
-  .contact-info h2{ font-size: clamp(1.9rem, 3.4vw, 2.4rem); margin-bottom: 16px; }
-  .contact-info p{ color: var(--text-dim); margin-bottom: 26px; }
-  .contact-detail{
-    display:flex; gap:12px; align-items:center; margin-bottom:16px;
-    font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-dim);
-  }
-  .contact-detail svg{ width:18px; height:18px; stroke: var(--blue); flex-shrink:0; }
+  /* ---------- Opposing parties ---------- */
+  .op-grid { border-top: 1px solid rgba(11,29,58,.15); border-left: 1px solid rgba(11,29,58,.15); }
+  .op-tile { position: relative; aspect-ratio: 3 / 2; display: grid; place-items: center; padding: 18px; border-right: 1px solid rgba(11,29,58,.15); border-bottom: 1px solid rgba(11,29,58,.15); background: #F7F8FA; transition: background-color .35s ease; }
+  .op-tile img { max-width: 78%; max-height: 64%; object-fit: contain; filter: grayscale(1) contrast(1.05); opacity: .62; transition: filter .45s ease, opacity .45s ease, transform .45s ease; }
+  .op-tile::after { content: ''; position: absolute; inset: -1px; border: 1px solid #B31B2C; opacity: 0; transition: opacity .3s; pointer-events: none; }
+  .op-tile:hover { background: #fff; z-index: 1; }
+  .op-tile:hover::after { opacity: 1; }
+  .op-tile:hover img { filter: none; opacity: 1; transform: scale(1.04); }
 
-  form{
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-    display:grid; gap: 18px;
-  }
-  .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  label{
-    display:block; font-family: var(--font-mono); font-size:0.76rem;
-    color: var(--text-faint); text-transform:uppercase; letter-spacing:0.06em;
-    margin-bottom: 8px;
-  }
-  input, textarea, select{
-    width:100%; background: #0c1119; border: 1px solid var(--border);
-    border-radius: 8px; padding: 12px 14px; color: var(--text);
-    font-family: var(--font-body); font-size: 0.95rem;
-    transition: border-color .2s ease;
-  }
-  input::placeholder, textarea::placeholder{ color: var(--text-faint); }
-  input:focus, textarea:focus, select:focus{ border-color: var(--blue); }
-  textarea{ resize: vertical; min-height: 110px; }
-  select{ appearance:none; -webkit-appearance:none; cursor:pointer;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238b93a7' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
-    background-repeat: no-repeat; background-position: right 14px center;
-  }
-  .form-note{ font-size: 0.8rem; color: var(--text-faint); }
+  /* ---------- Roster ---------- */
+  .atty { background: #FFFFFF; border: 1px solid rgba(11,29,58,.15); transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .45s; }
+  .atty:hover { transform: translateY(-8px); border-color: #B31B2C; box-shadow: 0 36px 60px -40px rgba(11,29,58,.6); }
+  .atty .frame { transition: border-color .35s; }
+  .atty:hover .frame { border-color: #B31B2C; }
 
-  /* ---------- Footer ---------- */
-  footer{
-    border-top: 1px solid var(--border);
-    padding: 40px 0;
-  }
-  .footer-row{
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
-  }
-  .footer-row p{ color: var(--text-faint); font-size: 0.85rem; font-family: var(--font-mono); }
-  .social-row{ display:flex; gap: 14px; }
-  .social-row a{
-    width: 36px; height:36px; border-radius:8px; border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center;
-    color: var(--text-dim); transition: border-color .2s ease, color .2s ease;
-  }
-  .social-row a:hover{ border-color: var(--border-bright); color: var(--text); }
-  .social-row svg{ width:17px; height:17px; }
+  /* ---------- 3.1 photography ---------- */
+  .pa-img { position: relative; margin-top: 20px; aspect-ratio: 21 / 8; overflow: hidden; border: 1px solid rgba(11,29,58,.15); background: #0B1D3A; }
+  .pa-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85); transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .5s; }
+  .pa-card:hover .pa-img img { transform: scale(1.05); filter: none; }
+  .ch-img { margin-top: 24px; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(179,27,44,.45); background: #0A1530; }
+  .ch-img img { width: 100%; height: 100%; object-fit: cover; }
+  .lb-tile { position: relative; aspect-ratio: 1; overflow: hidden; border: 1px solid rgba(179,27,44,.3); }
+  .lb-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s; filter: saturate(.9); }
+  .lb-tile:hover img { transform: scale(1.08); filter: none; }
+  .court { flex: none; width: min(78vw, 340px); scroll-snap-align: start; }
+  .court-img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid rgba(11,29,58,.15); background: #0B1D3A; }
+  .court-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .court:hover .court-img img { transform: scale(1.05); }
+  .court-img::after { content: ''; position: absolute; inset: 10px; border: 1px solid rgba(247,248,250,.0); transition: border-color .4s; pointer-events: none; }
+  .court:hover .court-img::after { border-color: rgba(233,115,124,.9); }
+  .court figcaption { display: flex; gap: 14px; align-items: baseline; padding-top: 14px; border-top: 1px solid rgba(11,29,58,.15); margin-top: 14px; }
+  .court .num { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.4rem; color: #9B1C28; }
+  .com-tile { position: relative; margin: 0 0 16px; break-inside: avoid; overflow: hidden; border: 1px solid rgba(179,27,44,.25); background: #0A1530; }
+  .com-tile img { display: block; width: 100%; height: auto; filter: saturate(.92); transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s; }
+  .com-tile:hover img { transform: scale(1.04); filter: none; }
+  .com-tile::after { content: ''; position: absolute; inset: 0; border: 1px solid #B31B2C; opacity: 0; transition: opacity .35s; pointer-events: none; }
+  .com-tile:hover::after { opacity: 1; }
 
-  /* ---------- Responsive ---------- */
-  @media (max-width: 900px){
-    .hero{ grid-template-columns: 1fr; padding-top: 140px; }
-    .about{ grid-template-columns: 1fr; }
-    .contact-shell{ grid-template-columns: 1fr; }
-    .services-grid{ grid-template-columns: 1fr; }
-  }
-  @media (max-width: 720px){
-    .nav-links{
-      position: fixed; top: 64px; left:0; right:0;
-      background: rgba(9,12,19,0.98); backdrop-filter: blur(14px);
-      flex-direction: column; align-items: stretch;
-      padding: 20px 24px 26px; gap: 18px;
-      border-bottom: 1px solid var(--border);
-      transform: translateY(-140%); transition: transform .3s ease;
-    }
-    .nav-links.open{ transform: translateY(0); }
-    .nav-links a{ font-size: 1rem; }
-    .nav-toggle{ display:block; }
-    .form-row{ grid-template-columns: 1fr; }
+  /* ---------- 3.2 hero ---------- */
+  .glass-card { background: rgba(247,248,250,.09); border: 1px solid rgba(247,248,250,.22); border-top: 3px solid #B31B2C; -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 40px 80px -40px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.08); }
+  .mp4-drop[hidden] { display: none !important; }
+  .mp4-drop { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: calc(100% - 40px); padding: 0 16px; border: 1px dashed rgba(233,115,124,.85); background: rgba(10,17,40,.6); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #F7F8FA; font-size: 12.5px; font-weight: 600; letter-spacing: .04em; cursor: pointer; transition: background-color .25s, border-color .25s, transform .25s; }
+  .mp4-drop:hover, .mp4-drop.is-over { background: rgba(179,27,44,.25); border-style: solid; transform: translateY(-2px); }
+  .mp4-drop:focus-within { outline: 2px solid #E9737C; outline-offset: 3px; }
+  #mp4Label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #dropOverlay.is-on { display: grid; }
+  .scroll-cue-line { animation: cue 1.8s ease-in-out infinite; }
+  @keyframes cue { 0% { transform: scaleY(0); opacity: 1; } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+  .qce-pulse { animation: qcePulse 1.2s ease-out; }
+  @keyframes qcePulse { from { box-shadow: 0 0 0 0 rgba(233,115,124,.85); } to { box-shadow: 0 0 0 16px rgba(233,115,124,0); } }
+
+  /* ---------- 3.3 reviews ---------- */
+  .rev-track { gap: 20px; }
+  .rev-card { flex: none; width: min(82vw, 380px); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; padding: 26px 26px 22px; background: #fff; border: 1px solid rgba(11,29,58,.15); border-top: 3px solid #B31B2C; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; }
+  .rev-card:hover { transform: translateY(-4px); box-shadow: 0 24px 44px -30px rgba(11,29,58,.55); }
+  .rev-card blockquote { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.42rem; line-height: 1.3; font-weight: 500; color: #0B1D3A; }
+  .rev-card figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(11,29,58,.12); padding-top: 14px; font-size: 13px; color: #475569; }
+  .rev-card figcaption b { color: #0B1D3A; font-weight: 600; }
+  .rev-row:hover .rev-track { animation-play-state: paused; }
+  /* ---------- 3.3 payments ---------- */
+  .pay-opt { position: relative; display: block; cursor: pointer; }
+  .pay-opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .pay-opt span { display: flex; flex-direction: column; gap: 4px; min-height: 76px; padding: 16px 18px; border: 1px solid rgba(11,29,58,.25); background: #fff; transition: border-color .2s, box-shadow .2s, background-color .2s; }
+  .pay-opt strong { font-size: 15px; color: #0B1D3A; }
+  .pay-opt small { font-size: 12.5px; color: #475569; }
+  .pay-opt input:checked + span { border-color: #B31B2C; box-shadow: inset 0 0 0 1px #B31B2C; background: rgba(179,27,44,.06); }
+  .pay-opt input:focus-visible + span { outline: 2px solid #E9737C; outline-offset: 3px; }
+  .flag-rule { height: 2px; background: linear-gradient(90deg, #3B6BC4 0 33.33%, rgba(247,248,250,.85) 33.33% 66.66%, #B31B2C 66.66% 100%); opacity: .9; }
+
+  /* ---------- 3.2 attorneys ---------- */
+  .portrait-live video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+  .portrait-live.is-playing video { opacity: 1; }
+  .cred-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid rgba(179,27,44,.55); background: #F7F8FA; }
+  .cred-img img { width: 100%; height: 100%; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .cred-fig:hover .cred-img img { transform: scale(1.04); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
 </head>
-<body>
 
-<a href="#main" class="skip-link">Skip to main content</a>
+<body class="bg-parch font-sans text-ink text-[16px] leading-relaxed pb-[64px] md:pb-0">
 
-<header id="site-header">
-  <div class="nav">
-    <a href="#top" class="logo" aria-label="COTECH home">
-      <span class="dot" aria-hidden="true"></span> COTECH
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path id="navIconPath" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-    <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#services">Services</a>
-      <a href="#about">Why Us</a>
-      <a href="#contact">Contact</a>
-      <a href="#contact" class="btn btn-primary nav-cta">Book a Consultation</a>
-    </nav>
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-brass focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
+
+<!-- Scroll progress -->
+<div id="progress" aria-hidden="true" class="fixed left-0 top-0 z-[100] h-[2px] w-full origin-left scale-x-0 bg-brass"></div>
+
+<!-- ===================== MASTHEAD ===================== -->
+<header id="masthead" class="fixed inset-x-0 top-0 z-50 text-parch">
+  <div id="utility" class="overflow-hidden bg-charcoal text-[12.5px] text-parch/80">
+    <div class="wrap flex h-11 items-center justify-between gap-6 border-b border-brass/25">
+      <p class="hidden items-center gap-2 md:flex">
+        <svg class="h-[15px] w-[15px] text-brass-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        1 World Trade Center, Suite 800 &middot; Long Beach, CA 90802
+      </p>
+      <p class="hidden tracking-wide lg:block">Established 2006 &middot; Twenty Years in Long Beach</p>
+      <div class="ml-auto flex items-center gap-5 md:ml-0">
+        <span class="border border-brass/60 px-2.5 py-[3px] text-[10.5px] font-semibold uppercase tracking-[.12em] text-brass-lt">Se Habla Espa&ntilde;ol</span>
+        <a href="#pay" class="hidden min-h-[44px] items-center font-semibold text-parch/85 underline-offset-4 transition-colors hover:text-brass-lt hover:underline sm:inline-flex">Pay Online</a>
+        <a href="tel:+15624337363" class="inline-flex min-h-[44px] items-center gap-2 font-semibold text-parch transition-colors hover:text-brass-lt">
+          <svg class="h-[15px] w-[15px] text-brass-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          (562) 433-7363
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="navbar">
+    <div class="wrap nav-row flex items-center justify-between gap-6 py-5">
+      <a href="#top" class="group flex items-center gap-4" aria-label="Law Office of Edward J. O'Reilly, back to top">
+        <span class="crest grid h-[44px] w-[44px] sm:h-[52px] sm:w-[52px] place-items-center border border-brass font-serif text-[19px] font-semibold tracking-wide text-brass-lt group-hover:bg-brass group-hover:text-white">EJO</span>
+        <span class="leading-tight">
+          <span class="block text-[10px] font-semibold uppercase tracking-[.3em] text-brass-lt">Law Office of</span>
+          <span class="block whitespace-nowrap font-serif text-[22px] font-semibold leading-[1.05] sm:text-[26px] md:text-[28px]">Edward J. O&rsquo;Reilly</span>
+          <span class="brand-sub hidden overflow-hidden sm:block text-[11px] tracking-[.08em] text-parch/65">O&rsquo;Reilly Law Associates</span>
+        </span>
+      </a>
+      <nav aria-label="Primary" class="hidden items-center gap-7 whitespace-nowrap text-[14px] font-medium text-parch/85 lg:flex">
+        <a class="nav-link hover:text-brass-lt" href="#practice">Practice Areas</a>
+        <a class="nav-link hover:text-brass-lt" href="#heritage">Our Story</a>
+        <a class="nav-link hover:text-brass-lt" href="#courts">Courts</a>
+        <a class="nav-link hover:text-brass-lt" href="#reviews">Reviews</a>
+        <a class="nav-link hover:text-brass-lt" href="#attorneys">Attorneys</a>
+        <a class="nav-link hover:text-brass-lt" href="#contact">Contact</a>
+      </nav>
+      <div class="hidden sm:block"><a href="#contact" class="btn btn-brass min-h-[46px] whitespace-nowrap px-5 text-[13.5px]">Free Consultation</a></div>
+    </div>
+  <div class="flag-rule" aria-hidden="true"></div>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- Hero -->
-  <section class="hero wrap" id="top">
-    <div>
-      <div class="eyebrow">Systems online</div>
-      <h1>Technology that <span>actually works</span> for your business.</h1>
-      <p>COTECH repairs what's broken, teaches you what's confusing, and integrates the AI tools that save your team real time — all from one point of contact.</p>
-      <div class="hero-ctas">
-        <a href="#contact" class="btn btn-primary">Book a Consultation</a>
-        <a href="#services" class="btn btn-ghost">See Services</a>
+<!-- ===================== HERO: Apple-style scroll-scrubbed video ===================== -->
+<section id="hero-scrub-section" class="relative bg-[#0A1128] lg:h-[220vh]" aria-label="Introduction">
+  <span id="top" class="absolute left-0 top-0" aria-hidden="true"></span>
+  <div id="heroViewport" class="relative min-h-[100svh] w-full overflow-hidden lg:sticky lg:top-0 lg:h-screen">
+    <!-- Layer 1: background video (scrubbed by scroll on desktop) -->
+    <video id="higgsfield-hero-video" src="./higgsfield-hero.mp4" poster="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_224137_c410374f-c2bd-41d1-bc4a-22129a080c59.png" muted playsinline preload="auto" class="absolute inset-0 h-full w-full object-cover" aria-hidden="true" tabindex="-1"></video>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0A1128]/90 via-[#0A1128]/70 to-[#0A1128]/40"></div>
+    <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1128] to-transparent"></div>
+    <!-- Firm mark: red, white & blue knot, rotates with scroll -->
+    <div id="heroKnotWrap" class="pointer-events-none absolute right-[-18vw] top-1/2 z-[1] -translate-y-1/2 opacity-[.17] md:right-[-8vw] lg:right-[2vw]" aria-hidden="true">
+      <div id="heroKnot" class="h-[min(118vw,1040px)] w-[min(118vw,1040px)] lg:h-[min(112vh,1040px)] lg:w-[min(112vh,1040px)]">
+        <svg viewBox="-135 -135 270 270" class="h-full w-full" fill="none" stroke-linecap="round">
+          <g stroke="#020814" stroke-width="17">
+            <circle r="62"/>
+            <path d="M0 57.735A100 100 0 0 1 0 -115.47A100 100 0 0 1 0 57.735Z"/>
+            <path d="M-50 -28.868A100 100 0 0 1 100 57.735A100 100 0 0 1 -50 -28.868Z"/>
+            <path d="M50 -28.868A100 100 0 0 0 -100 57.735A100 100 0 0 0 50 -28.868Z"/>
+          </g>
+          <circle r="62" stroke="#F7F8FA" stroke-width="11"/>
+          <path d="M-50 -28.868A100 100 0 0 1 100 57.735A100 100 0 0 1 -50 -28.868Z" stroke="#F7F8FA" stroke-width="11"/>
+          <path d="M50 -28.868A100 100 0 0 0 -100 57.735A100 100 0 0 0 50 -28.868Z" stroke="#3B6BC4" stroke-width="11"/>
+          <path d="M0 57.735A100 100 0 0 1 0 -115.47A100 100 0 0 1 0 57.735Z" stroke="#D2283A" stroke-width="11"/>
+        </svg>
       </div>
     </div>
-    <div class="terminal" role="img" aria-label="Terminal animation showing COTECH diagnostic status: repair, AI integration, coaching, and smart home systems all online">
-      <div class="terminal-bar">
-        <span></span><span></span><span></span>
-        <span class="label">cotech — diagnostics</span>
-      </div>
-      <div class="terminal-body" id="termBody"></div>
-    </div>
-  </section>
 
-  <!-- Services -->
-  <section class="section wrap" id="services">
-    <div class="section-head">
-      <div class="eyebrow">What we do</div>
-      <h2>Four ways we keep you running</h2>
-      <p>Pick one service or bundle them — most clients start with a repair or a coaching session and grow into ongoing AI integration support.</p>
-    </div>
-
-    <div class="services-grid">
-
-      <article class="service-card">
-        <div class="service-top">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
-          </div>
-          <span class="service-code">TC · 01</span>
-        </div>
-        <h3>Tech Consulting &amp; AI Integration</h3>
-        <p>We map your existing workflow, find where AI tools actually save time, and implement them — no jargon, no rip-and-replace of systems that already work.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-top">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a4 4 0 0 1-5.1 5.1L5.4 21.6a2 2 0 0 1-2.8-2.8L12.9 8.5a4 4 0 0 1 5.1-5.1z"/></svg>
-          </div>
-          <span class="service-code">HW · 02</span>
-        </div>
-        <h3>Computer Repair &amp; Troubleshooting</h3>
-        <p>Slow machine, mystery error, dead hard drive — we diagnose it fast and fix it right, with plain explanations of what went wrong and how to avoid it next time.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-top">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4M7 9l3 3-3 3"/></svg>
-          </div>
-          <span class="service-code">ED · 03</span>
-        </div>
-        <h3>Technology Coaching</h3>
-        <p>One-on-one sessions to get comfortable with your phone, laptop, or software — at your pace, with follow-up notes so nothing has to be re-explained.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-top">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9"/><circle cx="12" cy="14.5" r="1.6"/></svg>
-          </div>
-          <span class="service-code">SH · 04</span>
-        </div>
-        <h3>Smart Home &amp; Security Setup</h3>
-        <p>Wireless cameras, video doorbells, and smart locks — installed, connected, and configured so the whole system actually works together (and you know how to use it).</p>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="section wrap" id="about">
-    <div class="about">
-      <div>
-        <div class="eyebrow">Why COTECH</div>
-        <h2>One person to call, not a ticket number.</h2>
-        <p style="color:var(--text-dim); margin-top:14px; max-width:440px;">
-          You get a consultant who actually looks at your setup before recommending anything - and is still able to be contacted after the jobs done.
+    <!-- Layer 2: foreground content -->
+    <div id="heroFg" class="wrap relative z-10 grid min-h-[100svh] items-center gap-12 pb-36 pt-[168px] lg:h-screen lg:min-h-0 lg:grid-cols-[minmax(0,6fr)_minmax(0,4fr)] lg:gap-16 lg:pb-20 lg:pt-[128px]">
+      <div id="heroCopy" class="text-parch">
+        <p class="hero-fade eyebrow inline-flex items-center gap-3 border border-brass/60 bg-[#0A1128]/40 px-4 py-2 text-brass-lt backdrop-blur-sm">
+          <span class="h-1.5 w-1.5 rotate-45 bg-brass"></span>1 World Trade Center &middot; Long Beach &middot; Est. 2006
         </p>
-      </div>
-      <div class="about-points">
-        <div class="about-point">
-          <div class="mark">→</div>
-          <div><h4>Straight answers, no upsells</h4><p>We tell you what actually needs fixing or changing — and what's fine to leave alone.</p></div>
-        </div>
-        <div class="about-point">
-          <div class="mark">→</div>
-          <div><h4>Solutions built around your setup</h4><p>No forced platform switches. We work with the tools and hardware you already have wherever possible.</p></div>
-        </div>
-        <div class="about-point">
-          <div class="mark">→</div>
-          <div><h4>Support after the visit</h4><p>Follow-up questions get answered by the same person who did the work — not a new rep every time.</p></div>
+        <h1 class="mt-7 font-serif text-[clamp(3.2rem,6.6vw,6.4rem)] font-semibold leading-[.93] tracking-[-.015em]">
+          <span class="hero-line"><span>Stand Up</span></span>
+          <span class="hero-line"><span>For Your</span></span>
+          <span class="hero-line"><span class="italic font-medium text-brass-lt">Rights!</span></span>
+        </h1>
+        <p class="hero-fade mt-8 max-w-[560px] text-[clamp(1.02rem,1.25vw,1.17rem)] leading-[1.75] text-parch/85">
+          For twenty years, Edward J. O&rsquo;Reilly has stood up for injured workers, families, property owners and businesses from 1 World Trade Center. Where an early settlement serves you, he negotiates it decisively. Where it does not, he prepares your case for trial from the first day.
+        </p>
+        <div class="hero-fade mt-10 flex flex-wrap gap-3.5">
+          <a href="#contact" class="btn btn-brass">Get in Touch <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#qce" id="tellUs" class="btn btn-ghost-lt">Tell Us About Your Case</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Contact -->
-  <section class="section wrap" id="contact">
-    <div class="contact-shell">
-      <div class="contact-info">
-        <div class="eyebrow">Get in touch</div>
-        <h2>Tell us what's going on.</h2>
-        <p>Send a few details and we'll follow up to schedule a repair, coaching session, or consultation.</p>
-
-        <div class="contact-detail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 6l9 7 9-7"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
-          <span>H.COTESTER1@Gmail.com</span>  
+      <!-- Right 40%: glassmorphic Case Assessment -->
+      <div id="qce" class="glass-card relative z-10 mx-auto w-full max-w-[420px] p-7 text-parch lg:ml-auto lg:mr-0" aria-live="polite">
+        <div class="relative flex items-center justify-between gap-3">
+          <p class="eyebrow text-brass-lt">Fair &amp; Honest Case Assessment</p>
+          <p id="qceStep" class="text-[11.5px] font-semibold uppercase tracking-[.1em] text-parch/70">Step 1 of 2</p>
         </div>
-        <div class="contact-detail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.9 2.2z"/></svg>
-          <span>(310) 853-3750</span>
-        </div>
+        <div class="relative mb-5 mt-3.5 flex gap-1.5" aria-hidden="true"><span class="seg on"></span><span id="qceSeg2" class="seg"></span></div>
 
-        <p class="form-note" style="margin-top:22px;">At COTECH, we believe in technology to improve people's lives.  For a company that cares, chose COTECH. </p>
-      </div>
-
-      <form action="mailto:h.cotester1@gmail.com" method="POST" enctype="text/plain">
-        <div class="form-row">
-          <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="Name" placeholder="Jane Doe" required>
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="Email" placeholder="jane@email.com" required>
+        <div data-step="1" class="relative">
+          <h2 class="font-serif text-[1.85rem] font-semibold leading-[1.1]">What kind of matter are you facing?</h2>
+          <div class="mt-5 grid grid-cols-2 gap-2.5">
+            <button type="button" class="pill" data-area="Personal Injury">Injury</button>
+            <button type="button" class="pill" data-area="Real Estate">Real Estate</button>
+            <button type="button" class="pill" data-area="Business">Business</button>
+            <button type="button" class="pill" data-area="Employment">Employment</button>
+            <button type="button" class="pill" data-area="Transportation &amp; Maritime">Maritime</button>
+            <button type="button" class="pill" data-area="Other">Other</button>
           </div>
         </div>
-        <div>
-          <label for="service">Service needed</label>
-          <select id="service" name="Service">
-            <option>Tech Consulting &amp; AI Integration</option>
-            <option>Computer Repair &amp; Troubleshooting</option>
-            <option>Technology Coaching</option>
-            <option>Smart Home &amp; Security Setup</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div>
-          <label for="message">Message</label>
-          <textarea id="message" name="Message" placeholder="What's going on, and what device or system is involved?" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="justify-self:start;">Send Message</button>
-      </form>
-    </div>
-  </section>
 
-</main>
+        <form data-step="2" class="relative space-y-3" hidden>
+          <div class="flex items-center justify-between gap-3 border border-brass/45 bg-brass/10 px-3.5 py-2.5 text-[13.5px]">
+            <span>Matter: <strong id="qceArea" class="text-brass-lt">&nbsp;</strong></span>
+            <button type="button" id="qceBack" class="min-h-[40px] px-1 text-[12.5px] font-semibold text-brass-lt underline underline-offset-4 hover:text-parch">Change</button>
+          </div>
+          <label class="fld fld-dk"><span>Full name</span><input name="name" type="text" required autocomplete="name" placeholder="Your name"></label>
+          <label class="fld fld-dk"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555"></label>
+          <label class="fld fld-dk"><span>What happened?</span><textarea name="summary" placeholder="A few sentences is enough." style="min-height:72px"></textarea></label>
+          <button type="submit" class="btn btn-brass w-full">Request Priority Review
+            <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="text-[11.5px] leading-snug text-parch/65">Submitting this form does not create an attorney-client relationship.</p>
+        </form>
 
-<footer>
-  <div class="wrap footer-row">
-    <p>© <span id="year"></span> COTECH. All rights reserved.</p>
-    <div class="social-row">
-      <a href="#" aria-label="COTECH on Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-      </a>
-      <a href="#" aria-label="COTECH on LinkedIn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 13v4"/></svg>
-      </a>
-      <a href="#" aria-label="COTECH on Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3h-2a4 4 0 0 0-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
+        <div data-step="3" class="relative" hidden>
+          <span class="grid h-12 w-12 place-items-center border border-brass text-brass-lt"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <h2 class="mt-4 font-serif text-[1.85rem] font-semibold leading-[1.1]">Your request is in.</h2>
+          <p class="mt-2 text-[14px] text-parch/75">The office will review your matter and call you back. If it is urgent, call <a href="tel:+15624337363" class="font-semibold text-brass-lt underline underline-offset-4">(562) 433-7363</a> now.</p>
+          <button type="button" id="qceReset" class="mt-4 min-h-[44px] text-[13px] font-semibold text-brass-lt underline underline-offset-4 hover:text-parch">Start another evaluation</button>
+        </div>
+      </div>
     </div>
-    <p>h.cotester1@gmail.com · (310) 853-3750</p>
+
+    <!-- Preview tool: drop a local Higgsfield .mp4 to test the scrub (remove before launch) -->
+    <label id="mp4Drop" class="mp4-drop absolute bottom-[84px] left-5 z-20 md:bottom-6 md:left-6" hidden>
+      <input id="mp4Input" type="file" accept="video/mp4" class="sr-only">
+      <svg class="h-[18px] w-[18px] flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+      <span id="mp4Label">Preview Upload: Drop Your Higgsfield .MP4 Here</span>
+    </label>
+    <div id="dropOverlay" class="pointer-events-none absolute inset-4 z-30 hidden place-items-center border-2 border-dashed border-brass-lt bg-[#0A1128]/70 text-center font-serif text-[2rem] text-parch">Release to preview your video</div>
+
+    <div id="scrollCue" class="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-parch/70 lg:flex" aria-hidden="true">
+      <span class="eyebrow text-[10px]">Scroll</span><span class="block h-10 w-px origin-top bg-brass-lt scroll-cue-line"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FLAGS OF OUR CLIENTS ===================== -->
+<section id="clients" class="relative overflow-hidden bg-charcoal py-24 text-parch" aria-labelledby="clientsTitle">
+  <div class="wrap grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_auto]">
+    <div>
+      <p class="eyebrow text-brass-lt">Flags of Our Clients</p>
+      <h2 id="clientsTitle" class="mt-4 max-w-[820px] font-serif text-[clamp(2.1rem,3.6vw,3.4rem)] font-semibold leading-[1.06]">Representing clients across Long Beach, Southern California and around the globe &mdash; <em class="font-medium text-brass-lt">from 1 World Trade Center.</em></h2>
+    </div>
+    <p class="max-w-[300px] text-[14px] leading-relaxed text-parch/70">An international city deserves an international practice. These are the flags of the clients this office has been proud to represent.</p>
+  </div>
+  <div class="mt-14 space-y-5">
+    <div class="marquee" data-dir="1"><div class="track" id="flagsA"></div></div>
+    <div class="marquee" data-dir="-1"><div class="track" id="flagsB"></div></div>
+  </div>
+  <div class="draw-x absolute inset-x-0 bottom-0 h-px bg-brass/40"></div>
+</section>
+
+<!-- ===================== PRACTICE AREAS (pinned sidebar) ===================== -->
+<section id="practice" class="py-28 md:py-32" aria-labelledby="paTitle">
+  <div class="mx-auto w-full max-w-[1140px] px-5 md:px-10">
+    <div class="flex flex-col gap-12 md:flex-row md:gap-12">
+      <!-- Left 35% (pinned) -->
+      <aside id="paLeft" class="md:w-[35%] md:flex-none">
+        <div id="paPin">
+          <p class="eyebrow text-brass-ink">Practice Areas</p>
+          <h2 id="paTitle" class="mt-4 font-serif text-[clamp(2.3rem,3.7vw,3.5rem)] font-semibold leading-[1.03] text-navy">Six areas of law. <em class="font-medium text-brass-ink">One attorney</em> who answers the phone.</h2>
+          <div class="draw-x mt-8 h-px bg-rule"></div>
+          <div class="mt-6 flex items-end gap-3 font-serif text-navy">
+            <span id="paNum" class="text-[clamp(4.4rem,6.4vw,6rem)] font-medium leading-[.85]">01</span>
+            <span class="pb-2 text-[1.6rem] italic text-brass-ink">/ 06</span>
+          </div>
+          <p id="paName" class="mt-3 min-h-[1.6em] text-[13px] font-semibold uppercase tracking-[.14em] text-mute">Personal Injury</p>
+          <div class="mt-4 flex gap-1.5" aria-hidden="true">
+            <span class="pa-seg on"></span><span class="pa-seg"></span><span class="pa-seg"></span><span class="pa-seg"></span><span class="pa-seg"></span><span class="pa-seg"></span>
+          </div>
+          <div class="mt-9 border-t-[3px] border-brass bg-navy p-6 text-parch">
+            <p class="text-[14px] text-parch/80">Not sure where your situation fits? Speak with the attorney directly.</p>
+            <a href="tel:+15624337363" class="mt-2 inline-flex min-h-[44px] items-center gap-2.5 font-serif text-[1.75rem] font-semibold text-brass-lt transition-colors hover:text-parch">(562) 433-7363</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right 65% (stacked cards) -->
+      <div id="paCards" class="flex flex-col gap-8 md:w-[65%] md:gap-10">
+
+        <article class="pa-card p-7 md:p-9" style="--i:0" data-name="Personal Injury">
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">01</span>
+            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>
+          </div>
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/a66ee6c4-fda2-44da-b611-8e7d59ede9ba.png" alt="Traffic on a Southern California freeway beneath a rainbow" decoding="async"></figure>
+          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Personal Injury &amp; Catastrophic Accidents</h3>
+          <p class="mt-3 max-w-[560px] text-[15px] text-mute">When an injury changes the course of your life, insurers count on you settling early and cheaply. We build the medical and liability record that makes them pay what the case is worth.</p>
+          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
+            <li>Auto, truck &amp; motorcycle collisions</li><li>Catastrophic &amp; brain injuries</li><li>Wrongful death</li><li>Premises liability</li>
+          </ul>
+          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="pa-card p-7 md:p-9" style="--i:1" data-name="Real Estate">
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">02</span>
+            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg></span>
+          </div>
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/3b1a2f11-531e-4a75-9df3-20cfd09881b0.png" alt="Residential and commercial neighborhoods with the San Gabriel Mountains beyond" decoding="async"></figure>
+          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Real Estate Law &amp; Property Disputes</h3>
+          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Property is usually the largest asset a family or company holds. We protect it at the closing table, in negotiation and, when necessary, in court.</p>
+          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
+            <li>Purchase &amp; sale disputes</li><li>Landlord &amp; tenant matters</li><li>Title, boundary &amp; easements</li><li>Construction &amp; contractor claims</li>
+          </ul>
+          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="pa-card p-7 md:p-9" style="--i:2" data-name="Business Law">
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">03</span>
+            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v12H3zM9 8V5h6v3M3 13h18"/></svg></span>
+          </div>
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/d16152c2-9ca8-435b-8252-59933db8b6f7.png" alt="A conference room overlooking the city" decoding="async"></figure>
+          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Business Law, Contracts &amp; Commercial Torts</h3>
+          <p class="mt-3 max-w-[560px] text-[15px] text-mute">A contract is only as strong as the lawyer prepared to enforce it. Practical counsel for owners, partners and operators &mdash; before the dispute and during it.</p>
+          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
+            <li>Contract drafting &amp; breach</li><li>Partnership &amp; shareholder disputes</li><li>Fraud &amp; interference claims</li><li>Unfair competition</li>
+          </ul>
+          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="pa-card p-7 md:p-9" style="--i:3" data-name="Employment Law">
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">04</span>
+            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="6.5" r="3.5"/><path d="M21 20v-2a4 4 0 0 0-3-3.9M16 3.1a3.5 3.5 0 0 1 0 6.8"/></svg></span>
+          </div>
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/7bf5e3c1-4985-4557-98c6-b1396fb048ef.png" alt="Edward J. O&rsquo;Reilly meeting with a client" decoding="async"></figure>
+          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Employment Law &amp; Workplace Rights</h3>
+          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Working families deserve a fair shake. If an employer crossed the line, you should not have to face their lawyers alone.</p>
+          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
+            <li>Wrongful termination</li><li>Wage &amp; hour violations</li><li>Discrimination &amp; harassment</li><li>Retaliation</li>
+          </ul>
+          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="pa-card p-7 md:p-9" style="--i:4" data-name="Transportation &amp; Maritime">
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">05</span>
+            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg></span>
+          </div>
+          <figure class="pa-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223217_adcd4fb2-7fdd-4b17-ae59-7981ac90e13e.png" alt="Container cranes at the Port of Long Beach" decoding="async"></figure>
+          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Transportation, Maritime &amp; Logistics Law</h3>
+          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Before practicing law, Edward worked inside global shipping lines. He knows how freight, carriers and ports actually operate &mdash; and where they fail.</p>
+          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
+            <li>Cargo loss &amp; freight claims</li><li>Carrier &amp; shipper contracts</li><li>Maritime injury</li><li>Port &amp; logistics disputes</li>
+          </ul>
+          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="pa-card p-7 md:p-9" style="--i:5" data-name="Civil, Criminal &amp; Estates">
+          <div class="flex items-start justify-between gap-4">
+            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">06</span>
+            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 21h14M3 8l9-3 9 3M6 8l-3 7a4 4 0 0 0 6 0L6 8M18 8l-3 7a4 4 0 0 0 6 0L18 8"/></svg></span>
+          </div>
+          <figure class="pa-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223221_89ee1cdb-3993-4ff9-a21e-53db047fe17c.png" alt="A California courtroom" decoding="async"></figure>
+          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Civil Litigation, Criminal Defense &amp; Estates</h3>
+          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Lawsuits, criminal charges and family legacies all turn on the same thing: preparation. Every file is prepared as if it will be tried.</p>
+          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
+            <li>Civil litigation &amp; trials</li><li>Criminal defense</li><li>Wills, trusts &amp; probate</li><li>Mediation &amp; early settlement</li>
+          </ul>
+          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HERITAGE: METRICS + TIMELINE ===================== -->
+<section id="heritage" class="relative overflow-clip bg-navy text-parch" aria-labelledby="herTitle">
+  <!-- tunnel image backdrop -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-[720px] overflow-hidden" aria-hidden="true">
+    <img id="tunnelImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_202657_8f9a9774-4771-4077-8a8e-5c42f30f9e98.png" alt="" class="absolute inset-0 h-[124%] w-full object-cover opacity-[.32]" loading="lazy">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/70 to-navy"></div>
+  </div>
+
+  <div class="wrap relative pb-28 pt-28 md:pt-32">
+    <p class="eyebrow text-brass-lt">Our Story &middot; Since 2006</p>
+    <h2 id="herTitle" class="mt-4 max-w-[900px] font-serif text-[clamp(2.5rem,5vw,4.6rem)] font-semibold leading-[1.02]">From the Bronx tunnels to <em class="font-medium text-brass-lt">the World Trade Center.</em></h2>
+
+    <!-- Metrics bar -->
+    <div id="metrics" class="relative mt-16 grid grid-cols-2 md:grid-cols-5">
+      <div class="draw-x absolute inset-x-0 top-0 h-px bg-brass/60"></div>
+      <div class="draw-x absolute inset-x-0 bottom-0 h-px bg-brass/30"></div>
+      <div class="relative px-0 py-8 md:pr-6">
+        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="1986" data-to="2006">2006</span></p>
+        <p class="mt-3 text-[13px] leading-snug text-parch/72">Founded in Long Beach</p>
+      </div>
+      <div class="relative py-8 pl-6 md:px-6">
+        <span class="draw-y absolute bottom-6 left-0 top-6 w-px bg-brass/40"></span>
+        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="0" data-to="20">20</span></p>
+        <p class="mt-3 text-[13px] leading-snug text-parch/72">Years at 1 World Trade Center</p>
+      </div>
+      <div class="relative py-8 md:px-6">
+        <span class="draw-y absolute bottom-6 left-0 top-6 hidden w-px bg-brass/40 md:block"></span>
+        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="0" data-to="6">6</span></p>
+        <p class="mt-3 text-[13px] leading-snug text-parch/72">Practice areas</p>
+      </div>
+      <div class="relative py-8 pl-6 md:px-6">
+        <span class="draw-y absolute bottom-6 left-0 top-6 w-px bg-brass/40"></span>
+        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="0" data-to="34">34</span></p>
+        <p class="mt-3 text-[13px] leading-snug text-parch/72">Flags of our clients</p>
+      </div>
+      <div class="relative col-span-2 py-8 md:col-span-1 md:px-6">
+        <span class="draw-y absolute bottom-6 left-0 top-6 hidden w-px bg-brass/40 md:block"></span>
+        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="0" data-to="100" data-suffix="+">100+</span></p>
+        <p class="mt-3 text-[13px] leading-snug text-parch/72">Five-star Google reviews</p>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="mt-24 grid gap-14 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-20">
+      <div>
+        <div class="md:sticky md:top-[140px]">
+          <p class="max-w-[440px] text-[16.5px] leading-[1.8] text-parch/80">Most lawyers learn the law first. Edward learned how the world works &mdash; underground, inside the legislature, on the docks &mdash; and then brought that experience into the courtroom.</p>
+          <figure class="mt-10 max-w-[440px] border-t border-brass/50 pt-7">
+            <blockquote class="font-serif text-[clamp(1.4rem,1.9vw,1.7rem)] font-medium italic leading-[1.3]">&ldquo;Often, we can negotiate early settlements to avoid costly litigation &mdash; but when a fight is necessary, we bring relentless courtroom preparation.&rdquo;</blockquote>
+            <figcaption class="eyebrow mt-4 text-brass-lt">Edward J. O&rsquo;Reilly</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <ol id="timeline" class="relative pl-14 md:pl-16">
+        <span class="absolute bottom-2 left-[19px] top-2 w-px bg-parch/20" aria-hidden="true"></span>
+        <span id="tlFill" class="absolute bottom-2 left-[18px] top-2 w-[3px] origin-top bg-brass" aria-hidden="true"></span>
+
+        <li class="chapter relative pb-20">
+          <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
+          <div class="ch-body">
+            <p class="eyebrow text-brass-lt">Chapter I &middot; New York</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">The Bronx &amp; the State Legislature</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">Born and raised in the Bronx and a graduate of SUNY Albany, Edward began in public service &mdash; in the New York State Legislature and at the NYC Department of Housing &amp; Preservation &mdash; working on housing, labor and legislative matters.</p>
+            <figure class="ch-img"><img src="https://nebula.wsimg.com/d3500a7ed972ca70d1a030da13f99bb9?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="An American flag hung from a fire-truck ladder" loading="lazy"></figure>
+          </div>
+        </li>
+        <li class="chapter relative pb-20">
+          <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
+          <div class="ch-body">
+            <p class="eyebrow text-brass-lt">Chapter II &middot; Underground</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">600 Feet Below the City</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">As a New York City &ldquo;Sandhog,&rdquo; Edward helped build water and subway tunnels 600 feet beneath the streets. He also worked as a private investigator &mdash; learning grit, and learning how to find the facts other people miss.</p>
+            <figure class="ch-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_202657_8f9a9774-4771-4077-8a8e-5c42f30f9e98.png" alt="A tunnel under construction, lit by work lights" loading="lazy"></figure>
+          </div>
+        </li>
+        <li class="chapter relative pb-20">
+          <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
+          <div class="ch-body">
+            <p class="eyebrow text-brass-lt">Chapter III &middot; Global Trade</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Inside International Shipping</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">With American President Lines (APL) and Orient Overseas Container Line (OOCL), Edward worked inside the commercial and transportation systems that move cargo across the Pacific &mdash; the same systems behind today&rsquo;s maritime and logistics disputes.</p>
+            <figure class="ch-img"><img src="https://nebula.wsimg.com/3c02813bb4ec7a0b0c91e4394a32df54?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Ocean-going vessels berthed in the harbor" loading="lazy"></figure>
+          </div>
+        </li>
+        <li class="chapter relative">
+          <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
+          <div class="ch-body">
+            <p class="eyebrow text-brass-lt">Chapter IV &middot; 2006 &ndash; Present</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Twenty Years in Long Beach</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">Since 2006, the Law Office of Edward J. O&rsquo;Reilly has practiced from Suite 800 at 1 World Trade Center, standing up for Veterans, working families and local businesses &mdash; supported by a network of Associated Counsel when a matter calls for more hands.</p>
+            <figure class="ch-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223215_9310471f-8085-4f81-85d8-06dd2182901c.png" alt="Edward J. O&rsquo;Reilly walking past the LONG BEACH letters downtown" loading="lazy"></figure>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LONG BEACH BAND ===================== -->
+<section id="longbeach" class="relative overflow-clip bg-navy text-parch" aria-labelledby="lbTitle">
+  <div class="relative h-[78vh] min-h-[520px] overflow-hidden">
+    <img id="lbImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223219_c9b6c6e9-a083-4344-a3c4-63dc13401156.png" alt="The downtown Long Beach skyline across the water" class="absolute inset-x-0 top-[-9%] h-[118%] w-full object-cover" loading="lazy">
+    <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/35 to-navy/5"></div>
+    <div class="wrap relative flex h-full flex-col justify-end pb-16">
+      <p class="eyebrow text-brass-lt">Home Port</p>
+      <h2 id="lbTitle" class="mt-4 font-serif text-[clamp(3rem,8vw,7.5rem)] font-semibold leading-[.92]"><span class="mask-line"><span class="lb-word">Long Beach</span></span><span class="mask-line"><span class="lb-word italic font-medium text-brass-lt">is home.</span></span></h2>
+      <p class="mt-6 max-w-[560px] text-[16.5px] leading-[1.75] text-parch/85">Twenty years in the International City &mdash; minutes from the port, the courts and the people this office serves.</p>
+    </div>
+  </div>
+  <div class="wrap pb-14 pt-10"><div id="lbStrip" class="grid grid-cols-3 gap-3 md:grid-cols-6"></div></div>
+</section>
+
+<!-- ===================== COURTS (horizontal scroll) ===================== -->
+<section id="courts" class="relative overflow-clip bg-parch" aria-labelledby="courtsTitle">
+  <div id="courtsPin" class="py-24 md:flex md:h-screen md:flex-col md:justify-center md:py-0 md:pt-16">
+    <div class="wrap grid items-end gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,360px)]">
+      <div>
+        <p class="eyebrow text-brass-ink">On the Record</p>
+        <h2 id="courtsTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">From the federal building to <em class="font-medium text-brass-ink">the county courthouse.</em></h2>
+      </div>
+      <p class="text-[15px] leading-relaxed text-mute">Federal court in downtown Los Angeles. Superior Courts from Compton to Pomona to San Bernardino. The work goes wherever a client&rsquo;s case is heard.</p>
+    </div>
+    <div id="courtsViewport" class="mt-12 snap-x snap-mandatory overflow-x-auto pb-4 md:snap-none md:overflow-visible md:pb-0">
+      <div id="courtsTrack" class="flex w-max gap-6 px-5 will-change-transform md:px-[max(48px,calc((100vw-1184px)/2))]"></div>
+    </div>
+    <div class="wrap mt-8 hidden md:block"><div class="relative h-px bg-rule"><div id="courtsBar" class="absolute inset-x-0 -top-px h-[3px] origin-left scale-x-0 bg-brass"></div></div></div>
+  </div>
+</section>
+
+<!-- ===================== OPPOSING PARTIES ===================== -->
+<section id="record" class="relative border-t border-rule bg-paper py-28 md:py-32" aria-labelledby="recTitle">
+  <div class="wrap">
+    <div class="grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
+      <div>
+        <p class="eyebrow text-brass-ink">Track Record</p>
+        <h2 id="recTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">We have stood across the table <em class="font-medium text-brass-ink">from all of them.</em></h2>
+      </div>
+      <p class="text-[15px] leading-relaxed text-mute">Global shipping lines, insurers, national brands and public agencies all have well-funded legal departments. Our clients have Edward. A selection of opposing parties in matters handled by the firm:</p>
+    </div>
+    <div class="draw-x mt-12 h-px bg-brass/70"></div>
+    <div id="opGrid" class="op-grid mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"></div>
+    <p class="mt-6 max-w-[860px] text-[12px] leading-relaxed text-mute">Logos and trade names are the property of their respective owners and are shown only to identify opposing parties in past matters. No affiliation with or endorsement by any of these organizations is implied. Prior results do not guarantee a similar outcome.</p>
+  </div>
+</section>
+
+<!-- ===================== GOOGLE REVIEWS ===================== -->
+<section id="reviews" class="relative overflow-clip bg-paper py-28 md:py-32" aria-labelledby="revTitle">
+  <div class="wrap">
+    <div class="grid items-end gap-10 md:grid-cols-[minmax(0,1fr)_auto]">
+      <div>
+        <p class="eyebrow text-brass-ink">Client Reviews</p>
+        <h2 id="revTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">What clients say <em class="font-medium text-brass-ink">after the case is over.</em></h2>
+      </div>
+      <div class="flex items-center gap-5 border border-rule bg-white px-6 py-5">
+        <div class="flex gap-1 text-[#E0A526]" aria-hidden="true"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
+        <div>
+          <p class="font-serif text-[1.6rem] font-semibold leading-none text-navy">100+ five-star reviews</p>
+          <p class="mt-1 text-[12px] font-semibold uppercase tracking-[.14em] text-mute">On Google</p>
+        </div>
+      </div>
+    </div>
+    <div class="draw-x mt-12 h-px bg-brass/60"></div>
+  </div>
+  <div class="mt-12 space-y-6" role="list" aria-label="Client reviews from Google">
+    <div class="marquee rev-row" data-dir="1"><div class="track rev-track" id="revA"></div></div>
+    <div class="marquee rev-row" data-dir="-1"><div class="track rev-track" id="revB"></div></div>
+  </div>
+  <div class="wrap mt-10 flex flex-wrap items-center justify-between gap-6">
+    <a href="https://www.google.com/search?q=Law+Office+of+Edward+J.+O%27Reilly+Long+Beach+reviews" target="_blank" rel="noopener" class="pa-link inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Read all reviews on Google <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="max-w-[640px] text-[12px] leading-relaxed text-mute">Excerpts from public Google reviews. These testimonials do not constitute a guarantee, warranty, or prediction regarding the outcome of your legal matter.</p>
+  </div>
+</section>
+
+<!-- ===================== CLIENTS & COMMUNITY ===================== -->
+<section id="community" class="relative bg-navy py-28 text-parch md:py-32" aria-labelledby="comTitle">
+  <div class="wrap">
+    <div class="grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
+      <div>
+        <p class="eyebrow text-brass-lt">Clients &amp; Community</p>
+        <h2 id="comTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03]">Twenty years of <em class="font-medium text-brass-lt">standing beside people.</em></h2>
+      </div>
+      <p class="text-[15px] leading-relaxed text-parch/75">Clients, colleagues and neighbors &mdash; moments from two decades of practice in Long Beach and across Southern California.</p>
+    </div>
+    <div class="draw-x mt-12 h-px bg-brass/60"></div>
+    <div id="comGrid" class="mt-10 columns-2 gap-4 md:columns-3 lg:columns-4"></div>
+  </div>
+</section>
+
+<!-- ===================== ATTORNEY ROSTER ===================== -->
+<section id="attorneys" class="relative border-t border-rule bg-paper py-28 md:py-32" aria-labelledby="attTitle">
+  <div class="wrap">
+    <div class="grid items-center gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">
+      <div class="relative aspect-[4/3] overflow-hidden border border-brass/60">
+        <img id="booksImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223435_9fdddbe3-0095-47f2-9c95-9159fdadc2ce.png" alt="Edward J. O&rsquo;Reilly at the office window" class="absolute inset-0 h-full w-full object-cover will-change-transform" loading="lazy">
+      </div>
+      <div>
+        <p class="eyebrow text-brass-ink">The Attorneys</p>
+        <h2 id="attTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">You will know <em class="font-medium text-brass-ink">exactly who</em> is handling your case.</h2>
+        <p class="mt-6 max-w-[520px] text-[16px] leading-[1.75] text-mute">No call centers and no hand-offs to a junior associate you have never met. Your matter is led by Edward J. O&rsquo;Reilly personally, with experienced Associated Counsel brought in when a case demands it.</p>
+      </div>
+    </div>
+
+    <div class="mt-20 grid gap-8 md:grid-cols-2">
+      <!-- Edward -->
+      <article class="atty reveal grid sm:grid-cols-[200px_minmax(0,1fr)]">
+        <div class="frame relative m-3 border border-brass/50 bg-navy sm:m-4">
+          
+          <div class="portrait-live relative aspect-[4/5] h-full w-full overflow-hidden" data-video="./edward-portrait.mp4"><img src="https://nebula.wsimg.com/aad9e34837c73fef11614be38ff740a2?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Edward J. O&rsquo;Reilly" class="block h-full w-full object-cover" style="object-position:50% 25%" loading="lazy"></div>
+        </div>
+        <div class="p-7 sm:pl-3">
+          <p class="eyebrow text-brass-ink">Principal Attorney</p>
+          <h3 class="mt-2 font-serif text-[2.2rem] font-semibold leading-[1.05] text-navy">Edward J. O&rsquo;Reilly</h3>
+          <ul class="mt-5 space-y-2.5 border-t border-rule pt-5 text-[14px] text-mute">
+            <li><span class="font-semibold text-navy">State Bar of California</span> &middot; Active member</li>
+            <li><span class="font-semibold text-navy">U.S. District Court</span> &middot; Central District of California, admitted 2008</li>
+            <li><span class="font-semibold text-navy">J.D.</span> &middot; Pacific Coast University School of Law</li>
+            <li><span class="font-semibold text-navy">B.A.</span> &middot; SUNY Albany</li>
+          </ul>
+          <a href="tel:+15624337363" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold text-navy hover:text-brass-ink">Call Edward <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <!-- Batsakis -->
+      <article class="atty reveal grid sm:grid-cols-[200px_minmax(0,1fr)]">
+        <div class="frame relative m-3 border border-brass/50 bg-navy sm:m-4">
+          <!-- Replace with: <img src="batsakis-portrait.jpg" alt="Theodore Batsakis" class="absolute inset-0 h-full w-full object-cover"> -->
+          <div class="flex h-full min-h-[220px] w-full flex-col items-center justify-center text-brass-lt">
+            <span class="grid h-20 w-20 place-items-center rounded-full border border-brass/70 font-serif text-[1.9rem] font-semibold">TB</span>
+            <span class="eyebrow mt-4 text-[10px] text-brass/80">Portrait</span>
+          </div>
+        </div>
+        <div class="p-7 sm:pl-3">
+          <p class="eyebrow text-brass-ink">Associated Counsel</p>
+          <h3 class="mt-2 font-serif text-[2.2rem] font-semibold leading-[1.05] text-navy">Theodore Batsakis</h3>
+          <p class="mt-5 border-t border-rule pt-5 text-[14px] leading-relaxed text-mute">Part of the firm&rsquo;s network of Associated Counsel, adding depth and courtroom capacity when a matter calls for a second experienced advocate.</p>
+          <ul class="mt-3 space-y-2.5 text-[14px] text-mute">
+            <li class="border border-dashed border-rule px-3 py-1.5">[Bar admission &amp; number]</li>
+            <li class="border border-dashed border-rule px-3 py-1.5">[Education &amp; focus areas]</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <div class="mt-16 grid gap-8 md:grid-cols-2">
+      <figure class="cred-fig reveal">
+        <div class="cred-img p-4"><img src="https://nebula.wsimg.com/76949dd68f91c59a2cf4b9ea7ad13c1a?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Certificate admitting Edward J. O&rsquo;Reilly to practice before the U.S. District Court, Central District of California" class="object-contain" loading="lazy"></div>
+        <figcaption class="mt-4 flex items-baseline gap-4 border-t border-rule pt-4">
+          <span class="font-serif text-[1.4rem] italic text-brass-ink">2008</span>
+          <span><strong class="block font-serif text-[1.5rem] font-semibold leading-tight text-navy">Admitted to federal court</strong><span class="text-[14px] text-mute">U.S. District Court, Central District of California &mdash; December 29, 2008</span></span>
+        </figcaption>
+      </figure>
+      <figure class="cred-fig reveal">
+        <div class="cred-img"><img src="https://nebula.wsimg.com/872800546f7e05cb8102809455013de5?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Edward J. O&rsquo;Reilly outside the Clara Shortridge Foltz courthouse of the Los Angeles Superior Court" class="object-cover" loading="lazy"></div>
+        <figcaption class="mt-4 flex items-baseline gap-4 border-t border-rule pt-4">
+          <span class="font-serif text-[1.4rem] italic text-brass-ink">L.A.</span>
+          <span><strong class="block font-serif text-[1.5rem] font-semibold leading-tight text-navy">Los Angeles Superior Court</strong><span class="text-[14px] text-mute">Clara Shortridge Foltz Courthouse, downtown Los Angeles</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAY ONLINE (Stripe Payment Links) ===================== -->
+<section id="pay" class="relative border-t border-rule bg-parch py-24 md:py-28" aria-labelledby="payTitle">
+  <div class="wrap grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+    <div>
+      <p class="eyebrow text-brass-ink">Pay Online</p>
+      <h2 id="payTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.6rem)] font-semibold leading-[1.03] text-navy">Secure payments, <em class="font-medium text-brass-ink">in under a minute.</em></h2>
+      <p class="mt-6 max-w-[460px] text-[16px] leading-[1.75] text-mute">Pay an invoice or a retainer by card, Apple Pay or Google Pay. Payments are processed by Stripe; the firm never sees or stores your card number.</p>
+      <ul class="mt-8 space-y-3 text-[14.5px] text-navy">
+        <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-brass"></span>Encrypted checkout hosted by Stripe</li>
+        <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-brass"></span>Email receipt sent automatically</li>
+        <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-brass"></span>Questions about a bill? Call <a href="tel:+15624337363" class="font-semibold underline underline-offset-4">(562) 433-7363</a></li>
+      </ul>
+    </div>
+    <form id="payForm" class="border-t-[3px] border-brass bg-white p-7 shadow-[0_30px_60px_-40px_rgba(11,29,58,.45)] md:p-10" novalidate>
+      <fieldset>
+        <legend class="font-serif text-[1.9rem] font-semibold leading-[1.1] text-navy">What are you paying?</legend>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+          <label class="pay-opt"><input type="radio" name="payType" value="invoice" checked><span><strong>Invoice</strong><small>Pay a bill for legal services</small></span></label>
+          <label class="pay-opt"><input type="radio" name="payType" value="retainer"><span><strong>Retainer</strong><small>As set out in your engagement letter</small></span></label>
+        </div>
+      </fieldset>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <label class="fld fld-lt"><span>Full name</span><input name="payName" type="text" required autocomplete="name" placeholder="Your name"></label>
+        <label class="fld fld-lt"><span>Email for receipt</span><input name="payEmail" type="email" required autocomplete="email" placeholder="you@email.com"></label>
+      </div>
+      <label class="fld fld-lt mt-4"><span>Invoice or matter number</span><input name="payRef" type="text" autocomplete="off" placeholder="e.g. INV-1042"></label>
+      <button type="submit" class="btn btn-brass mt-6 w-full">Continue to Secure Payment
+        <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p id="payMsg" class="mt-4 min-h-[1.5em] text-[13px] text-mute" aria-live="polite"></p>
+      <p class="mt-2 flex items-center gap-2 text-[12px] text-mute"><svg class="h-4 w-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Payments are processed securely by Stripe. Making a payment does not by itself create an attorney-client relationship.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== CONTACT FOOTER ===================== -->
+<footer id="contact" class="relative bg-charcoal text-parch" aria-labelledby="ctTitle">
+  <div class="draw-x absolute inset-x-0 top-0 h-px bg-brass/60"></div>
+  <div class="wrap pt-28 md:pt-32">
+    <div class="grid gap-14 md:grid-cols-2 md:gap-20">
+      <!-- Office details -->
+      <div>
+        <p class="eyebrow text-brass-lt">Contact the Firm</p>
+        <h2 id="ctTitle" class="mt-4 font-serif text-[clamp(2.4rem,4.4vw,4rem)] font-semibold leading-[1.02]">Stand up for your rights. <em class="font-medium text-brass-lt">Start with one call.</em></h2>
+        <p class="mt-6 max-w-[480px] text-[16px] leading-[1.75] text-parch/78">Tell us what happened. You will hear back from the office personally &mdash; with a clear view of where you stand and what comes next.</p>
+
+        <dl class="mt-12 border-t border-brass/40">
+          <div class="flex gap-5 border-b border-parch/12 py-5">
+            <dt class="eyebrow w-24 flex-none pt-1.5 text-brass-lt">Call</dt>
+            <dd><a href="tel:+15624337363" class="font-serif text-[2.2rem] font-semibold leading-none transition-colors hover:text-brass-lt">(562) 433-7363</a></dd>
+          </div>
+          <div class="flex gap-5 border-b border-parch/12 py-5">
+            <dt class="eyebrow w-24 flex-none pt-1 text-brass-lt">Office</dt>
+            <dd class="text-[16px] leading-relaxed">1 World Trade Center, Suite 800<br>Long Beach, CA 90802<br>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=1+World+Trade+Center+Suite+800+Long+Beach+CA+90802" target="_blank" rel="noopener" class="mt-1 inline-flex min-h-[40px] items-center text-[13px] font-semibold text-brass-lt underline underline-offset-4 hover:text-parch">Get directions</a></dd>
+          </div>
+          <div class="flex gap-5 border-b border-parch/12 py-5">
+            <dt class="eyebrow w-24 flex-none pt-1 text-brass-lt">Hours</dt>
+            <dd class="text-[15px] text-parch/80"><span class="border border-dashed border-parch/35 px-2.5 py-1">[Insert office hours]</span></dd>
+          </div>
+          <div class="flex gap-5 border-b border-parch/12 py-5">
+            <dt class="eyebrow w-24 flex-none pt-1 text-brass-lt">Languages</dt>
+            <dd class="text-[16px]">English &amp; Espa&ntilde;ol &mdash; <em class="font-serif text-[1.1rem] text-brass-lt">Se habla espa&ntilde;ol</em></dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Consultation form -->
+      <div class="border-t-[3px] border-brass bg-parch p-7 text-navy md:p-10">
+        <form id="ctForm" class="space-y-4">
+          <h3 class="font-serif text-[2rem] font-semibold leading-[1.08]">Request a Consultation</h3>
+          <p class="pb-2 text-[14px] text-mute">Share the basics. The office will follow up personally, usually within one business day.</p>
+          <label class="fld fld-lt"><span>Full name</span><input name="name" type="text" required autocomplete="name" placeholder="Your name"></label>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="fld fld-lt"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555"></label>
+            <label class="fld fld-lt"><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="you@email.com"></label>
+          </div>
+          <label class="fld fld-lt"><span>Type of matter</span>
+            <select name="matter">
+              <option>Personal injury</option><option>Real estate</option><option>Business &amp; contracts</option><option>Employment</option><option>Transportation &amp; maritime</option><option>Civil, criminal or estates</option><option>Other</option>
+            </select>
+          </label>
+          <label class="fld fld-lt"><span>Brief summary</span><textarea name="summary" placeholder="What happened, and when?"></textarea></label>
+          <label class="flex items-start gap-3 text-[13px] leading-snug text-mute">
+            <input type="checkbox" required class="mt-0.5 h-5 w-5 flex-none accent-[#0B1D3A]">
+            <span>I understand that submitting this form does not create an attorney-client relationship, and I will not send confidential information until the firm agrees to represent me.</span>
+          </label>
+          <button type="submit" class="btn btn-brass w-full">Request Priority Review
+            <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <div id="ctDone" class="py-6" hidden aria-live="polite">
+          <span class="grid h-12 w-12 place-items-center border border-brass-ink text-brass-ink"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <h3 class="mt-4 font-serif text-[2rem] font-semibold leading-[1.08]">Thank you. Your request is in.</h3>
+          <p class="mt-2 text-[14.5px] text-mute">The office will be in touch. If your matter is urgent, please call <a href="tel:+15624337363" class="font-semibold text-navy underline underline-offset-4">(562) 433-7363</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimers -->
+    <div class="mt-24 grid gap-8 border-t border-brass/35 py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+      <div>
+        <p class="eyebrow text-brass-lt">Important Disclosures</p>
+      </div>
+      <div class="space-y-3 text-[12.5px] leading-[1.7] text-parch/68">
+        <p><strong class="tracking-[.06em] text-parch">ATTORNEY ADVERTISING.</strong> This website is attorney advertising under the rules of the State Bar of California. Prior results do not guarantee a similar outcome; each matter depends on its own facts and the applicable law.</p>
+        <p><strong class="tracking-[.06em] text-parch">NO ATTORNEY-CLIENT RELATIONSHIP.</strong> Contacting the firm by phone, email or through this website does not create an attorney-client relationship. Please do not send confidential or time-sensitive information until the firm has confirmed in writing that it represents you. The content of this site is general information, not legal advice.</p>
+        <p>Edward J. O&rsquo;Reilly is licensed by the State Bar of California and admitted to practice before the United States District Court for the Central District of California. Attorney responsible for this website: Edward J. O&rsquo;Reilly, 1 World Trade Center, Suite 800, Long Beach, CA 90802.</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap justify-between gap-x-8 gap-y-2 border-t border-parch/12 py-6 text-[12px] text-parch/60">
+      <span>&copy; 2006&ndash;2026 Law Office of Edward J. O&rsquo;Reilly &middot; O&rsquo;Reilly Law Associates</span>
+      <span>1 World Trade Center, Suite 800, Long Beach, CA 90802</span>
+    </div>
   </div>
 </footer>
 
+</main>
+
+<!-- Mobile action bar -->
+<nav aria-label="Quick actions" class="fixed inset-x-0 bottom-0 z-[60] grid grid-cols-2 shadow-[0_-12px_30px_-12px_rgba(0,0,0,.5)] md:hidden">
+  <a href="tel:+15624337363" class="flex min-h-[64px] items-center justify-center gap-2 bg-brass text-[15px] font-semibold text-white">
+    <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+    Call Now
+  </a>
+  <a href="#qce" class="flex min-h-[64px] items-center justify-center border-t border-brass bg-navy text-[15px] font-semibold text-parch">Free Case Review</a>
+</nav>
+
 <script>
-  // Footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* ============================================================
+   Image assets
+   - FLAGS: 34 "Flags of Our Clients" images from the original site
+   - OPPOSING: 54 opposing-party images from the original site
+   Hosted on the original GoDaddy CDN. For launch, download and
+   self-host these files and swap the URL builder below.
+   ============================================================ */
+const IMG = id => `https://nebula.wsimg.com/${id}?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1`;
+const FLAGS = [
+  '09783a7963874698b2e426068c83473c',
+  '46fb1cbb4be0c76ddfcb0d3ba6d4ebed',
+  'eaeada3793b1d30cf7810a2695ca87ea',
+  '17053a7870e20040ac9f799e176dacc7',
+  '78f0eecb9c00a5c81021edb119234c45',
+  '7a70d2abed81935b8d54495f79ba3852',
+  '6a644fc7047b344ac7ba75fcc228d828',
+  '8cf40c4e01a03941d88c3fcb8291f177',
+  '56174904e5c50dc46f03f3301c5ab347',
+  '63570aef6024964dc305c020b5fad04a',
+  '6927e78047490a8323548be1d1b914fd',
+  '14cc9484f9010568c7fe571bbefd0220',
+  'd14c957cdd08fc3bf3ea34de2ab4e4bd',
+  '727f7defe7f9da33653f3e03d06e815a',
+  'ac8212ccfbd6d41d9089495bf2b9e10d',
+  'e19791844fe7478de7549c4079bef242',
+  '432822e625d49c6c7438280ec9ee00df',
+  'ed1a78e7354657ce5c0911b4ce13c634',
+  'f30c37000e4f64273708c5544addeef9',
+  '1b4899d65a2c70e191226a23c316e066',
+  '912a6cba4cd7ee48a9d56e9c2370b292',
+  'bed54dfab99c18315bdd8378ae688ef6',
+  'd86a19df55caec0e2d2d24f242a0e1f4',
+  '525052c694bec955425da321c13b7f32',
+  '090fe1b48ba056b420458744db6c8ace',
+  'c2992866c187e6b73dec9cc524f17bb2',
+  '4d8a8c6c91de92b20ed44f5370fc8783',
+  '7915fc85dbb4d16757bfc8c371edbf9a',
+  '40f45a4a357a25d702f6e76d3d8aa0ac',
+  '2e2d95e76ca607d13a6da6e542bdc77d',
+  '7804845ec5c50317e0635f5a69881cea',
+  'de17c53d04e4f933de20f3305f2c9aab',
+  '4829f45669e777ac7a7d48774896a36d',
+  '37351a26b4a23d8364afffb787e6126a'
+];
+const OPPOSING = [
+  '0206a8c66f279b6a7f71f3197573f3b1',
+  '5908eeb3191fe31b9aa131704a8dec9a',
+  'e5499519ad98f01f6076b8a88ead476e',
+  '8f708aae7813a8ad10fff06a052ffb0a',
+  '33d8bb462e3e634b4402b47175f90d78',
+  'd90462dc7d8c4683ecb0565d6fb4f855',
+  'a4e9b06c34af3635407a0801addac350',
+  'e0ae33e70c4229f74e56669ee07e818f',
+  '43a17a007af09e64ba5e035b24185a47',
+  '5d594017cf0fba4123850ad6e2dcd3b9',
+  '366898dfb1e29f785a88f0d94d420c0a',
+  '0cc9a8ac530f183b1a6b522143443f1c',
+  '84503ee6710ee29ea65224d2ef17a246',
+  '3c1639aa84b6d1ab59514aaf4cb03e2d',
+  'e6392868ba27e5f1cdcbac282f913122',
+  '309d3c1eaee30988f10c2f4769e68385',
+  '64b98e9717b30df1c1c5628998b6259e',
+  '971db2e11522d273d42d2233c3a6a910',
+  '08e89fbe8a2dde8c3a7c73d8906ae04a',
+  'a70c6849b1851a3954316be3f12ee257',
+  'd52707f2da368f0eea83ba03233bd6b8',
+  '42b03636daeef463383d3f491d081dff',
+  '19cbc094c6e552478bcf641156ec73da',
+  '091383ace4ade2a200589aca3937d5b4',
+  '586d42243bd2add235cf9d24ea3dadd1',
+  '1a7c99191120717054787e83f5e3e002',
+  '530d02ee8a8bdaf94e3db3535006a70f',
+  'c42d1e9515d5b5e20fda0f3f28f4bcfa',
+  '0bd569e0d654ca2ace473171f80d88ca',
+  '9fd000acc9dc27b4182571ec6e206b06',
+  'd3cbf71802c1afda5ba569f70baf4fe0',
+  '2281780eeccbd94b7a68431c76b8de7f',
+  '27fe9a753c8faf2db1b38cca5e21683c',
+  '47ae0ae6955f10b913e71d35a0c59bcc',
+  '441ba9fe1d0cdd3c3057a8410b56d933',
+  'd14511d77543ea07d3c566915bddd8c2',
+  '5de8a98d06a0adf8580dd6359ca8f2a9',
+  'adcd59ed17234cd432bbf34a6faa5335',
+  '3d9feabad37a64b616d9faaf4442aa37',
+  'b33ff28387861c477190147123c84bda',
+  '04d02b9a11600ef50abd3182e68f55cb',
+  '358d7335a52081c305d8c7599c5e7f29',
+  '8bae6423d52b549267e2ecad46b863a7',
+  '26afd24e06550590b21315f421b1c848',
+  '8e0258e8b2fc8735d1aaa697fb5b2739',
+  'e2b0bd24cb089a6ad7431ab82cdd2090',
+  'dfac952ee5207a36a6b1c965156dc902',
+  'a17e00aeff9140201b817fa11f87d331',
+  '2de2833c599f2f05bd1f61056ddd77b3',
+  '71f2494a91c50f04f01b6d6906f9e865',
+  'fea2748c95bfd7f5e3e6e11b32f3ba4b',
+  'ca6f4432aa97533846b9129458d542f4',
+  '9770e3ec9cb792af5b124139a7fdf251',
+  '7160f8b5c907f311c0dafc70884e9be0'
+];
 
-  // Header scroll state
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 12);
-  }, { passive: true });
-
-  // Mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
+(function buildAssets() {
+  const mkImg = (id, alt, cls) => {
+    const img = new Image();
+    img.src = IMG(id); img.alt = alt; img.loading = 'lazy'; img.decoding = 'async';
+    if (cls) img.className = cls;
+    img.addEventListener('error', () => { const c = img.closest('.flag, .op-tile'); if (c) c.style.display = 'none'; });
+    return img;
+  };
+  // Flags: split into two rows, each duplicated for a seamless loop
+  const half = Math.ceil(FLAGS.length / 2);
+  [[document.getElementById('flagsA'), FLAGS.slice(0, half)], [document.getElementById('flagsB'), FLAGS.slice(half)]].forEach(([track, ids]) => {
+    for (let pass = 0; pass < 2; pass++) {
+      ids.forEach(id => {
+        const cell = document.createElement('div');
+        cell.className = 'flag';
+        if (pass) cell.setAttribute('aria-hidden', 'true');
+        cell.appendChild(mkImg(id, pass ? '' : 'Client flag'));
+        track.appendChild(cell);
+      });
+    }
   });
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
+  // Opposing parties grid
+  const grid = document.getElementById('opGrid');
+  OPPOSING.forEach(id => {
+    const tile = document.createElement('div');
+    tile.className = 'op-tile';
+    tile.appendChild(mkImg(id, 'Opposing party logo'));
+    grid.appendChild(tile);
   });
+})();
 
-  // Terminal diagnostic animation
-  const termLines = [
-    { text: '> initializing cotech diagnostics…', cls: '' },
-    { text: '> hardware repair module ......... <span class="ok">ONLINE</span>', cls: '' },
-    { text: '> ai integration engine .......... <span class="ok">ONLINE</span>', cls: '' },
-    { text: '> coaching sessions .............. <span class="ok">AVAILABLE</span>', cls: '' },
-    { text: '> smart home &amp; security ......... <span class="ok">READY</span>', cls: '' },
-    { text: '> all systems <span class="accent">operational</span>.', cls: '' },
-  ];
-  const termBody = document.getElementById('termBody');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ============================================================
+   Revision 3.1 photography (original firm images, GoDaddy CDN)
+   ============================================================ */
+const PH = {1: '9951509ea504f0ff1da0c5f0bb6255b5', 2: '32544f45c182ec27efc279b97a2a3b00', 3: 'a2b8db06ff7a78a2853b8f3195dad875', 4: 'dbc28f4526be903c8697dcdf4d47511b', 5: 'b7c9fff5c1924af99c920ef054b05e48', 6: '6ffe3842bffb5d3b444d825074193178', 7: 'e9cb66e80db7b30c91e2f5475380cbc3', 8: 'e6bf9c9dc7174c824cf55282a5edb1bd', 9: '22ea4b5519fa1d0d35d246f4ca976d3a', 10: '318f3d651d5f5d163b78c568f842346d', 11: 'd3500a7ed972ca70d1a030da13f99bb9', 12: 'b98a78b634b1a647f6d5665c96c575b5', 13: '5556c5aa7ff750b0ceafba66b6f56bcd', 14: '3e585f89157ff99bb5fb600ed2267ffe', 15: 'efceee069b11bc5674929518a4f692f5', 16: '10be4d7849e1607ed0531850063274f0', 17: '3ebf43527cdb1a95aedb7eaf6be1af89', 18: 'a9ec9193adefb1b9598d641e1eef94f7', 19: 'dc06c5c4c4aa32420de53071ce08c5f8', 20: '8b1fe5899ea22686fb96c341cf47e2c7', 21: '10a41c5d36d69f8a418f18eee52b8a42', 22: 'd7c2928a8e8992ae4ffd314ca39f8414', 23: 'b69925e38f703c5fe048c26c65474450', 24: '0ccd6bfe433af414249e7b50fdff78c3', 25: 'e6ddb8ed0a4fb5ebc0856217de0a1050', 26: '32b35ff5cd1d49c84cbf2f70f59d421f', 27: '142aa3f9866f9a0862a8b0ca74e045b0', 28: 'b7546812c3fc6dbd8bed10c3c7a18c0a', 29: '8db3d163f326cc3f70a43cdcc0db1e35', 30: 'db45d881daf7034502ec66f002ee974e', 31: '00208600c996cd5f652752283b584b0c', 32: '0554333b0db373c6bfe0779a13687a4d', 33: 'cf060005f8656002199185c0949cc290', 34: 'a4a827621118911e2591c9dbe95e52cd', 35: 'e29977a56dc9abfa412bca1c45ed11b1', 36: '643dba552f0c7086e510719956c7fc0a', 37: '3c02813bb4ec7a0b0c91e4394a32df54', 38: '000f936ce6de1aac2ca1152e575a2212', 39: 'ed2dad57a740e06fb98226e53054c7b0', 40: 'a72d719b9c5b604241a9967e74e7fa7a', 41: '910248e4acab6ba5b84fffe11d5dab87', 42: 'c5305dc3f910f5c46f0595698eb48596', 43: '597262266f51b75227448db580b102fa', 44: '673726b471cf1f4b8683a5f134c07cac', 45: '0fc6809e7a1f790e7d84acec56a6eb3e', 46: '33f50fa25f6b834ff9d2c425157f2056', 47: '089884aeb220dbdece9d1e5756b9b17a', 48: 'd08077793d5fe279395bc7cd1f1545bc', 49: '0a2c0a35bcb1ae741745b0b35f277236', 50: '6feb6b6304d4105612cfb48b50b8bee3', 51: '6f7c31d2d3451dcfbb02e83cb0cdbde1', 52: '1edd53700c6e0f183aee7376d6b84399', 53: '24297f17453ec30da49174973b5069df', 54: 'b8ff6b8e4266bd4922332e55b4cebe80', 55: '0d828cb4cc1fb56df09134dab8bb5cb4', 56: '06687cdb4ae2941992fbe3f72d368613', 57: '0ebc501861c42b12371f2894cf8e03e3', 58: '5dab90aaff6dcfabe3f0815b2495222a', 59: 'fd32f682eb4596a2c511c83bd798fe49', 60: '5cf5a054259b36f34727d64275489962', 61: 'd766b98bbe038eb02a3ede31323a4dee', 62: 'f61ef1d6a48573a732b0f9510441e8ee', 63: '702c5cbe89db78be1f0a9b97ab67d3ac', 64: 'b3b5fb09539ec37361c47bba7803f760', 65: '5849f6cac8290d26d337148c4ce726fd', 66: '0a69b44ab0e806dbf9c321368d28df7f', 67: '221cb5d82b863a721765733aa077e9d2', 68: 'd0d84c7ed9cc809526861e792d239948', 69: 'b91ce4f300ac4aace56e5c49664a3fc0', 70: '860b0a4ac1ff98c7e102d72ac2a2847a', 71: '0416a1f306ee615bb3cce0ee5c87bd75', 72: 'b7fb8fdeb03190c39fe4c7114aa5ec54', 73: '2a0f525587212d8b8c557252ef94b7e4', 74: '404ec0aea85e2980650495137c15639d', 75: '7d5454678aa26d2106c589161b73e923', 76: 'a942b5f5940ebb34cbadb8bcf4975130', 77: '3c3686d04ebbef868d189e3877008c06', 78: '70c44731a7b4a732a761a49c8e118fe1', 79: '81a0094f2d4e69d2f5124a370dc9ae44', 80: '87ace8659af7090e2448ded9ae4ea7c9', 81: 'd062daa10956355c4cfd7ba26db384be', 82: 'b931dd3c5caaa72a1d2f6bbe84724324', 83: 'b274cf4390ef51c31a58820519cb4aba', 84: 'eb9cc2c9d98879c150fce17eba8f4d0f', 85: '9f2058224a644470242eb3d1ce0cad9b', 86: 'b1e35b1c32ae127b569c25ce33ebb9ec', 87: 'e65ab5e2b837181ecd2f237c316d9f4b', 88: 'ea2fd097c7b3e697aab99ec1e93b1790', 89: '30d106e488ffd5cc9c95a9232a9bb87a'};
+const PHOTO = n => IMG(PH[n]);
+const LB_STRIP = [18, 25, 26, 33, 55, 83];
+const COURTS = [
+  [24, 'Edward R. Roybal Federal Building', 'U.S. District Court \u00b7 Los Angeles'],
+  [81, 'Compton Courthouse', 'Superior Court of California'],
+  [62, 'Pomona Courthouse South', 'Superior Court of California'],
+  [79, 'Whittier Courthouse', 'Los Angeles Superior Court'],
+  [82, 'Marina Division', 'Superior Court of California'],
+  [64, 'Hall of Records', 'County of San Bernardino'],
+  [5, 'In the courtroom', 'Trial work'],
+  [74, 'Outside the department', 'Between hearings'],
+  [23, 'Courthouse steps', 'Los Angeles County'],
+  [22, 'Courthouse lobby', 'Calendar call']
+];
+const COMMUNITY = [3, 9, 15, 16, 17, 28, 27, 34, 40, 43, 45, 53, 4, 65, 86, 19, 29, 46, 63, 77, 68, 80, 84, 70, 1, 30, 78, 89, 48, 32, 2, 60, 72];
 
-  function renderTerminal(){
-    termBody.innerHTML = '';
-    termLines.forEach((line, i) => {
-      const el = document.createElement('div');
-      el.className = 'line';
-      el.innerHTML = line.text;
-      el.style.animationDelay = reduceMotion ? '0s' : (i * 0.35) + 's';
-      termBody.appendChild(el);
+(function buildPhotos() {
+  const lb = document.getElementById('lbStrip');
+  LB_STRIP.forEach(n => {
+    const d = document.createElement('div'); d.className = 'lb-tile';
+    d.innerHTML = `<img src="${PHOTO(n)}" alt="Long Beach" loading="lazy">`;
+    lb.appendChild(d);
+  });
+  const ct = document.getElementById('courtsTrack');
+  COURTS.forEach(([n, name, sub], i) => {
+    const f = document.createElement('figure'); f.className = 'court';
+    f.innerHTML = `<div class="court-img"><img src="${PHOTO(n)}" alt="${name}" loading="lazy"></div>
+      <figcaption><span class="num">${String(i + 1).padStart(2, '0')}</span><span><strong class="block font-serif text-[1.45rem] font-semibold leading-tight text-navy">${name}</strong><span class="mt-1 block text-[12px] font-semibold uppercase tracking-[.14em] text-mute">${sub}</span></span></figcaption>`;
+    ct.appendChild(f);
+  });
+  const cg = document.getElementById('comGrid');
+  COMMUNITY.forEach(n => {
+    const f = document.createElement('figure'); f.className = 'com-tile';
+    f.innerHTML = `<img src="${PHOTO(n)}" alt="From the firm&rsquo;s photo archive" loading="lazy">`;
+    cg.appendChild(f);
+  });
+})();
+
+/* ============================================================
+   3.2 Hero video scrub (GSAP ScrollTrigger drives video.currentTime)
+   For smooth scrubbing, export the MP4 with a keyframe on every frame:
+   ffmpeg -i in.mp4 -c:v libx264 -g 1 -crf 20 -pix_fmt yuv420p -an -movflags +faststart higgsfield-hero.mp4
+   ============================================================ */
+(function heroVideo() {
+  const video = document.getElementById('higgsfield-hero-video');
+  const input = document.getElementById('mp4Input');
+  const label = document.getElementById('mp4Label');
+  const drop = document.getElementById('mp4Drop');
+  const previewMode = new URLSearchParams(location.search).has('preview');
+  if (previewMode) drop.hidden = false;
+  const overlay = document.getElementById('dropOverlay');
+  const desktop = window.matchMedia('(min-width: 1024px)');
+  let scrub = null, objectUrl = null;
+
+  function buildScrub() {
+    if (!window.gsap || !window.ScrollTrigger || reduceMotion) return;
+    if (scrub) { if (scrub.scrollTrigger) scrub.scrollTrigger.kill(); scrub.kill(); scrub = null; }
+    if (!desktop.matches || !isFinite(video.duration) || !video.duration) return;
+    video.pause();
+    video.currentTime = 0;
+    scrub = gsap.to(video, {
+      currentTime: video.duration, ease: 'none',
+      scrollTrigger: { trigger: '#hero-scrub-section', start: 'top top', end: 'bottom bottom', scrub: 0.5 }
     });
-    const cursor = document.createElement('span');
-    cursor.className = 'cursor';
-    cursor.setAttribute('aria-hidden', 'true');
-    termBody.appendChild(cursor);
+    ScrollTrigger.refresh();
   }
-  renderTerminal();
-</script>
+  video.addEventListener('loadedmetadata', buildScrub);
+  video.addEventListener('error', () => { label.textContent = 'Preview Upload: Drop Your Higgsfield .MP4 Here'; });
+  if (video.readyState >= 1) buildScrub();
+  desktop.addEventListener('change', buildScrub);
 
+  // iOS Safari only seeks after a user gesture has started the media once
+  const unlock = () => { const p = video.play(); if (p && p.then) p.then(() => video.pause()).catch(() => {}); };
+  window.addEventListener('touchstart', unlock, { once: true, passive: true });
+
+  function loadFile(file) {
+    if (!file) return;
+    if (!/\.mp4$/i.test(file.name) && file.type !== 'video/mp4') { label.textContent = 'Please choose an .mp4 file'; return; }
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+    objectUrl = URL.createObjectURL(file);
+    video.removeAttribute('poster');
+    video.src = objectUrl;
+    video.load();
+    label.textContent = 'Previewing ' + file.name + ' \u2014 scroll to scrub';
+  }
+  input.addEventListener('change', e => loadFile(e.target.files[0]));
+
+  // Drag-and-drop anywhere over the hero
+  const hero = document.getElementById('hero-scrub-section');
+  let depth = 0;
+  if (previewMode) hero.addEventListener('dragenter', e => { e.preventDefault(); depth++; overlay.classList.add('is-on'); drop.classList.add('is-over'); });
+  if (previewMode) hero.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; });
+  if (previewMode) hero.addEventListener('dragleave', () => { depth = Math.max(0, depth - 1); if (!depth) { overlay.classList.remove('is-on'); drop.classList.remove('is-over'); } });
+  if (previewMode) hero.addEventListener('drop', e => {
+    e.preventDefault(); depth = 0; overlay.classList.remove('is-on'); drop.classList.remove('is-over');
+    loadFile([...e.dataTransfer.files].find(f => f.type === 'video/mp4' || /\.mp4$/i.test(f.name)));
+  });
+
+  // "Tell Us About Your Case" highlights the intake card
+  document.getElementById('tellUs').addEventListener('click', () => {
+    const q = document.getElementById('qce');
+    q.classList.remove('qce-pulse'); void q.offsetWidth; q.classList.add('qce-pulse');
+    setTimeout(() => { const f = q.querySelector('[data-step]:not([hidden]) button, [data-step]:not([hidden]) input'); if (f) f.focus({ preventScroll: true }); }, 700);
+  });
+})();
+
+/* ============================================================
+   3.2 Attorney portraits: hover plays an optional Higgsfield .mp4 loop
+   (set data-video on .portrait-live; missing files fall back to the photo)
+   ============================================================ */
+(function portraitLoops() {
+  document.querySelectorAll('.portrait-live[data-video]').forEach(box => {
+    let vid = null, failed = false;
+    const card = box.closest('.atty') || box;
+    card.addEventListener('mouseenter', () => {
+      if (failed || reduceMotion) return;
+      if (!vid) {
+        vid = document.createElement('video');
+        vid.muted = true; vid.loop = true; vid.playsInline = true; vid.preload = 'auto';
+        vid.setAttribute('aria-hidden', 'true');
+        vid.addEventListener('error', () => { failed = true; vid.remove(); vid = null; box.classList.remove('is-playing'); });
+        vid.addEventListener('playing', () => box.classList.add('is-playing'));
+        vid.src = box.dataset.video;
+        box.appendChild(vid);
+      }
+      const p = vid.play(); if (p && p.catch) p.catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => { if (vid) { vid.pause(); box.classList.remove('is-playing'); } });
+  });
+})();
+
+/* ============================================================
+   3.3 Google reviews (verbatim excerpts from public Google reviews)
+   ============================================================ */
+const REVIEWS = [
+  ['Could not be happier with my experience with Ed.', 'Nikki F.', 'June 2024'],
+  ['Edward and his associates were so helpful every step of the way!', 'Amanda H.', 'May 2024'],
+  ['A knowledgeable and experienced lawyer that you can trust.', 'Will S.', 'February 2024'],
+  ['He listens to our problems &amp; give me solutions.', 'George S.', 'June 2024'],
+  ['5 stars is not enough.', 'Misty M.', 'November 2023'],
+  ['&hellip;his attention to detail and the time he took to really get to know the facts of my case was remarkable.', 'Jessica H.', 'September 2023'],
+  ['Professional, courteous, and effective.', 'Christopher A.', 'September 2023'],
+  ['&hellip;he has always been a stand-up guy and a friend and a voice to those who need one.', 'Kermit T.', 'September 2023'],
+  ['Highly recommended for his professionalism and knowledge when it comes to real estate.', 'Diego E.', 'August 2023'],
+  ['Ed demonstrated genuine empathy and understanding toward my situation.', 'Sydney F.', 'August 2023'],
+  ['Great Attorney! Knowledgeable and approachable.', 'Johnny A.', 'August 2023'],
+  ['Meets all deadlines, very thorough and works well with other attorneys, mediators&hellip;', 'Brandie M.', 'June 2023'],
+  ['&hellip;he is quick with a response and was very informational with my problem', 'Miguel R.', 'October 2023'],
+  ['Ed is the best listener!', 'Megan M.', 'March 2023']
+];
+(function buildReviews() {
+  const STARS = '<span class="flex gap-0.5 text-[#E0A526]" aria-label="5 out of 5 stars">' + '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>'.repeat(5) + '</span>';
+  const card = ([q, who, when], hidden) => `<figure class="rev-card" ${hidden ? 'aria-hidden="true"' : 'role="listitem"'}>${STARS}<blockquote>&ldquo;${q}&rdquo;</blockquote><figcaption><span><b>${who}</b> &middot; ${when}</span><span class="font-semibold text-[#4285F4]">Google</span></figcaption></figure>`;
+  const half = Math.ceil(REVIEWS.length / 2);
+  [['revA', REVIEWS.slice(0, half)], ['revB', REVIEWS.slice(half)]].forEach(([id, list]) => {
+    const el = document.getElementById(id);
+    el.innerHTML = list.map(r => card(r, false)).join('') + list.map(r => card(r, true)).join('');
+  });
+})();
+
+/* ============================================================
+   3.3 Pay Online: Stripe Payment Links (no server needed)
+   1. In Stripe: Payment Links > New > "Customers choose what to pay".
+   2. Make one link for invoices and one for retainers, paste them below.
+   Retainers belong in the client trust account: use a Stripe account tied to
+   that account (or a trust-compliant processor) per Cal. Rule of Prof. Conduct 1.15.
+   ============================================================ */
+const STRIPE_LINKS = {
+  invoice: '',   // e.g. 'https://buy.stripe.com/xxxxxxxx'
+  retainer: ''   // e.g. 'https://buy.stripe.com/yyyyyyyy'
+};
+(function payments() {
+  const form = document.getElementById('payForm');
+  const msg = document.getElementById('payMsg');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const type = form.payType.value;
+    const link = STRIPE_LINKS[type];
+    if (!link) {
+      msg.innerHTML = 'Online payment is being set up. To pay today, please call <a class="font-semibold underline" href="tel:+15624337363">(562) 433-7363</a>.';
+      return;
+    }
+    const url = new URL(link);
+    url.searchParams.set('prefilled_email', form.payEmail.value.trim());
+    const ref = (form.payRef.value.trim() || form.payName.value.trim()).replace(/[^A-Za-z0-9_-]+/g, '-').slice(0, 190);
+    if (ref) url.searchParams.set('client_reference_id', ref);
+    msg.textContent = 'Opening secure checkout\u2026';
+    window.location.href = url.toString();
+  });
+})();
+
+/* ============================================================
+   Forms (front-end only: connect to your form handler or CRM)
+   ============================================================ */
+(function forms() {
+  const qce = document.getElementById('qce');
+  const panes = qce.querySelectorAll('[data-step]');
+  const stepLbl = document.getElementById('qceStep');
+  const seg2 = document.getElementById('qceSeg2');
+  const areaOut = document.getElementById('qceArea');
+  function go(n) {
+    panes.forEach(p => { p.hidden = Number(p.dataset.step) !== n; });
+    stepLbl.textContent = n === 3 ? 'Received' : `Step ${n} of 2`;
+    seg2.classList.toggle('on', n >= 2);
+    const shown = qce.querySelector(`[data-step="${n}"]`);
+    if (window.gsap && !reduceMotion) gsap.from(shown, { x: 18, opacity: 0, duration: .45, ease: 'power3.out' });
+    const focusEl = shown.querySelector('input, button');
+    if (n > 1 && focusEl) focusEl.focus({ preventScroll: true });
+  }
+  qce.querySelectorAll('.pill').forEach(b => b.addEventListener('click', () => { areaOut.textContent = b.dataset.area; go(2); }));
+  document.getElementById('qceBack').addEventListener('click', () => go(1));
+  document.getElementById('qceReset').addEventListener('click', () => { qce.querySelector('form').reset(); go(1); });
+  qce.querySelector('form').addEventListener('submit', e => { e.preventDefault(); go(3); });
+
+  const ct = document.getElementById('ctForm');
+  ct.addEventListener('submit', e => {
+    e.preventDefault();
+    ct.hidden = true;
+    const done = document.getElementById('ctDone');
+    done.hidden = false;
+    if (window.gsap && !reduceMotion) gsap.from(done, { y: 18, opacity: 0, duration: .5, ease: 'power3.out' });
+  });
+})();
+
+/* ============================================================
+   Motion: Lenis + GSAP ScrollTrigger
+   ============================================================ */
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+(function motion() {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* --- Smooth inertial scroll --- */
+  let lenis = null;
+  if (!reduceMotion && window.Lenis) {
+    lenis = new Lenis({ duration: 1.25, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(time => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  // Anchor links scroll through Lenis, offset for the fixed header
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(el, { offset: id === '#top' ? 0 : -84, duration: 1.4 });
+      else el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* --- Progress bar --- */
+  gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.2 } });
+
+  /* --- Morphing masthead --- */
+  const masthead = document.getElementById('masthead');
+  ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => masthead.classList.toggle('is-compact', self.scroll() > 48) });
+  gsap.to('#utility', { height: 0, ease: 'none', scrollTrigger: { start: 0, end: 110, scrub: true } });
+
+  if (reduceMotion) return;
+
+  /* --- Hero intro: staggered headline --- */
+  const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  intro.from('.hero-line > span', { yPercent: 112, duration: 1.15, stagger: 0.12 }, 0.1)
+       .from('.hero-fade', { y: 26, opacity: 0, duration: 0.9, stagger: 0.09 }, 0.45)
+       .from('#qce', { y: 46, opacity: 0, duration: 1 }, 0.7);
+
+  /* --- 3.2: foreground lifts away over the last stretch of the scrub (desktop) --- */
+  const heroMM = gsap.matchMedia();
+  heroMM.add('(min-width: 1024px)', () => {
+    gsap.fromTo(['#heroCopy', '#qce'], { y: 0, opacity: 1 }, {
+      y: -70, opacity: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: { trigger: '#hero-scrub-section', start: () => 'top+=' + Math.round(window.innerHeight * 0.8) + ' top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true }
+    });
+    gsap.to('#scrollCue', { opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero-scrub-section', start: 'top top', end: '+=160', scrub: true } });
+  });
+
+  /* --- 3.3: firm knot rotates with scroll --- */
+  gsap.from('#heroKnotWrap', { opacity: 0, scale: .9, duration: 1.6, ease: 'power3.out', delay: .2 });
+  gsap.to('#heroKnot', { rotation: 240, ease: 'none', scrollTrigger: { trigger: '#hero-scrub-section', start: 'top top', end: 'bottom top', scrub: 0.8 } });
+
+
+  /* --- Self-drawing architectural rules --- */
+  gsap.utils.toArray('.draw-x').forEach(el => {
+    gsap.fromTo(el, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 55%', scrub: true } });
+  });
+  gsap.utils.toArray('.draw-y').forEach(el => {
+    gsap.fromTo(el, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 90%', end: 'top 60%', scrub: true } });
+  });
+
+  /* --- Generic reveals --- */
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.from(el, { y: 48, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+  });
+
+  /* --- Flags marquee, accelerated by scroll velocity --- */
+  const loops = gsap.utils.toArray('.marquee').map(m => {
+    const track = m.querySelector('.track');
+    const dir = Number(m.dataset.dir);
+    return gsap.fromTo(track, { xPercent: dir > 0 ? 0 : -50 }, { xPercent: dir > 0 ? -50 : 0, duration: 70, ease: 'none', repeat: -1 });
+  });
+  let boost = 1;
+  ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => { boost = Math.max(boost, 1 + Math.min(Math.abs(self.getVelocity()) / 260, 7)); } });
+  gsap.ticker.add(() => { boost += (1 - boost) * 0.06; loops.forEach(t => t.timeScale(boost)); });
+
+  /* --- Practice areas --- */
+  const cards = gsap.utils.toArray('.pa-card');
+  const paNum = document.getElementById('paNum');
+  const paName = document.getElementById('paName');
+  const segs = document.querySelectorAll('.pa-seg');
+  let current = -1;
+  function setActive(i) {
+    if (i === current || i < 0) return;
+    current = i;
+    segs.forEach((s, k) => s.classList.toggle('on', k <= i));
+    gsap.to(paNum, { yPercent: -40, opacity: 0, duration: .18, ease: 'power2.in', onComplete: () => {
+      paNum.textContent = String(i + 1).padStart(2, '0');
+      paName.textContent = cards[i].dataset.name;
+      gsap.fromTo(paNum, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .35, ease: 'power3.out' });
+    }});
+  }
+  setActive(0);
+
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 768px)', () => {
+    // Pin the 35% sidebar for the length of the card stack
+    const pin = document.getElementById('paPin');
+    ScrollTrigger.create({
+      trigger: pin,
+      start: 'top 124px',
+      endTrigger: '#paCards',
+      end: () => `bottom ${124 + pin.offsetHeight}px`,
+      pin: true,
+      pinSpacing: false,
+      invalidateOnRefresh: true
+    });
+    // Counter follows the card in view
+    cards.forEach((card, i) => {
+      ScrollTrigger.create({ trigger: card, start: 'top 62%', onEnter: () => setActive(i), onLeaveBack: () => setActive(i - 1) });
+    });
+    // Stacked-card transition: each card recedes as the next one slides over it
+    cards.forEach((card, i) => {
+      if (i === cards.length - 1) return;
+      const shade = document.createElement('span');
+      shade.className = 'pa-shade';
+      card.appendChild(shade);
+      const st = { trigger: cards[i + 1], start: 'top bottom', end: () => `top ${124 + (i + 1) * 14}px`, scrub: true, invalidateOnRefresh: true };
+      gsap.to(card, { scale: 0.93, ease: 'none', scrollTrigger: st });
+      gsap.to(shade, { opacity: 0.35, ease: 'none', scrollTrigger: { ...st } });
+    });
+  });
+  mm.add('(max-width: 767px)', () => {
+    cards.forEach((card, i) => {
+      ScrollTrigger.create({ trigger: card, start: 'top 60%', onEnter: () => setActive(i), onLeaveBack: () => setActive(i - 1) });
+      gsap.from(card, { y: 40, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
+    });
+  });
+
+  /* --- Heritage: tunnel parallax, scrubbed metrics, timeline fill --- */
+  gsap.fromTo('#tunnelImg', { yPercent: -10 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '#heritage', start: 'top bottom', end: 'top -40%', scrub: true } });
+
+  gsap.utils.toArray('#metrics .count').forEach(el => {
+    const from = Number(el.dataset.from), to = Number(el.dataset.to), dec = Number(el.dataset.dec || 0);
+    const state = { v: from };
+    const paint = () => { el.textContent = (dec ? state.v.toFixed(dec) : Math.round(state.v)) + (el.dataset.suffix || ''); };
+    paint();
+    gsap.to(state, { v: to, ease: 'none', onUpdate: paint, scrollTrigger: { trigger: '#metrics', start: 'top 88%', end: 'top 45%', scrub: 0.6 } });
+  });
+
+  gsap.fromTo('#tlFill', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top 62%', end: 'bottom 62%', scrub: true } });
+  gsap.utils.toArray('.chapter').forEach(ch => {
+    const body = ch.querySelector('.ch-body');
+    gsap.set(body, { opacity: 0.35 });
+    ScrollTrigger.create({
+      trigger: ch, start: 'top 62%',
+      onEnter: () => { ch.classList.add('is-lit'); gsap.to(body, { opacity: 1, duration: .5 }); },
+      onLeaveBack: () => { ch.classList.remove('is-lit'); gsap.to(body, { opacity: 0.35, duration: .4 }); }
+    });
+  });
+
+  /* --- Opposing parties: staggered tile reveal --- */
+  gsap.set('.op-tile', { opacity: 0, y: 24 });
+  ScrollTrigger.batch('.op-tile', { start: 'top 92%', once: true, onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: .7, stagger: .05, ease: 'power3.out' }) });
+
+  /* --- Roster image parallax --- */
+  gsap.fromTo('#booksImg', { scale: 1.15 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '#booksImg', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* --- 3.1: Long Beach band --- */
+  gsap.fromTo('#lbImg', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '#longbeach', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.from('.lb-word', { yPercent: 112, duration: 1.1, stagger: .12, ease: 'power4.out', scrollTrigger: { trigger: '#lbTitle', start: 'top 85%', once: true } });
+  ScrollTrigger.batch('.lb-tile', { start: 'top 92%', once: true, onEnter: b => gsap.from(b, { y: 30, opacity: 0, duration: .7, stagger: .06, ease: 'power3.out' }) });
+
+  /* --- 3.1: chapter photos open like a shutter, scrubbed --- */
+  gsap.utils.toArray('.ch-img').forEach(fig => {
+    gsap.fromTo(fig, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', ease: 'none', scrollTrigger: { trigger: fig, start: 'top 90%', end: 'top 55%', scrub: true } });
+    gsap.fromTo(fig.querySelector('img'), { scale: 1.2 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  /* --- 3.1: courts horizontal scroll (desktop), native swipe on phones --- */
+  mm.add('(min-width: 768px)', () => {
+    const track = document.getElementById('courtsTrack');
+    const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
+    gsap.to(track, {
+      x: () => -dist(), ease: 'none',
+      scrollTrigger: {
+        trigger: '#courtsPin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
+        onUpdate: self => gsap.set('#courtsBar', { scaleX: self.progress })
+      }
+    });
+  });
+
+  /* --- 3.1: community gallery reveal --- */
+  gsap.set('.com-tile', { opacity: 0, y: 30 });
+  ScrollTrigger.batch('.com-tile', { start: 'top 94%', once: true, onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: .8, stagger: .06, ease: 'power3.out' }) });
+
+  // Recalculate once images have sized the layout
+  ScrollTrigger.sort();
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
 </body>
 </html>
