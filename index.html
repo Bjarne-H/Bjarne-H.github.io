@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Law Office of Edward J. O'Reilly | Long Beach Trial &amp; Business Attorney</title>
-<!-- Revision 3.3: red-white-blue palette, rotating knot mark in hero, Google reviews, Stripe payments, bar number removed -->
-<meta name="description" content="The Law Office of Edward J. O'Reilly (O'Reilly Law Associates) has represented individuals, families and businesses from 1 World Trade Center in Long Beach, California since 2006. Personal injury, real estate, business, employment, maritime and civil litigation. Se habla español.">
+<!-- Revision 3.4: full-color imagery, opposing-party descriptors, no numbered labels, "Get in Touch" CTAs, national-network positioning, expanded Areas of Law (Partition Actions), Investigative Services, rewritten biography, Awards & Recognition, Useful Links, Facebook config, single lead principal -->
+<meta name="description" content="The Law Office of Edward J. O'Reilly (O'Reilly Law Associates) has represented individuals, families and businesses from 1 World Trade Center in Long Beach, California since 2006, backed by a network of associated attorneys across California and nationwide. Partition actions, real estate, personal injury, business, employment, maritime, criminal law, private investigations and background checks. Se habla español.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -129,21 +129,26 @@
   .flag img { max-height: 100%; max-width: 100%; object-fit: contain; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
   .flag:hover { border-color: #B31B2C; background: rgba(179,27,44,.1); transform: translateY(-3px); }
 
-  /* ---------- Practice: pinned sidebar + stacked cards ---------- */
-  .pa-card { position: relative; background: #FFFFFF; border: 1px solid rgba(11,29,58,.15); transform-origin: center top; transition: border-color .35s ease, box-shadow .35s ease; }
-  .pa-card:hover { border-color: #B31B2C; box-shadow: 0 30px 60px -36px rgba(11,29,58,.55); }
-  .pa-shade { position: absolute; inset: -1px; background: #F7F8FA; opacity: 0; pointer-events: none; z-index: 2; }
+  /* ---------- Areas of law: open responsive grid (no card cap, no numbering) ---------- */
+  .pa-card { position: relative; display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid rgba(11,29,58,.15); transition: border-color .35s ease, box-shadow .35s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+  .pa-card:hover { border-color: #B31B2C; box-shadow: 0 30px 60px -36px rgba(11,29,58,.55); transform: translateY(-4px); }
+  .pa-card .pa-img { margin-top: 0; aspect-ratio: 16 / 9; }
+  .pa-feature { display: grid; border-top: 3px solid #B31B2C; }
+  .award .wreath b.sm { font-size: 1.2rem; }
+  .pa-feature .pa-img { border: 0; border-bottom: 1px solid rgba(11,29,58,.15); }
+  @media (min-width: 1024px) {
+    .pa-feature { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); }
+    .pa-feature .pa-img { aspect-ratio: auto; height: 100%; min-height: 420px; border-bottom: 0; border-right: 1px solid rgba(11,29,58,.15); }
+  }
+  .pa-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 11px; background: #B31B2C; color: #fff; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+  .pa-refer { background: #0B1D3A; color: #F7F8FA; border-color: #0B1D3A; border-top: 3px solid #B31B2C; }
+  .pa-refer:hover { border-color: #0B1D3A; border-top-color: #B31B2C; }
   .pa-card .pa-ic { transition: background-color .3s, color .3s, border-color .3s; }
   .pa-card:hover .pa-ic { background: #0B1D3A; color: #B31B2C; border-color: #0B1D3A; }
   .pa-card li { position: relative; padding-left: 18px; }
   .pa-card li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; background: #B31B2C; transform: rotate(45deg); }
   .pa-link .arr { transition: transform .3s; }
   .pa-link:hover .arr { transform: translateX(6px); }
-  @media (min-width: 768px) {
-    .pa-card { position: sticky; top: calc(124px + var(--i) * 14px); min-height: 360px; }
-  }
-  .pa-seg { height: 2px; flex: 1; background: rgba(11,29,58,.15); transition: background-color .4s; }
-  .pa-seg.on { background: #B31B2C; }
 
   /* ---------- Heritage ---------- */
   .chapter .dot { transition: background-color .4s, border-color .4s, box-shadow .4s; }
@@ -152,12 +157,17 @@
 
   /* ---------- Opposing parties ---------- */
   .op-grid { border-top: 1px solid rgba(11,29,58,.15); border-left: 1px solid rgba(11,29,58,.15); }
-  .op-tile { position: relative; aspect-ratio: 3 / 2; display: grid; place-items: center; padding: 18px; border-right: 1px solid rgba(11,29,58,.15); border-bottom: 1px solid rgba(11,29,58,.15); background: #F7F8FA; transition: background-color .35s ease; }
-  .op-tile img { max-width: 78%; max-height: 64%; object-fit: contain; filter: grayscale(1) contrast(1.05); opacity: .62; transition: filter .45s ease, opacity .45s ease, transform .45s ease; }
-  .op-tile::after { content: ''; position: absolute; inset: -1px; border: 1px solid #B31B2C; opacity: 0; transition: opacity .3s; pointer-events: none; }
-  .op-tile:hover { background: #fff; z-index: 1; }
-  .op-tile:hover::after { opacity: 1; }
-  .op-tile:hover img { filter: none; opacity: 1; transform: scale(1.04); }
+  /* 3.4: logos in full color; hover / focus / tap slides up a one-line descriptor */
+  .op-tile { position: relative; aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 16px; border: 0; border-right: 1px solid rgba(11,29,58,.15); border-bottom: 1px solid rgba(11,29,58,.15); background: #fff; overflow: hidden; cursor: pointer; text-align: left; font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+  @media (min-width: 1024px) { .op-tile { aspect-ratio: 3 / 2; } }
+  .op-tile img { max-width: 78%; max-height: 62%; object-fit: contain; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .op-tile::after { content: ''; position: absolute; inset: 0; border: 2px solid #B31B2C; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 3; }
+  .op-info { position: absolute; inset: auto 0 0 0; z-index: 2; padding: 10px 12px 11px; background: #0B1D3A; border-top: 2px solid #B31B2C; color: #F7F8FA; font-size: 12.5px; line-height: 1.35; transform: translateY(101%); transition: transform .42s cubic-bezier(.2,.8,.2,1); }
+  .op-info b { display: block; margin-bottom: 2px; font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #E9737C; }
+  .op-tile:hover::after, .op-tile:focus-visible::after, .op-tile.is-open::after { opacity: 1; }
+  .op-tile:hover .op-info, .op-tile:focus-visible .op-info, .op-tile.is-open .op-info { transform: translateY(0); }
+  .op-tile:hover img, .op-tile:focus-visible img, .op-tile.is-open img { transform: translateY(-40%) scale(.62); }
+  .op-tile:focus-visible { outline: none; }
 
   /* ---------- Roster ---------- */
   .atty { background: #FFFFFF; border: 1px solid rgba(11,29,58,.15); transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .45s; }
@@ -167,24 +177,24 @@
 
   /* ---------- 3.1 photography ---------- */
   .pa-img { position: relative; margin-top: 20px; aspect-ratio: 21 / 8; overflow: hidden; border: 1px solid rgba(11,29,58,.15); background: #0B1D3A; }
-  .pa-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85); transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .5s; }
-  .pa-card:hover .pa-img img { transform: scale(1.05); filter: none; }
+  .pa-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .pa-card:hover .pa-img img { transform: scale(1.05); }
   .ch-img { margin-top: 24px; max-width: 560px; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid rgba(179,27,44,.45); background: #0A1530; }
   .ch-img img { width: 100%; height: 100%; object-fit: cover; }
   .lb-tile { position: relative; aspect-ratio: 1; overflow: hidden; border: 1px solid rgba(179,27,44,.3); }
-  .lb-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s; filter: saturate(.9); }
-  .lb-tile:hover img { transform: scale(1.08); filter: none; }
+  .lb-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .lb-tile:hover img { transform: scale(1.08); }
   .court { flex: none; width: min(78vw, 340px); scroll-snap-align: start; }
   .court-img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid rgba(11,29,58,.15); background: #0B1D3A; }
   .court-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
   .court:hover .court-img img { transform: scale(1.05); }
   .court-img::after { content: ''; position: absolute; inset: 10px; border: 1px solid rgba(247,248,250,.0); transition: border-color .4s; pointer-events: none; }
   .court:hover .court-img::after { border-color: rgba(233,115,124,.9); }
-  .court figcaption { display: flex; gap: 14px; align-items: baseline; padding-top: 14px; border-top: 1px solid rgba(11,29,58,.15); margin-top: 14px; }
-  .court .num { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.4rem; color: #9B1C28; }
+  .court figcaption { display: flex; gap: 14px; align-items: flex-start; padding-top: 14px; border-top: 1px solid rgba(11,29,58,.15); margin-top: 14px; }
+  .court .cdot { flex: none; width: 8px; height: 8px; margin-top: 10px; background: #B31B2C; transform: rotate(45deg); }
   .com-tile { position: relative; margin: 0 0 16px; break-inside: avoid; overflow: hidden; border: 1px solid rgba(179,27,44,.25); background: #0A1530; }
-  .com-tile img { display: block; width: 100%; height: auto; filter: saturate(.92); transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .5s; }
-  .com-tile:hover img { transform: scale(1.04); filter: none; }
+  .com-tile img { display: block; width: 100%; height: auto; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .com-tile:hover img { transform: scale(1.04); }
   .com-tile::after { content: ''; position: absolute; inset: 0; border: 1px solid #B31B2C; opacity: 0; transition: opacity .35s; pointer-events: none; }
   .com-tile:hover::after { opacity: 1; }
 
@@ -226,6 +236,39 @@
   .cred-img img { width: 100%; height: 100%; transition: transform .9s cubic-bezier(.2,.8,.2,1); }
   .cred-fig:hover .cred-img img { transform: scale(1.04); }
 
+  /* ---------- 3.4 investigative services ---------- */
+  .inv-card { position: relative; display: flex; flex-direction: column; padding: 30px 28px 28px; background: #0B1D3A; color: #F7F8FA; border-top: 3px solid #B31B2C; transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
+  .inv-card:hover { transform: translateY(-6px); box-shadow: 0 36px 60px -36px rgba(11,29,58,.8); }
+  .inv-card li { position: relative; padding-left: 18px; }
+  .inv-card li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; background: #E9737C; transform: rotate(45deg); }
+  .inv-ic { display: grid; place-items: center; width: 58px; height: 58px; background: #B31B2C; color: #fff; }
+  .inv-strip { padding: 26px 28px; background: #F7F8FA; border: 1px solid rgba(11,29,58,.15); }
+
+  /* ---------- 3.4 awards & recognition ---------- */
+  .award { position: relative; display: flex; flex-direction: column; align-items: center; height: 100%; padding: 26px 18px 24px; text-align: center; background: #fff; border: 1px solid rgba(11,29,58,.14); border-bottom: 4px solid var(--c); transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s; }
+  a.award:hover { transform: translateY(-6px); box-shadow: 0 30px 50px -34px rgba(11,29,58,.55); }
+  .award .wreath { position: relative; display: grid; place-items: center; width: 124px; height: 104px; color: var(--c); }
+  .award .wreath svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .award .wreath b { position: relative; margin-top: -4px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.6rem; font-weight: 700; line-height: 1; color: #0B1D3A; }
+  .aw-src { margin-top: 12px; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #475569; }
+  .aw-title { margin-top: 6px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 600; line-height: 1.12; color: #0B1D3A; }
+  .aw-sub { margin-top: 6px; font-size: 12.5px; line-height: 1.4; color: #475569; }
+  .aw-more { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 14px; font-size: 12px; font-weight: 600; color: #9B1C28; }
+
+  /* ---------- 3.4 attorneys network panel ---------- */
+  .net-panel { position: relative; overflow: hidden; padding: 36px 32px; background: #0B1D3A; color: #F7F8FA; border-top: 3px solid #B31B2C; }
+  .net-art { position: absolute; right: -60px; bottom: -50px; width: 340px; height: auto; opacity: .55; pointer-events: none; }
+
+  /* ---------- 3.4 useful links + social ---------- */
+  .res-link { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; min-height: 44px; padding: 14px 0; border-bottom: 1px solid rgba(247,248,250,.14); font-size: 15px; color: #F7F8FA; transition: color .25s, padding-left .3s; }
+  .res-link small { display: block; margin-top: 2px; font-size: 12.5px; color: rgba(247,248,250,.62); }
+  .res-link svg { flex: none; margin-top: 4px; color: #E9737C; }
+  .res-link:hover { color: #E9737C; padding-left: 6px; }
+  .fb-row { display: flex; }
+  .fb-row[hidden] { display: none; }
+  .fb-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; transition: color .25s; }
+  .fb-link:hover { color: #E9737C; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
@@ -251,6 +294,7 @@
       <div class="ml-auto flex items-center gap-5 md:ml-0">
         <span class="border border-brass/60 px-2.5 py-[3px] text-[10.5px] font-semibold uppercase tracking-[.12em] text-brass-lt">Se Habla Espa&ntilde;ol</span>
         <a href="#pay" class="hidden min-h-[44px] items-center font-semibold text-parch/85 underline-offset-4 transition-colors hover:text-brass-lt hover:underline sm:inline-flex">Pay Online</a>
+        <span class="hidden items-center gap-4 md:flex" data-fb-slot="header"></span>
         <a href="tel:+15624337363" class="inline-flex min-h-[44px] items-center gap-2 font-semibold text-parch transition-colors hover:text-brass-lt">
           <svg class="h-[15px] w-[15px] text-brass-lt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
           (562) 433-7363
@@ -271,13 +315,13 @@
       </a>
       <nav aria-label="Primary" class="hidden items-center gap-7 whitespace-nowrap text-[14px] font-medium text-parch/85 lg:flex">
         <a class="nav-link hover:text-brass-lt" href="#practice">Practice Areas</a>
+        <a class="nav-link hover:text-brass-lt" href="#investigations">Investigations</a>
         <a class="nav-link hover:text-brass-lt" href="#heritage">Our Story</a>
-        <a class="nav-link hover:text-brass-lt" href="#courts">Courts</a>
         <a class="nav-link hover:text-brass-lt" href="#reviews">Reviews</a>
         <a class="nav-link hover:text-brass-lt" href="#attorneys">Attorneys</a>
         <a class="nav-link hover:text-brass-lt" href="#contact">Contact</a>
       </nav>
-      <div class="hidden sm:block"><a href="#contact" class="btn btn-brass min-h-[46px] whitespace-nowrap px-5 text-[13.5px]">Free Consultation</a></div>
+      <div class="hidden sm:block"><a href="#contact" class="btn btn-brass min-h-[46px] whitespace-nowrap px-5 text-[13.5px]">Get in Touch</a></div>
     </div>
   <div class="flag-rule" aria-hidden="true"></div>
   </div>
@@ -323,7 +367,7 @@
           <span class="hero-line"><span class="italic font-medium text-brass-lt">Rights!</span></span>
         </h1>
         <p class="hero-fade mt-8 max-w-[560px] text-[clamp(1.02rem,1.25vw,1.17rem)] leading-[1.75] text-parch/85">
-          For twenty years, Edward J. O&rsquo;Reilly has stood up for injured workers, families, property owners and businesses from 1 World Trade Center. Where an early settlement serves you, he negotiates it decisively. Where it does not, he prepares your case for trial from the first day.
+          For twenty years, the Law Office of Edward J. O&rsquo;Reilly has stood up for injured workers, families, property owners and businesses from 1 World Trade Center &mdash; backed by a team and a network of associated attorneys across California and nationwide. Where an early settlement serves you, we negotiate it decisively. Where it does not, we prepare your case for trial from the first day.
         </p>
         <div class="hero-fade mt-10 flex flex-wrap gap-3.5">
           <a href="#contact" class="btn btn-brass">Get in Touch <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -335,7 +379,7 @@
       <div id="qce" class="glass-card relative z-10 mx-auto w-full max-w-[420px] p-7 text-parch lg:ml-auto lg:mr-0" aria-live="polite">
         <div class="relative flex items-center justify-between gap-3">
           <p class="eyebrow text-brass-lt">Fair &amp; Honest Case Assessment</p>
-          <p id="qceStep" class="text-[11.5px] font-semibold uppercase tracking-[.1em] text-parch/70">Step 1 of 2</p>
+          <p id="qceStep" class="text-[11.5px] font-semibold uppercase tracking-[.1em] text-parch/70">Your matter</p>
         </div>
         <div class="relative mb-5 mt-3.5 flex gap-1.5" aria-hidden="true"><span class="seg on"></span><span id="qceSeg2" class="seg"></span></div>
 
@@ -344,9 +388,11 @@
           <div class="mt-5 grid grid-cols-2 gap-2.5">
             <button type="button" class="pill" data-area="Personal Injury">Injury</button>
             <button type="button" class="pill" data-area="Real Estate">Real Estate</button>
+            <button type="button" class="pill" data-area="Partition Action">Partition</button>
             <button type="button" class="pill" data-area="Business">Business</button>
             <button type="button" class="pill" data-area="Employment">Employment</button>
-            <button type="button" class="pill" data-area="Transportation &amp; Maritime">Maritime</button>
+            <button type="button" class="pill" data-area="Criminal Law">Criminal</button>
+            <button type="button" class="pill" data-area="Investigation">Investigation</button>
             <button type="button" class="pill" data-area="Other">Other</button>
           </div>
         </div>
@@ -359,7 +405,7 @@
           <label class="fld fld-dk"><span>Full name</span><input name="name" type="text" required autocomplete="name" placeholder="Your name"></label>
           <label class="fld fld-dk"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555"></label>
           <label class="fld fld-dk"><span>What happened?</span><textarea name="summary" placeholder="A few sentences is enough." style="min-height:72px"></textarea></label>
-          <button type="submit" class="btn btn-brass w-full">Request Priority Review
+          <button type="submit" class="btn btn-brass w-full">Send Your Case Details
             <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
           <p class="text-[11.5px] leading-snug text-parch/65">Submitting this form does not create an attorney-client relationship.</p>
@@ -368,7 +414,7 @@
         <div data-step="3" class="relative" hidden>
           <span class="grid h-12 w-12 place-items-center border border-brass text-brass-lt"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
           <h2 class="mt-4 font-serif text-[1.85rem] font-semibold leading-[1.1]">Your request is in.</h2>
-          <p class="mt-2 text-[14px] text-parch/75">The office will review your matter and call you back. If it is urgent, call <a href="tel:+15624337363" class="font-semibold text-brass-lt underline underline-offset-4">(562) 433-7363</a> now.</p>
+          <p class="mt-2 text-[14px] text-parch/75">Our team will review your matter and call you back. If it is urgent, call <a href="tel:+15624337363" class="font-semibold text-brass-lt underline underline-offset-4">(562) 433-7363</a> now.</p>
           <button type="button" id="qceReset" class="mt-4 min-h-[44px] text-[13px] font-semibold text-brass-lt underline underline-offset-4 hover:text-parch">Start another evaluation</button>
         </div>
       </div>
@@ -404,134 +450,203 @@
   <div class="draw-x absolute inset-x-0 bottom-0 h-px bg-brass/40"></div>
 </section>
 
-<!-- ===================== PRACTICE AREAS (pinned sidebar) ===================== -->
+<!-- ===================== AREAS OF LAW (open grid, no card cap) ===================== -->
 <section id="practice" class="py-28 md:py-32" aria-labelledby="paTitle">
-  <div class="mx-auto w-full max-w-[1140px] px-5 md:px-10">
-    <div class="flex flex-col gap-12 md:flex-row md:gap-12">
-      <!-- Left 35% (pinned) -->
-      <aside id="paLeft" class="md:w-[35%] md:flex-none">
-        <div id="paPin">
-          <p class="eyebrow text-brass-ink">Practice Areas</p>
-          <h2 id="paTitle" class="mt-4 font-serif text-[clamp(2.3rem,3.7vw,3.5rem)] font-semibold leading-[1.03] text-navy">Six areas of law. <em class="font-medium text-brass-ink">One attorney</em> who answers the phone.</h2>
-          <div class="draw-x mt-8 h-px bg-rule"></div>
-          <div class="mt-6 flex items-end gap-3 font-serif text-navy">
-            <span id="paNum" class="text-[clamp(4.4rem,6.4vw,6rem)] font-medium leading-[.85]">01</span>
-            <span class="pb-2 text-[1.6rem] italic text-brass-ink">/ 06</span>
-          </div>
-          <p id="paName" class="mt-3 min-h-[1.6em] text-[13px] font-semibold uppercase tracking-[.14em] text-mute">Personal Injury</p>
-          <div class="mt-4 flex gap-1.5" aria-hidden="true">
-            <span class="pa-seg on"></span><span class="pa-seg"></span><span class="pa-seg"></span><span class="pa-seg"></span><span class="pa-seg"></span><span class="pa-seg"></span>
-          </div>
-          <div class="mt-9 border-t-[3px] border-brass bg-navy p-6 text-parch">
-            <p class="text-[14px] text-parch/80">Not sure where your situation fits? Speak with the attorney directly.</p>
-            <a href="tel:+15624337363" class="mt-2 inline-flex min-h-[44px] items-center gap-2.5 font-serif text-[1.75rem] font-semibold text-brass-lt transition-colors hover:text-parch">(562) 433-7363</a>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Right 65% (stacked cards) -->
-      <div id="paCards" class="flex flex-col gap-8 md:w-[65%] md:gap-10">
-
-        <article class="pa-card p-7 md:p-9" style="--i:0" data-name="Personal Injury">
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">01</span>
-            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>
-          </div>
-          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/a66ee6c4-fda2-44da-b611-8e7d59ede9ba.png" alt="Traffic on a Southern California freeway beneath a rainbow" decoding="async"></figure>
-          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Personal Injury &amp; Catastrophic Accidents</h3>
-          <p class="mt-3 max-w-[560px] text-[15px] text-mute">When an injury changes the course of your life, insurers count on you settling early and cheaply. We build the medical and liability record that makes them pay what the case is worth.</p>
-          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
-            <li>Auto, truck &amp; motorcycle collisions</li><li>Catastrophic &amp; brain injuries</li><li>Wrongful death</li><li>Premises liability</li>
-          </ul>
-          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="pa-card p-7 md:p-9" style="--i:1" data-name="Real Estate">
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">02</span>
-            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg></span>
-          </div>
-          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/3b1a2f11-531e-4a75-9df3-20cfd09881b0.png" alt="Residential and commercial neighborhoods with the San Gabriel Mountains beyond" decoding="async"></figure>
-          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Real Estate Law &amp; Property Disputes</h3>
-          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Property is usually the largest asset a family or company holds. We protect it at the closing table, in negotiation and, when necessary, in court.</p>
-          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
-            <li>Purchase &amp; sale disputes</li><li>Landlord &amp; tenant matters</li><li>Title, boundary &amp; easements</li><li>Construction &amp; contractor claims</li>
-          </ul>
-          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="pa-card p-7 md:p-9" style="--i:2" data-name="Business Law">
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">03</span>
-            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v12H3zM9 8V5h6v3M3 13h18"/></svg></span>
-          </div>
-          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/d16152c2-9ca8-435b-8252-59933db8b6f7.png" alt="A conference room overlooking the city" decoding="async"></figure>
-          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Business Law, Contracts &amp; Commercial Torts</h3>
-          <p class="mt-3 max-w-[560px] text-[15px] text-mute">A contract is only as strong as the lawyer prepared to enforce it. Practical counsel for owners, partners and operators &mdash; before the dispute and during it.</p>
-          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
-            <li>Contract drafting &amp; breach</li><li>Partnership &amp; shareholder disputes</li><li>Fraud &amp; interference claims</li><li>Unfair competition</li>
-          </ul>
-          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="pa-card p-7 md:p-9" style="--i:3" data-name="Employment Law">
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">04</span>
-            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="6.5" r="3.5"/><path d="M21 20v-2a4 4 0 0 0-3-3.9M16 3.1a3.5 3.5 0 0 1 0 6.8"/></svg></span>
-          </div>
-          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/7bf5e3c1-4985-4557-98c6-b1396fb048ef.png" alt="Edward J. O&rsquo;Reilly meeting with a client" decoding="async"></figure>
-          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Employment Law &amp; Workplace Rights</h3>
-          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Working families deserve a fair shake. If an employer crossed the line, you should not have to face their lawyers alone.</p>
-          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
-            <li>Wrongful termination</li><li>Wage &amp; hour violations</li><li>Discrimination &amp; harassment</li><li>Retaliation</li>
-          </ul>
-          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="pa-card p-7 md:p-9" style="--i:4" data-name="Transportation &amp; Maritime">
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">05</span>
-            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg></span>
-          </div>
-          <figure class="pa-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223217_adcd4fb2-7fdd-4b17-ae59-7981ac90e13e.png" alt="Container cranes at the Port of Long Beach" decoding="async"></figure>
-          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Transportation, Maritime &amp; Logistics Law</h3>
-          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Before practicing law, Edward worked inside global shipping lines. He knows how freight, carriers and ports actually operate &mdash; and where they fail.</p>
-          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
-            <li>Cargo loss &amp; freight claims</li><li>Carrier &amp; shipper contracts</li><li>Maritime injury</li><li>Port &amp; logistics disputes</li>
-          </ul>
-          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
-        <article class="pa-card p-7 md:p-9" style="--i:5" data-name="Civil, Criminal &amp; Estates">
-          <div class="flex items-start justify-between gap-4">
-            <span class="font-serif text-[3rem] font-medium italic leading-none text-brass-ink">06</span>
-            <span class="pa-ic grid h-[52px] w-[52px] place-items-center border border-rule text-navy"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 21h14M3 8l9-3 9 3M6 8l-3 7a4 4 0 0 0 6 0L6 8M18 8l-3 7a4 4 0 0 0 6 0L18 8"/></svg></span>
-          </div>
-          <figure class="pa-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223221_89ee1cdb-3993-4ff9-a21e-53db047fe17c.png" alt="A California courtroom" decoding="async"></figure>
-          <h3 class="mt-5 font-serif text-[clamp(1.8rem,2.4vw,2.3rem)] font-semibold leading-[1.08] text-navy">Civil Litigation, Criminal Defense &amp; Estates</h3>
-          <p class="mt-3 max-w-[560px] text-[15px] text-mute">Lawsuits, criminal charges and family legacies all turn on the same thing: preparation. Every file is prepared as if it will be tried.</p>
-          <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium sm:grid-cols-2">
-            <li>Civil litigation &amp; trials</li><li>Criminal defense</li><li>Wills, trusts &amp; probate</li><li>Mediation &amp; early settlement</li>
-          </ul>
-          <a href="#contact" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </article>
-
+  <div class="wrap">
+    <div class="grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,400px)]">
+      <div>
+        <p class="eyebrow text-brass-ink">Areas of Law</p>
+        <h2 id="paTitle" class="mt-4 max-w-[820px] font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">One firm. <em class="font-medium text-brass-ink">A network of attorneys</em> behind every matter.</h2>
       </div>
+      <p class="text-[15px] leading-relaxed text-mute">From partition actions and property disputes to injury, employment, maritime and criminal matters, our team handles a broad civil and criminal practice &mdash; and works with associated counsel throughout California and nationwide when a case calls for more.</p>
+    </div>
+    <div class="draw-x mt-12 h-px bg-brass/60"></div>
+
+    <div id="paGrid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Featured: Partition Actions -->
+        <article class="pa-card pa-feature md:col-span-2" data-name="Partition Actions">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/8a276f39-f3ef-4d0a-ad2e-80c21412c17c.png" alt="A row of family homes on a residential street" decoding="async"></figure>
+          <div class="flex flex-col p-7 md:p-9">
+            <div class="flex items-start justify-between gap-4">
+              <span class="pa-tag"><span class="h-1.5 w-1.5 rotate-45 bg-white"></span>Featured Practice</span>
+              <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/><path d="M12 7v13" stroke-dasharray="2 2.2"/></svg></span>
+            </div>
+            <h3 class="mt-5 font-serif text-[clamp(2rem,2.8vw,2.6rem)] font-semibold leading-[1.04] text-navy">Partition Actions</h3>
+            <p class="mt-3 text-[15.5px] leading-[1.7] text-mute">When co-owners cannot agree on what to do with a property &mdash; siblings who inherited a home, former partners, or investors on title together &mdash; California law lets any co-owner ask the court to divide the property or order it sold and the proceeds split (Code of Civil Procedure &sect;&nbsp;872.010 et seq.). We represent owners on either side: compelling a sale, negotiating a buyout, or protecting your share and the credit you are owed for mortgage, taxes and improvements.</p>
+            <ul class="mt-5 grid gap-x-7 gap-y-2 text-[14.5px] font-medium text-navy sm:grid-cols-2">
+              <li>Inherited &amp; family property</li><li>Partition by sale or in kind</li><li>Co-owner buyouts &amp; settlements</li><li>Accounting for payments &amp; improvements</li><li>Heirs&rsquo; property protections</li><li>Title, lis pendens &amp; referee sales</li>
+            </ul>
+            <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss a Partition Matter <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
+        <article class="pa-card p-6 md:p-7" data-name="Personal Injury, Wrongful Death &amp; Civil Rights">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/7e421748-9150-429f-97dd-5b2b0e665840.png" alt="A bandaged hand resting on a table" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Personal Injury, Wrongful Death &amp; Civil Rights</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">When an injury changes the course of your life, insurers count on you settling early and cheaply. We build the medical and liability record that makes them pay what the case is worth.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Auto, truck &amp; motorcycle accidents</li><li>Wrongful death</li><li>Work-related injury</li><li>Civil rights violations</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Real Estate Law &amp; Property Disputes">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/3b1a2f11-531e-4a75-9df3-20cfd09881b0.png" alt="Residential and commercial neighborhoods with the San Gabriel Mountains beyond" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Real Estate Law &amp; Property Disputes</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">Property is usually the largest asset a family or company holds. We protect it at the closing table, in negotiation and, when necessary, in court.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Real estate disputes &amp; title actions</li><li>Lis pendens &amp; commission disputes</li><li>Landlord &amp; tenant matters</li><li>Real estate fraud &amp; contracts</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Business Law &amp; Contracts">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/d16152c2-9ca8-435b-8252-59933db8b6f7.png" alt="A conference room overlooking the city" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Business Law &amp; Contracts</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v12H3zM9 8V5h6v3M3 13h18"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">A contract is only as strong as the lawyer prepared to enforce it. Practical counsel for owners, partners and operators &mdash; before the dispute and during it.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Contract drafting &amp; breach</li><li>Unfair business practices</li><li>Collections &amp; professional contracts</li><li>Insurance &amp; cannabis law</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Employment &amp; Labor Law">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/7bf5e3c1-4985-4557-98c6-b1396fb048ef.png" alt="Edward J. O&rsquo;Reilly meeting with a client" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Employment &amp; Labor Law</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="6.5" r="3.5"/><path d="M21 20v-2a4 4 0 0 0-3-3.9M16 3.1a3.5 3.5 0 0 1 0 6.8"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">If an employer crossed the line, you should not have to face their lawyers alone. We stand up for workers &mdash; and advise business owners on their rights.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Wrongful termination</li><li>Discrimination &amp; sexual harassment</li><li>Hostile work environment</li><li>Equal pay &amp; employment contracts</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Transportation, Maritime &amp; Admiralty">
+          <figure class="pa-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223217_adcd4fb2-7fdd-4b17-ae59-7981ac90e13e.png" alt="Container cranes at the Port of Long Beach" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Transportation, Maritime &amp; Admiralty</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">Before practicing law, Edward worked inside global shipping lines. Our team knows how freight, carriers and ports actually operate &mdash; and where they fail.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Maritime &amp; admiralty claims</li><li>Cargo &amp; cruise ship claims</li><li>Trucking &amp; import&ndash;export</li><li>Demurrage &amp; per diem disputes</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Lemon Law">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/a66ee6c4-fda2-44da-b611-8e7d59ede9ba.png" alt="Traffic on a Southern California freeway beneath a rainbow" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Lemon Law</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17v-4l2.2-5.2A2 2 0 0 1 7 6.5h10a2 2 0 0 1 1.8 1.3L21 13v4H3z"/><path d="M3 13h18M6.5 17v2.5M17.5 17v2.5"/><circle cx="7" cy="15" r=".6"/><circle cx="17" cy="15" r=".6"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">A new vehicle that keeps going back to the shop is more than an inconvenience. California&rsquo;s Song-Beverly Consumer Warranty Act can require the manufacturer to repurchase or replace it.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Repeat repair failures</li><li>Repurchase &amp; replacement claims</li><li>Warranty disputes</li><li>Dealer &amp; manufacturer negotiations</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Civil Litigation &amp; Trial">
+          <figure class="pa-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223221_89ee1cdb-3993-4ff9-a21e-53db047fe17c.png" alt="A California courtroom" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Civil Litigation &amp; Trial</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 21h14M3 8l9-3 9 3M6 8l-3 7a4 4 0 0 0 6 0L6 8M18 8l-3 7a4 4 0 0 0 6 0L18 8"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">Lawsuits turn on preparation. We resolve what we can through mediation and pre-litigation solutions, and prepare every file as if it will be tried.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Defamation &amp; emotional distress</li><li>Elder abuse</li><li>Mediation &amp; trial</li><li>Civil restraining orders</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Criminal Law">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/d7a82d5f-8bc8-4f9a-88a8-35478370e5e0.png" alt="A judge&rsquo;s gavel beside a pair of handcuffs" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Criminal Law</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.2-8 9-4.5-.8-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">A criminal charge puts your freedom and your record on the line. You deserve a defense built on the facts &mdash; investigated early and argued firmly.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Criminal defense</li><li>Expungement</li><li>Protective orders</li><li>Early fact investigation</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+        <article class="pa-card p-6 md:p-7" data-name="Family, Trusts &amp; Estates">
+          <figure class="pa-img"><img src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/e5e83967-ad96-4c60-aba3-4dac79160c42.png" alt="The scales of justice on an attorney&rsquo;s desk" decoding="async"></figure>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="font-serif text-[clamp(1.6rem,2vw,1.9rem)] font-semibold leading-[1.08] text-navy">Family, Trusts &amp; Estates</h3>
+            <span class="pa-ic grid h-[48px] w-[48px] flex-none place-items-center border border-rule text-navy"><svg class="h-[22px] w-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></svg></span>
+          </div>
+          <p class="mt-3 text-[15px] text-mute">Plan for the people you love, and protect them when those plans are challenged.</p>
+          <ul class="mt-5 grid gap-y-2 text-[14.5px] font-medium text-navy"><li>Living trusts &amp; wills</li><li>Prenuptial agreements</li><li>Child custody</li><li>Estate disputes &amp; special-needs students</li></ul>
+          <a href="#contact" class="pa-link mt-auto inline-flex min-h-[44px] items-center gap-2.5 self-start border-b border-brass pt-6 text-[13.5px] font-semibold tracking-[.04em] text-navy hover:text-brass-ink">Discuss Your Case <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <!-- Referral guarantee -->
+        <aside class="pa-card pa-refer flex flex-col justify-between p-7 md:p-8" aria-label="Referral guarantee">
+          <div>
+            <p class="eyebrow text-brass-lt">Don&rsquo;t see your matter?</p>
+            <blockquote class="mt-5 font-serif text-[clamp(1.6rem,2.1vw,2rem)] font-medium italic leading-[1.22]">&ldquo;If my office can&rsquo;t help you, we can refer you to an associated law practice that can help you.&rdquo;</blockquote>
+            <p class="eyebrow mt-5 text-[10.5px] text-parch/70">Edward J. O&rsquo;Reilly</p>
+          </div>
+          <div class="mt-8 border-t border-parch/15 pt-6">
+            <p class="text-[14px] leading-relaxed text-parch/78">Through associated practices across California and the country, every caller leaves with a next step.</p>
+            <a href="#contact" class="btn btn-brass mt-5 w-full">Get in Touch <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </aside>
     </div>
   </div>
 </section>
 
-<!-- ===================== HERITAGE: METRICS + TIMELINE ===================== -->
+<!-- ===================== INVESTIGATIVE SERVICES ===================== -->
+<section id="investigations" class="relative border-t border-rule bg-paper py-28 md:py-32" aria-labelledby="invTitle">
+  <div class="wrap grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <div>
+      <p class="eyebrow text-brass-ink">Investigative Services</p>
+      <h2 id="invTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">Facts first. <em class="font-medium text-brass-ink">Then the courtroom.</em></h2>
+      <p class="mt-6 max-w-[480px] text-[16px] leading-[1.75] text-mute">Edward worked as a private investigator before he practiced law. That background is built into how the firm works: we find the witnesses, records and assets that decide a case &mdash; often before the other side knows to look &mdash; and carry that evidence straight into negotiation and trial.</p>
+      <ul class="mt-8 space-y-3 text-[15px] text-navy">
+        <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Investigation and litigation under one roof</li>
+        <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Evidence gathered with trial in mind</li>
+        <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Confidential, discreet and lawful</li>
+      </ul>
+      <div class="mt-10 flex flex-wrap gap-3.5">
+        <a href="#contact" class="btn btn-brass">Get in Touch <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="tel:+15624337363" class="btn btn-ghost">(562) 433-7363</a>
+      </div>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      <article class="inv-card reveal">
+        <span class="inv-ic"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5.2-5.2"/></svg></span>
+        <h3 class="mt-6 font-serif text-[2rem] font-semibold leading-[1.05]">Private Investigations</h3>
+        <p class="mt-3 text-[15px] leading-[1.7] text-parch/78">We develop the facts behind a case &mdash; locating and interviewing witnesses, documenting scenes and conditions, and tracing people, property and money.</p>
+        <ul class="mt-5 space-y-2 text-[14.5px] font-medium">
+          <li>Witness location &amp; interviews</li><li>Scene &amp; condition documentation</li><li>Asset &amp; ownership tracing</li><li>Pre-litigation fact investigation</li>
+        </ul>
+      </article>
+      <article class="inv-card reveal">
+        <span class="inv-ic"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="11" r="2.4"/><path d="M5.6 16.4a3.4 3.4 0 0 1 6.8 0M15 10h4M15 13h3"/></svg></span>
+        <h3 class="mt-6 font-serif text-[2rem] font-semibold leading-[1.05]">Background Checks</h3>
+        <p class="mt-3 text-[15px] leading-[1.7] text-parch/78">Know who you are dealing with before you sign, lend, partner or sue. We research the public record and report what it shows &mdash; clearly and confidentially.</p>
+        <ul class="mt-5 space-y-2 text-[14.5px] font-medium">
+          <li>Individual &amp; business research</li><li>Court, lien &amp; judgment searches</li><li>Property &amp; corporate records</li><li>Due diligence before deals &amp; lawsuits</li>
+        </ul>
+      </article>
+      <div class="inv-strip sm:col-span-2">
+        <p class="eyebrow text-brass-ink">Where investigation meets litigation</p>
+        <div class="mt-5 grid gap-6 sm:grid-cols-3">
+          <div class="flex gap-3"><span class="text-brass-ink"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><p class="text-[14px] leading-snug text-mute"><b class="block font-semibold text-navy">Witnesses found</b>Located, interviewed and documented early.</p></div>
+          <div class="flex gap-3"><span class="text-brass-ink"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></svg></span><p class="text-[14px] leading-snug text-mute"><b class="block font-semibold text-navy">Records traced</b>Ownership, assets, filings and history.</p></div>
+          <div class="flex gap-3"><span class="text-brass-ink"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><p class="text-[14px] leading-snug text-mute"><b class="block font-semibold text-navy">Evidence preserved</b>Gathered to hold up at deposition and trial.</p></div>
+        </div>
+      </div>
+      <p class="text-[12px] leading-relaxed text-mute sm:col-span-2">Investigative work is performed in connection with the firm&rsquo;s legal matters or by licensed investigators working with the firm. Background research is conducted in compliance with applicable law, including the federal Fair Credit Reporting Act and California&rsquo;s Investigative Consumer Reporting Agencies Act where they apply.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HERITAGE: METRICS + BIOGRAPHY TIMELINE ===================== -->
 <section id="heritage" class="relative overflow-clip bg-navy text-parch" aria-labelledby="herTitle">
-  <!-- tunnel image backdrop -->
+  <!-- tunnel image backdrop (full color under a legibility gradient) -->
   <div class="pointer-events-none absolute inset-x-0 top-0 h-[720px] overflow-hidden" aria-hidden="true">
-    <img id="tunnelImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_202657_8f9a9774-4771-4077-8a8e-5c42f30f9e98.png" alt="" class="absolute inset-0 h-[124%] w-full object-cover opacity-[.32]" loading="lazy">
-    <div class="absolute inset-0 bg-gradient-to-b from-navy/30 via-navy/70 to-navy"></div>
+    <img id="tunnelImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_202657_8f9a9774-4771-4077-8a8e-5c42f30f9e98.png" alt="" class="absolute inset-0 h-[124%] w-full object-cover" loading="lazy">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/45 via-navy/80 to-navy"></div>
   </div>
 
   <div class="wrap relative pb-28 pt-28 md:pt-32">
-    <p class="eyebrow text-brass-lt">Our Story &middot; Since 2006</p>
-    <h2 id="herTitle" class="mt-4 max-w-[900px] font-serif text-[clamp(2.5rem,5vw,4.6rem)] font-semibold leading-[1.02]">From the Bronx tunnels to <em class="font-medium text-brass-lt">the World Trade Center.</em></h2>
+    <p class="eyebrow text-brass-lt">Our Story &middot; Edward J. O&rsquo;Reilly</p>
+    <h2 id="herTitle" class="mt-4 max-w-[940px] font-serif text-[clamp(2.5rem,5vw,4.6rem)] font-semibold leading-[1.02]">Raised in a family of cops. <em class="font-medium text-brass-lt">Trained to find the facts.</em></h2>
 
     <!-- Metrics bar -->
     <div id="metrics" class="relative mt-16 grid grid-cols-2 md:grid-cols-5">
@@ -548,8 +663,8 @@
       </div>
       <div class="relative py-8 md:px-6">
         <span class="draw-y absolute bottom-6 left-0 top-6 hidden w-px bg-brass/40 md:block"></span>
-        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="0" data-to="6">6</span></p>
-        <p class="mt-3 text-[13px] leading-snug text-parch/72">Practice areas</p>
+        <p class="font-serif text-[clamp(2.6rem,4vw,3.7rem)] font-semibold leading-none"><span class="count" data-from="0" data-to="10" data-suffix="+">10+</span></p>
+        <p class="mt-3 text-[13px] leading-snug text-parch/72">Areas of law</p>
       </div>
       <div class="relative py-8 pl-6 md:px-6">
         <span class="draw-y absolute bottom-6 left-0 top-6 w-px bg-brass/40"></span>
@@ -563,13 +678,13 @@
       </div>
     </div>
 
-    <!-- Timeline -->
+    <!-- Biography timeline -->
     <div class="mt-24 grid gap-14 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-20">
       <div>
         <div class="md:sticky md:top-[140px]">
-          <p class="max-w-[440px] text-[16.5px] leading-[1.8] text-parch/80">Most lawyers learn the law first. Edward learned how the world works &mdash; underground, inside the legislature, on the docks &mdash; and then brought that experience into the courtroom.</p>
-          <figure class="mt-10 max-w-[440px] border-t border-brass/50 pt-7">
-            <blockquote class="font-serif text-[clamp(1.4rem,1.9vw,1.7rem)] font-medium italic leading-[1.3]">&ldquo;Often, we can negotiate early settlements to avoid costly litigation &mdash; but when a fight is necessary, we bring relentless courtroom preparation.&rdquo;</blockquote>
+          <p class="max-w-[460px] text-[16.5px] leading-[1.8] text-parch/85">Edward J. O&rsquo;Reilly comes from a long line of police officers. He followed them as far as the NYPD Academy before an opportunity brought him to California, where he built a career as a private investigator and then as an attorney. A cop&rsquo;s instincts, an investigator&rsquo;s discipline and a litigator&rsquo;s preparation give him a practical edge in uncovering facts, checking backgrounds and taking on powerful opposing parties.</p>
+          <figure class="mt-10 max-w-[460px] border-l-[3px] border-brass bg-parch/[.06] py-6 pl-6 pr-5">
+            <blockquote class="font-serif text-[clamp(1.45rem,2vw,1.8rem)] font-medium italic leading-[1.28]">&ldquo;If my office can&rsquo;t help you, we can refer you to an associated law practice that can help you.&rdquo;</blockquote>
             <figcaption class="eyebrow mt-4 text-brass-lt">Edward J. O&rsquo;Reilly</figcaption>
           </figure>
         </div>
@@ -582,36 +697,52 @@
         <li class="chapter relative pb-20">
           <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
           <div class="ch-body">
-            <p class="eyebrow text-brass-lt">Chapter I &middot; New York</p>
-            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">The Bronx &amp; the State Legislature</h3>
-            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">Born and raised in the Bronx and a graduate of SUNY Albany, Edward began in public service &mdash; in the New York State Legislature and at the NYC Department of Housing &amp; Preservation &mdash; working on housing, labor and legislative matters.</p>
+            <p class="eyebrow text-brass-lt">The Bronx &middot; Family</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">A Family That Wore the Badge</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/80">Edward grew up in the Bronx in a large Irish family with deep roots in law enforcement. His father was a police officer, and so were more uncles, cousins and in-laws than anyone at the dinner table could easily count. He was raised around people whose job was to show up, get the facts straight and protect their neighbors.</p>
             <figure class="ch-img"><img src="https://nebula.wsimg.com/d3500a7ed972ca70d1a030da13f99bb9?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="An American flag hung from a fire-truck ladder" loading="lazy"></figure>
           </div>
         </li>
         <li class="chapter relative pb-20">
           <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
           <div class="ch-body">
-            <p class="eyebrow text-brass-lt">Chapter II &middot; Underground</p>
+            <p class="eyebrow text-brass-lt">New York &middot; Public Service</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Manhattan College, Albany &amp; City Hall</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/80">Educated at Manhattan College and SUNY Albany, Edward began in public service &mdash; advocating for tenants at the New York City Department of Housing Preservation &amp; Development and working for a member of the New York State Assembly on housing, labor and legislative matters.</p>
+          </div>
+        </li>
+        <li class="chapter relative pb-20">
+          <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
+          <div class="ch-body">
+            <p class="eyebrow text-brass-lt">Underground &middot; Sandhog</p>
             <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">600 Feet Below the City</h3>
-            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">As a New York City &ldquo;Sandhog,&rdquo; Edward helped build water and subway tunnels 600 feet beneath the streets. He also worked as a private investigator &mdash; learning grit, and learning how to find the facts other people miss.</p>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/80">As a New York City &ldquo;Sandhog,&rdquo; Edward helped build the water and subway tunnels that run hundreds of feet beneath the streets. It was hard, dangerous work, and it taught him what working people are up against when something goes wrong on the job.</p>
             <figure class="ch-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_202657_8f9a9774-4771-4077-8a8e-5c42f30f9e98.png" alt="A tunnel under construction, lit by work lights" loading="lazy"></figure>
           </div>
         </li>
         <li class="chapter relative pb-20">
           <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
           <div class="ch-body">
-            <p class="eyebrow text-brass-lt">Chapter III &middot; Global Trade</p>
-            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Inside International Shipping</h3>
-            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">With American President Lines (APL) and Orient Overseas Container Line (OOCL), Edward worked inside the commercial and transportation systems that move cargo across the Pacific &mdash; the same systems behind today&rsquo;s maritime and logistics disputes.</p>
+            <p class="eyebrow text-brass-lt">NYPD Academy &middot; The Bronx</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Following His Father&rsquo;s Footsteps</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/80">Like the generation before him, Edward set out to become a New York City police officer. He attended classes at the NYPD Academy and logged training runs through the streets of the Bronx &mdash; until a major opportunity changed his plans and brought him west to California.</p>
+          </div>
+        </li>
+        <li class="chapter relative pb-20">
+          <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
+          <div class="ch-body">
+            <p class="eyebrow text-brass-lt">California &middot; Investigator</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Private Investigator &amp; Global Trade</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/80">In California, Edward built an extensive career as a private investigator &mdash; locating witnesses, running background checks and documenting the facts other people miss &mdash; while also working inside international shipping with American President Lines (APL) and Orient Overseas Container Line (OOCL).</p>
             <figure class="ch-img"><img src="https://nebula.wsimg.com/3c02813bb4ec7a0b0c91e4394a32df54?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Ocean-going vessels berthed in the harbor" loading="lazy"></figure>
           </div>
         </li>
         <li class="chapter relative">
           <span class="dot absolute -left-[46px] top-1.5 h-6 w-6 rounded-full border-2 border-parch/35 bg-navy md:-left-[54px]" aria-hidden="true"></span>
           <div class="ch-body">
-            <p class="eyebrow text-brass-lt">Chapter IV &middot; 2006 &ndash; Present</p>
-            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Twenty Years in Long Beach</h3>
-            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/78">Since 2006, the Law Office of Edward J. O&rsquo;Reilly has practiced from Suite 800 at 1 World Trade Center, standing up for Veterans, working families and local businesses &mdash; supported by a network of Associated Counsel when a matter calls for more hands.</p>
+            <p class="eyebrow text-brass-lt">Long Beach &middot; 2006 &ndash; Present</p>
+            <h3 class="mt-3 font-serif text-[clamp(1.9rem,2.8vw,2.7rem)] font-semibold leading-[1.06]">Twenty Years at 1 World Trade Center</h3>
+            <p class="mt-4 max-w-[560px] text-[16px] leading-[1.75] text-parch/80">After earning his law degree at Pacific Coast University School of Law, Edward was admitted to the State Bar of California and the U.S. District Court for the Central District of California. Since 2006 the firm has practiced from Suite 800 at 1 World Trade Center, backed by a team and a network of associated attorneys across California and nationwide. Edward is a member of the Los Angeles Police Emerald Society.</p>
             <figure class="ch-img"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3KppuZy5PDCWN6iQNPCvnJ0Uts9/hf_20261017_223215_9310471f-8085-4f81-85d8-06dd2182901c.png" alt="Edward J. O&rsquo;Reilly walking past the LONG BEACH letters downtown" loading="lazy"></figure>
           </div>
         </li>
@@ -659,7 +790,7 @@
         <p class="eyebrow text-brass-ink">Track Record</p>
         <h2 id="recTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">We have stood across the table <em class="font-medium text-brass-ink">from all of them.</em></h2>
       </div>
-      <p class="text-[15px] leading-relaxed text-mute">Global shipping lines, insurers, national brands and public agencies all have well-funded legal departments. Our clients have Edward. A selection of opposing parties in matters handled by the firm:</p>
+      <p class="text-[15px] leading-relaxed text-mute">Global shipping lines, insurers, national brands and public agencies all have well-funded legal departments. Our clients have a firm and a network that have faced them before. Hover over or tap a logo to see who each one is.</p>
     </div>
     <div class="draw-x mt-12 h-px bg-brass/70"></div>
     <div id="opGrid" class="op-grid mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"></div>
@@ -695,6 +826,54 @@
   </div>
 </section>
 
+<!-- ===================== AWARDS & RECOGNITION ===================== -->
+<section id="awards" class="relative border-t border-rule bg-parch py-24 md:py-28" aria-labelledby="awTitle">
+  <svg width="0" height="0" class="absolute" aria-hidden="true"><symbol id="laurel" viewBox="0 0 120 100"><g fill="currentColor"><ellipse cx="41.1" cy="91.3" rx="8.2" ry="3.2" transform="rotate(-204.0 41.1 91.3)"/><ellipse cx="44.8" cy="82.2" rx="7.2" ry="3.2" transform="rotate(-120.0 44.8 82.2)"/><ellipse cx="31.6" cy="84.8" rx="7.9" ry="3.1" transform="rotate(-188.5 31.6 84.8)"/><ellipse cx="37.4" cy="77.3" rx="6.9" ry="3.1" transform="rotate(-104.5 37.4 77.3)"/><ellipse cx="24.1" cy="76.0" rx="7.6" ry="3.0" transform="rotate(-173.0 24.1 76.0)"/><ellipse cx="31.4" cy="70.6" rx="6.7" ry="3.0" transform="rotate(-89.0 31.4 70.6)"/><ellipse cx="19.3" cy="65.7" rx="7.3" ry="2.9" transform="rotate(-157.5 19.3 65.7)"/><ellipse cx="27.4" cy="62.5" rx="6.4" ry="2.9" transform="rotate(-73.5 27.4 62.5)"/><ellipse cx="17.3" cy="54.5" rx="7.1" ry="2.8" transform="rotate(-142.0 17.3 54.5)"/><ellipse cx="25.7" cy="53.6" rx="6.2" ry="2.8" transform="rotate(-58.0 25.7 53.6)"/><ellipse cx="18.4" cy="43.2" rx="6.8" ry="2.6" transform="rotate(-126.5 18.4 43.2)"/><ellipse cx="26.3" cy="44.5" rx="5.9" ry="2.6" transform="rotate(-42.5 26.3 44.5)"/><ellipse cx="22.3" cy="32.6" rx="6.5" ry="2.5" transform="rotate(-111.0 22.3 32.6)"/><ellipse cx="29.3" cy="35.9" rx="5.7" ry="2.5" transform="rotate(-27.0 29.3 35.9)"/><ellipse cx="28.9" cy="23.5" rx="6.2" ry="2.4" transform="rotate(-95.5 28.9 23.5)"/><ellipse cx="34.5" cy="28.4" rx="5.4" ry="2.4" transform="rotate(-11.5 34.5 28.4)"/><ellipse cx="37.6" cy="16.5" rx="5.9" ry="2.3" transform="rotate(-80.0 37.6 16.5)"/><ellipse cx="41.5" cy="22.4" rx="5.2" ry="2.3" transform="rotate(4.0 41.5 22.4)"/></g><path d="M52.1 89.2A38 38 0 0 1 45.8 16.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><g transform="translate(120 0) scale(-1 1)"><g fill="currentColor"><ellipse cx="41.1" cy="91.3" rx="8.2" ry="3.2" transform="rotate(-204.0 41.1 91.3)"/><ellipse cx="44.8" cy="82.2" rx="7.2" ry="3.2" transform="rotate(-120.0 44.8 82.2)"/><ellipse cx="31.6" cy="84.8" rx="7.9" ry="3.1" transform="rotate(-188.5 31.6 84.8)"/><ellipse cx="37.4" cy="77.3" rx="6.9" ry="3.1" transform="rotate(-104.5 37.4 77.3)"/><ellipse cx="24.1" cy="76.0" rx="7.6" ry="3.0" transform="rotate(-173.0 24.1 76.0)"/><ellipse cx="31.4" cy="70.6" rx="6.7" ry="3.0" transform="rotate(-89.0 31.4 70.6)"/><ellipse cx="19.3" cy="65.7" rx="7.3" ry="2.9" transform="rotate(-157.5 19.3 65.7)"/><ellipse cx="27.4" cy="62.5" rx="6.4" ry="2.9" transform="rotate(-73.5 27.4 62.5)"/><ellipse cx="17.3" cy="54.5" rx="7.1" ry="2.8" transform="rotate(-142.0 17.3 54.5)"/><ellipse cx="25.7" cy="53.6" rx="6.2" ry="2.8" transform="rotate(-58.0 25.7 53.6)"/><ellipse cx="18.4" cy="43.2" rx="6.8" ry="2.6" transform="rotate(-126.5 18.4 43.2)"/><ellipse cx="26.3" cy="44.5" rx="5.9" ry="2.6" transform="rotate(-42.5 26.3 44.5)"/><ellipse cx="22.3" cy="32.6" rx="6.5" ry="2.5" transform="rotate(-111.0 22.3 32.6)"/><ellipse cx="29.3" cy="35.9" rx="5.7" ry="2.5" transform="rotate(-27.0 29.3 35.9)"/><ellipse cx="28.9" cy="23.5" rx="6.2" ry="2.4" transform="rotate(-95.5 28.9 23.5)"/><ellipse cx="34.5" cy="28.4" rx="5.4" ry="2.4" transform="rotate(-11.5 34.5 28.4)"/><ellipse cx="37.6" cy="16.5" rx="5.9" ry="2.3" transform="rotate(-80.0 37.6 16.5)"/><ellipse cx="41.5" cy="22.4" rx="5.2" ry="2.3" transform="rotate(4.0 41.5 22.4)"/></g><path d="M52.1 89.2A38 38 0 0 1 45.8 16.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g></symbol></svg>
+  <div class="wrap">
+    <div class="grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
+      <div>
+        <p class="eyebrow text-brass-ink">Awards &amp; Recognition</p>
+        <h2 id="awTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">Recognized by clients <em class="font-medium text-brass-ink">and independent reviewers.</em></h2>
+      </div>
+      <p class="text-[15px] leading-relaxed text-mute">Independent rankings, client reviews and community ties earned over twenty years of practice in Long Beach.</p>
+    </div>
+    <div class="draw-x mt-12 h-px bg-brass/60"></div>
+    <ul class="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-5">
+      <li class="reveal-aw"><a class="award" style="--c:#B31B2C" href="https://www.expertise.com/legal/litigation-lawyers/california/long-beach" target="_blank" rel="noopener">
+        <span class="wreath"><svg aria-hidden="true"><use href="#laurel"/></svg><b>2026</b></span>
+        <span class="aw-src">Expertise.com</span>
+        <h3 class="aw-title">Best Litigation Lawyers</h3>
+        <span class="aw-sub">Long Beach, CA &middot; 2026</span><span class="aw-more">View listing <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a></li>
+      <li class="reveal-aw"><a class="award" style="--c:#1E3A8A" href="https://www.expertise.com/legal/real-estate-lawyers/california/long-beach" target="_blank" rel="noopener">
+        <span class="wreath"><svg aria-hidden="true"><use href="#laurel"/></svg><b>2026</b></span>
+        <span class="aw-src">Expertise.com</span>
+        <h3 class="aw-title">Best Real Estate Lawyers</h3>
+        <span class="aw-sub">Long Beach, CA &middot; 2026</span><span class="aw-more">View listing <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a></li>
+      <li class="reveal-aw"><a class="award" style="--c:#3B6BC4" href="https://threebestrated.com/real-estate-lawyers-in-long-beach-ca" target="_blank" rel="noopener">
+        <span class="wreath"><svg aria-hidden="true"><use href="#laurel"/></svg><b class="sm">Top 3</b></span>
+        <span class="aw-src">ThreeBestRated</span>
+        <h3 class="aw-title">Top 3 Real Estate Lawyers</h3>
+        <span class="aw-sub">Long Beach, CA</span><span class="aw-more">View listing <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a></li>
+      <li class="reveal-aw"><a class="award" style="--c:#D99A1E" href="https://www.google.com/search?q=Law+Office+of+Edward+J.+O%27Reilly+Long+Beach+reviews" target="_blank" rel="noopener">
+        <span class="wreath"><svg aria-hidden="true"><use href="#laurel"/></svg><b>100+</b></span>
+        <span class="aw-src">Google Reviews</span>
+        <h3 class="aw-title">Five-Star Client Reviews</h3>
+        <span class="aw-sub">From clients in Long Beach &amp; beyond</span><span class="aw-more">View listing <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a></li>
+      <li class="reveal-aw col-span-2 lg:col-span-1"><div class="award" style="--c:#15803D">
+        <span class="wreath"><svg aria-hidden="true"><use href="#laurel"/></svg><b>&#9752;</b></span>
+        <span class="aw-src">Los Angeles Police</span>
+        <h3 class="aw-title">Emerald Society Member</h3>
+        <span class="aw-sub">Standing with the law-enforcement community</span>
+      </div></li>
+    </ul>
+    <p class="mt-8 max-w-[880px] text-[12px] leading-relaxed text-mute">Rankings and ratings are issued by the independent third parties named above under their own selection criteria; see each source for its methodology. Recognition does not constitute a guarantee, warranty, or prediction regarding the outcome of your legal matter.</p>
+  </div>
+</section>
+
 <!-- ===================== CLIENTS & COMMUNITY ===================== -->
 <section id="community" class="relative bg-navy py-28 text-parch md:py-32" aria-labelledby="comTitle">
   <div class="wrap">
@@ -710,7 +889,7 @@
   </div>
 </section>
 
-<!-- ===================== ATTORNEY ROSTER ===================== -->
+<!-- ===================== ATTORNEYS: LEAD PRINCIPAL + ASSOCIATED COUNSEL NETWORK ===================== -->
 <section id="attorneys" class="relative border-t border-rule bg-paper py-28 md:py-32" aria-labelledby="attTitle">
   <div class="wrap">
     <div class="grid items-center gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">
@@ -719,50 +898,53 @@
       </div>
       <div>
         <p class="eyebrow text-brass-ink">The Attorneys</p>
-        <h2 id="attTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">You will know <em class="font-medium text-brass-ink">exactly who</em> is handling your case.</h2>
-        <p class="mt-6 max-w-[520px] text-[16px] leading-[1.75] text-mute">No call centers and no hand-offs to a junior associate you have never met. Your matter is led by Edward J. O&rsquo;Reilly personally, with experienced Associated Counsel brought in when a case demands it.</p>
+        <h2 id="attTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03] text-navy">Led by Edward J. O&rsquo;Reilly. <em class="font-medium text-brass-ink">Backed by a network.</em></h2>
+        <p class="mt-6 max-w-[540px] text-[16px] leading-[1.75] text-mute">Every matter is supervised by Edward as lead principal and handled by a team that knows your file. When a case calls for more &mdash; a second trial lawyer, local counsel in another county, or a specialist in another state &mdash; the firm brings in associated counsel from its network throughout California and across the country.</p>
       </div>
     </div>
 
-    <div class="mt-20 grid gap-8 md:grid-cols-2">
-      <!-- Edward -->
-      <article class="atty reveal grid sm:grid-cols-[200px_minmax(0,1fr)]">
+    <div class="mt-20 grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+      <!-- Lead principal -->
+      <article class="atty reveal grid sm:grid-cols-[230px_minmax(0,1fr)]">
         <div class="frame relative m-3 border border-brass/50 bg-navy sm:m-4">
-          
           <div class="portrait-live relative aspect-[4/5] h-full w-full overflow-hidden" data-video="./edward-portrait.mp4"><img src="https://nebula.wsimg.com/aad9e34837c73fef11614be38ff740a2?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Edward J. O&rsquo;Reilly" class="block h-full w-full object-cover" style="object-position:50% 25%" loading="lazy"></div>
         </div>
         <div class="p-7 sm:pl-3">
-          <p class="eyebrow text-brass-ink">Principal Attorney</p>
-          <h3 class="mt-2 font-serif text-[2.2rem] font-semibold leading-[1.05] text-navy">Edward J. O&rsquo;Reilly</h3>
+          <p class="eyebrow text-brass-ink">Lead Principal Attorney</p>
+          <h3 class="mt-2 font-serif text-[2.3rem] font-semibold leading-[1.05] text-navy">Edward J. O&rsquo;Reilly</h3>
           <ul class="mt-5 space-y-2.5 border-t border-rule pt-5 text-[14px] text-mute">
             <li><span class="font-semibold text-navy">State Bar of California</span> &middot; Active member</li>
             <li><span class="font-semibold text-navy">U.S. District Court</span> &middot; Central District of California, admitted 2008</li>
             <li><span class="font-semibold text-navy">J.D.</span> &middot; Pacific Coast University School of Law</li>
-            <li><span class="font-semibold text-navy">B.A.</span> &middot; SUNY Albany</li>
+            <li><span class="font-semibold text-navy">Education</span> &middot; Manhattan College; SUNY Albany</li>
+            <li><span class="font-semibold text-navy">Background</span> &middot; Private investigator; international shipping (APL, OOCL)</li>
+            <li><span class="font-semibold text-navy">Member</span> &middot; Los Angeles Police Emerald Society</li>
           </ul>
-          <a href="tel:+15624337363" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold text-navy hover:text-brass-ink">Call Edward <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <blockquote class="mt-6 border-l-[3px] border-brass pl-4 font-serif text-[1.3rem] italic leading-[1.35] text-navy">&ldquo;Often, we can negotiate early settlements to avoid costly litigation &mdash; but when a fight is necessary, we bring relentless courtroom preparation.&rdquo;</blockquote>
+          <a href="tel:+15624337363" class="pa-link mt-6 inline-flex min-h-[44px] items-center gap-2.5 border-b border-brass text-[13.5px] font-semibold text-navy hover:text-brass-ink">Call the Office <svg class="arr h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
 
-      <!-- Batsakis -->
-      <article class="atty reveal grid sm:grid-cols-[200px_minmax(0,1fr)]">
-        <div class="frame relative m-3 border border-brass/50 bg-navy sm:m-4">
-          <!-- Replace with: <img src="batsakis-portrait.jpg" alt="Theodore Batsakis" class="absolute inset-0 h-full w-full object-cover"> -->
-          <div class="flex h-full min-h-[220px] w-full flex-col items-center justify-center text-brass-lt">
-            <span class="grid h-20 w-20 place-items-center rounded-full border border-brass/70 font-serif text-[1.9rem] font-semibold">TB</span>
-            <span class="eyebrow mt-4 text-[10px] text-brass/80">Portrait</span>
-          </div>
-        </div>
-        <div class="p-7 sm:pl-3">
-          <p class="eyebrow text-brass-ink">Associated Counsel</p>
-          <h3 class="mt-2 font-serif text-[2.2rem] font-semibold leading-[1.05] text-navy">Theodore Batsakis</h3>
-          <p class="mt-5 border-t border-rule pt-5 text-[14px] leading-relaxed text-mute">Part of the firm&rsquo;s network of Associated Counsel, adding depth and courtroom capacity when a matter calls for a second experienced advocate.</p>
-          <ul class="mt-3 space-y-2.5 text-[14px] text-mute">
-            <li class="border border-dashed border-rule px-3 py-1.5">[Bar admission &amp; number]</li>
-            <li class="border border-dashed border-rule px-3 py-1.5">[Education &amp; focus areas]</li>
+      <!-- Associated counsel network -->
+      <aside class="net-panel reveal" aria-labelledby="netTitle">
+        <svg class="net-art" viewBox="0 0 400 300" aria-hidden="true" fill="none">
+          <g stroke="rgba(233,115,124,.35)" stroke-width="1"><path d="M60 60 160 110 300 70 350 180 230 240 110 210 60 60M160 110 230 240M160 110 110 210M300 70 230 240M160 110 350 180"/></g>
+          <g fill="#E9737C"><circle cx="160" cy="110" r="7"/></g>
+          <g fill="#7FA3E6"><circle cx="60" cy="60" r="4.5"/><circle cx="300" cy="70" r="4.5"/><circle cx="350" cy="180" r="4.5"/><circle cx="230" cy="240" r="4.5"/><circle cx="110" cy="210" r="4.5"/></g>
+        </svg>
+        <div class="relative">
+          <p class="eyebrow text-brass-lt">Associated Counsel Network</p>
+          <h3 id="netTitle" class="mt-3 font-serif text-[clamp(2rem,2.8vw,2.5rem)] font-semibold leading-[1.05]">Throughout California. <em class="font-medium text-brass-lt">Across the country.</em></h3>
+          <p class="mt-4 text-[15px] leading-[1.75] text-parch/80">Complex and multi-jurisdictional matters rarely stay in one courthouse. The firm collaborates with a wide array of associated counsel &mdash; trial lawyers, local counsel and specialists &mdash; so each client has the right attorneys on the case, wherever it is heard.</p>
+          <ul class="mt-6 space-y-3 text-[14.5px]">
+            <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Trial co-counsel for complex and high-stakes cases</li>
+            <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Local counsel in courts throughout California</li>
+            <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Associated practices nationwide for multi-state matters</li>
+            <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 flex-none rotate-45 bg-brass"></span>Referrals to trusted firms when a matter falls outside our practice</li>
           </ul>
+          <a href="#contact" class="btn btn-brass mt-8">Get in Touch <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
-      </article>
+      </aside>
     </div>
     <div class="mt-16 grid gap-8 md:grid-cols-2">
       <figure class="cred-fig reveal">
@@ -780,6 +962,60 @@
         </figcaption>
       </figure>
     </div>
+  </div>
+</section>
+
+<!-- ===================== USEFUL LINKS ===================== -->
+<section id="resources" class="relative bg-navy py-28 text-parch md:py-32" aria-labelledby="resTitle">
+  <div class="wrap">
+    <div class="grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
+      <div>
+        <p class="eyebrow text-brass-lt">Useful Links</p>
+        <h2 id="resTitle" class="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] font-semibold leading-[1.03]">Courts, agencies <em class="font-medium text-brass-lt">and public records.</em></h2>
+      </div>
+      <p class="text-[15px] leading-relaxed text-parch/75">Quick access to the courts, government agencies and record offices our clients ask about most.</p>
+    </div>
+    <div class="draw-x mt-12 h-px bg-brass/60"></div>
+    <div class="mt-10 grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+      <div class="reveal">
+        <h3 class="eyebrow border-b border-brass/60 pb-4 text-brass-lt">Courts &amp; Case Records</h3>
+        <ul>
+          <li><a class="res-link" href="https://selfhelp.courts.ca.gov/" target="_blank" rel="noopener"><span><span class="font-medium">California Courts Self-Help Guide</span><small>Forms, filing basics and court procedures</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.lacourt.ca.gov/" target="_blank" rel="noopener"><span><span class="font-medium">Los Angeles County Superior Court</span><small>Case access, calendars and courthouse information</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.cacd.uscourts.gov/" target="_blank" rel="noopener"><span><span class="font-medium">U.S. District Court, Central District of California</span><small>Federal court for Los Angeles and Orange counties</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://pacer.uscourts.gov/" target="_blank" rel="noopener"><span><span class="font-medium">PACER</span><small>Federal case records and filings</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.dre.ca.gov/publications/ResourceGuidebook/" target="_blank" rel="noopener"><span><span class="font-medium">California Tenants&rsquo; Guide</span><small>Rights and duties of residential tenants and landlords (DRE)</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="eyebrow border-b border-brass/60 pb-4 text-brass-lt">Rights &amp; Agencies</h3>
+        <ul>
+          <li><a class="res-link" href="https://www.eeoc.gov/" target="_blank" rel="noopener"><span><span class="font-medium">U.S. Equal Employment Opportunity Commission</span><small>Workplace discrimination charges</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://calcivilrights.ca.gov/" target="_blank" rel="noopener"><span><span class="font-medium">California Civil Rights Department</span><small>Formerly DFEH: employment and housing complaints</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://civilrights.justice.gov/" target="_blank" rel="noopener"><span><span class="font-medium">U.S. DOJ Civil Rights Division</span><small>Report a civil rights violation</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://hud.gov/i_want_to/file_a_fair_housing_discrimination_complaint" target="_blank" rel="noopener"><span><span class="font-medium">HUD Fair Housing Complaints</span><small>Housing discrimination</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.hhs.gov/civil-rights/filing-a-complaint/complaint-process/index.html" target="_blank" rel="noopener"><span><span class="font-medium">HHS Office for Civil Rights</span><small>Health-care discrimination and privacy complaints</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.ed.gov/laws-and-policy/civil-rights-laws/file-complaint/ocr-discrimination-complaint-form" target="_blank" rel="noopener"><span><span class="font-medium">U.S. Dept. of Education, Office for Civil Rights</span><small>Discrimination in schools</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.dir.ca.gov/dlse/California_Equal_Pay_Act.htm" target="_blank" rel="noopener"><span><span class="font-medium">California Equal Pay Act</span><small>Department of Industrial Relations</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://aging.ca.gov/Programs_and_Services/Long-Term_Care_Ombudsman/Report_Elder_Abuse_or_Neglect/" target="_blank" rel="noopener"><span><span class="font-medium">Report Elder Abuse or Neglect</span><small>California Department of Aging</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.cdss.ca.gov/" target="_blank" rel="noopener"><span><span class="font-medium">Adult Protective Services</span><small>California Department of Social Services</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="eyebrow border-b border-brass/60 pb-4 text-brass-lt">Public Records &amp; Business</h3>
+        <ul>
+          <li><a class="res-link" href="https://apps.calbar.ca.gov/attorney/LicenseeSearch/QuickSearch" target="_blank" rel="noopener"><span><span class="font-medium">State Bar of California Attorney Search</span><small>Look up any California attorney</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://bizfileonline.sos.ca.gov/search/business" target="_blank" rel="noopener"><span><span class="font-medium">California Secretary of State Business Search</span><small>Corporations, LLCs and filings</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.lavote.gov/" target="_blank" rel="noopener"><span><span class="font-medium">L.A. County Registrar-Recorder/County Clerk</span><small>Recorded property documents and vital records</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://portal.assessor.lacounty.gov/" target="_blank" rel="noopener"><span><span class="font-medium">L.A. County Assessor Property Search</span><small>Parcel and assessment information</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://search.dca.ca.gov/" target="_blank" rel="noopener"><span><span class="font-medium">California DCA License Search</span><small>Verify investigators, contractors and other licensees</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.sba.gov/" target="_blank" rel="noopener"><span><span class="font-medium">U.S. Small Business Administration</span><small>Loans and resources for business owners</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.longbeach.gov/economicdevelopment/business-development/city-loan-programs/" target="_blank" rel="noopener"><span><span class="font-medium">City of Long Beach Loan Programs</span><small>Local small-business financing</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a class="res-link" href="https://www.loc.gov/" target="_blank" rel="noopener"><span><span class="font-medium">Library of Congress</span><small>Federal law and legal research collections</small></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-10 max-w-[860px] text-[12px] leading-relaxed text-parch/60">Links to outside websites are provided for convenience. The firm does not control and is not responsible for their content, and using them does not create an attorney-client relationship.</p>
   </div>
 </section>
 
@@ -827,7 +1063,12 @@
       <div>
         <p class="eyebrow text-brass-lt">Contact the Firm</p>
         <h2 id="ctTitle" class="mt-4 font-serif text-[clamp(2.4rem,4.4vw,4rem)] font-semibold leading-[1.02]">Stand up for your rights. <em class="font-medium text-brass-lt">Start with one call.</em></h2>
-        <p class="mt-6 max-w-[480px] text-[16px] leading-[1.75] text-parch/78">Tell us what happened. You will hear back from the office personally &mdash; with a clear view of where you stand and what comes next.</p>
+        <p class="mt-6 max-w-[480px] text-[16px] leading-[1.75] text-parch/80">Tell us what happened. Our team will review it and get back to you with a clear view of where you stand and what comes next.</p>
+
+        <figure class="mt-9 max-w-[500px] border-l-[3px] border-brass bg-parch/[.05] py-5 pl-6 pr-5">
+          <blockquote class="font-serif text-[clamp(1.35rem,1.9vw,1.65rem)] font-medium italic leading-[1.3]">&ldquo;If my office can&rsquo;t help you, we can refer you to an associated law practice that can help you.&rdquo;</blockquote>
+          <figcaption class="eyebrow mt-3 text-brass-lt">Edward J. O&rsquo;Reilly</figcaption>
+        </figure>
 
         <dl class="mt-12 border-t border-brass/40">
           <div class="flex gap-5 border-b border-parch/12 py-5">
@@ -847,14 +1088,18 @@
             <dt class="eyebrow w-24 flex-none pt-1 text-brass-lt">Languages</dt>
             <dd class="text-[16px]">English &amp; Espa&ntilde;ol &mdash; <em class="font-serif text-[1.1rem] text-brass-lt">Se habla espa&ntilde;ol</em></dd>
           </div>
+          <div class="fb-row gap-5 border-b border-parch/12 py-5" data-fb-wrap hidden>
+            <dt class="eyebrow w-24 flex-none pt-3 text-brass-lt">Follow</dt>
+            <dd class="flex flex-wrap gap-x-6 gap-y-1" data-fb-slot="contact"></dd>
+          </div>
         </dl>
       </div>
 
-      <!-- Consultation form -->
+      <!-- Intake form -->
       <div class="border-t-[3px] border-brass bg-parch p-7 text-navy md:p-10">
         <form id="ctForm" class="space-y-4">
-          <h3 class="font-serif text-[2rem] font-semibold leading-[1.08]">Request a Consultation</h3>
-          <p class="pb-2 text-[14px] text-mute">Share the basics. The office will follow up personally, usually within one business day.</p>
+          <h3 class="font-serif text-[2rem] font-semibold leading-[1.08]">Tell Us About Your Case</h3>
+          <p class="pb-2 text-[14px] text-mute">Share the basics. A member of our team will follow up, usually within one business day. If your matter is outside our practice, we will refer you to an associated firm that can help.</p>
           <label class="fld fld-lt"><span>Full name</span><input name="name" type="text" required autocomplete="name" placeholder="Your name"></label>
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="fld fld-lt"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555"></label>
@@ -862,7 +1107,7 @@
           </div>
           <label class="fld fld-lt"><span>Type of matter</span>
             <select name="matter">
-              <option>Personal injury</option><option>Real estate</option><option>Business &amp; contracts</option><option>Employment</option><option>Transportation &amp; maritime</option><option>Civil, criminal or estates</option><option>Other</option>
+              <option>Personal injury or wrongful death</option><option>Real estate</option><option>Partition action</option><option>Business &amp; contracts</option><option>Employment &amp; labor</option><option>Transportation &amp; maritime</option><option>Lemon law</option><option>Civil litigation</option><option>Criminal law</option><option>Family, trusts &amp; estates</option><option>Private investigation</option><option>Background check</option><option>Something else</option>
             </select>
           </label>
           <label class="fld fld-lt"><span>Brief summary</span><textarea name="summary" placeholder="What happened, and when?"></textarea></label>
@@ -870,14 +1115,14 @@
             <input type="checkbox" required class="mt-0.5 h-5 w-5 flex-none accent-[#0B1D3A]">
             <span>I understand that submitting this form does not create an attorney-client relationship, and I will not send confidential information until the firm agrees to represent me.</span>
           </label>
-          <button type="submit" class="btn btn-brass w-full">Request Priority Review
+          <button type="submit" class="btn btn-brass w-full">Send Your Case Details
             <svg class="arr h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
         </form>
         <div id="ctDone" class="py-6" hidden aria-live="polite">
           <span class="grid h-12 w-12 place-items-center border border-brass-ink text-brass-ink"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <h3 class="mt-4 font-serif text-[2rem] font-semibold leading-[1.08]">Thank you. Your request is in.</h3>
-          <p class="mt-2 text-[14.5px] text-mute">The office will be in touch. If your matter is urgent, please call <a href="tel:+15624337363" class="font-semibold text-navy underline underline-offset-4">(562) 433-7363</a>.</p>
+          <h3 class="mt-4 font-serif text-[2rem] font-semibold leading-[1.08]">Thank you. Your case details are in.</h3>
+          <p class="mt-2 text-[14.5px] text-mute">Our team will be in touch. If your matter is urgent, please call <a href="tel:+15624337363" class="font-semibold text-navy underline underline-offset-4">(562) 433-7363</a>.</p>
         </div>
       </div>
     </div>
@@ -890,11 +1135,18 @@
       <div class="space-y-3 text-[12.5px] leading-[1.7] text-parch/68">
         <p><strong class="tracking-[.06em] text-parch">ATTORNEY ADVERTISING.</strong> This website is attorney advertising under the rules of the State Bar of California. Prior results do not guarantee a similar outcome; each matter depends on its own facts and the applicable law.</p>
         <p><strong class="tracking-[.06em] text-parch">NO ATTORNEY-CLIENT RELATIONSHIP.</strong> Contacting the firm by phone, email or through this website does not create an attorney-client relationship. Please do not send confidential or time-sensitive information until the firm has confirmed in writing that it represents you. The content of this site is general information, not legal advice.</p>
+        <p><strong class="tracking-[.06em] text-parch">ASSOCIATED COUNSEL &amp; REFERRALS.</strong> Associated counsel are independent attorneys and law firms. When the firm works with or refers a matter to another lawyer, any division of fees is disclosed to the client and made only with the client&rsquo;s written consent, as required by the California Rules of Professional Conduct.</p>
         <p>Edward J. O&rsquo;Reilly is licensed by the State Bar of California and admitted to practice before the United States District Court for the Central District of California. Attorney responsible for this website: Edward J. O&rsquo;Reilly, 1 World Trade Center, Suite 800, Long Beach, CA 90802.</p>
       </div>
     </div>
-    <div class="flex flex-wrap justify-between gap-x-8 gap-y-2 border-t border-parch/12 py-6 text-[12px] text-parch/60">
+    <div class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-parch/12 py-6 text-[12px] text-parch/60">
       <span>&copy; 2006&ndash;2026 Law Office of Edward J. O&rsquo;Reilly &middot; O&rsquo;Reilly Law Associates</span>
+      <nav aria-label="Footer" class="flex flex-wrap items-center gap-x-6 gap-y-1">
+        <a href="#resources" class="inline-flex min-h-[40px] items-center hover:text-brass-lt">Useful Links</a>
+        <a href="#pay" class="inline-flex min-h-[40px] items-center hover:text-brass-lt">Pay Online</a>
+        <a href="#awards" class="inline-flex min-h-[40px] items-center hover:text-brass-lt">Recognition</a>
+        <span class="flex items-center gap-x-5" data-fb-slot="footer"></span>
+      </nav>
       <span>1 World Trade Center, Suite 800, Long Beach, CA 90802</span>
     </div>
   </div>
@@ -908,7 +1160,7 @@
     <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
     Call Now
   </a>
-  <a href="#qce" class="flex min-h-[64px] items-center justify-center border-t border-brass bg-navy text-[15px] font-semibold text-parch">Free Case Review</a>
+  <a href="#contact" class="flex min-h-[64px] items-center justify-center border-t border-brass bg-navy text-[15px] font-semibold text-parch">Get in Touch</a>
 </nav>
 
 <script>
@@ -1013,6 +1265,70 @@ const OPPOSING = [
   '7160f8b5c907f311c0dafc70884e9be0'
 ];
 
+/* 3.4: one-line descriptors, aligned 1:1 with OPPOSING (same order) */
+const OPP_INFO = [
+  ['Nutro', 'Premium pet-food brand owned by Mars Petcare.'],
+  ['Audi', 'German luxury automaker, part of the Volkswagen Group.'],
+  ['BDP International', 'Global logistics and freight-forwarding company.'],
+  ['TRAC Intermodal', 'Major provider of chassis for intermodal container transport.'],
+  ['OOCL', 'Orient Overseas Container Line, a Hong Kong\u2013based container carrier.'],
+  ['MOL', 'Mitsui O.S.K. Lines, one of Japan\u2019s largest shipping companies.'],
+  ['Hyundai Merchant Marine', 'South Korean container line, now operating as HMM.'],
+  ['Conagra Brands', 'Major U.S. packaged-foods company.'],
+  ['Ryder', 'Truck leasing, fleet management and supply-chain company.'],
+  ['CEVA Logistics', 'Global supply-chain and freight logistics provider.'],
+  ['APL', 'American President Lines, a U.S.-flag container shipping line.'],
+  ['Union Supply Group', 'Supplier of commissary goods to correctional facilities.'],
+  ['Hanjin Shipping', 'Former South Korean container carrier, once among the world\u2019s largest.'],
+  ['Walmart', 'The world\u2019s largest retailer.'],
+  ['LAUSD', 'Los Angeles Unified School District, the nation\u2019s second-largest school district.'],
+  ['City of Lakewood', 'City government in southeast Los Angeles County.'],
+  ['Auburn Network', 'Sports broadcasting and media network.'],
+  ['Toyota', 'Japanese automaker.'],
+  ['Ford', 'American automaker headquartered in Dearborn, Michigan.'],
+  ['HMM', 'South Korea\u2019s flagship container shipping line.'],
+  ['Hilton Hotels & Resorts', 'Global hotel brand of Hilton Worldwide.'],
+  ['ASCAP', 'Performing-rights organization that licenses music for songwriters and publishers.'],
+  ['DCLI', 'Direct ChassisLink, a major U.S. chassis provider.'],
+  ['Monaco Coach Corporation', 'Former manufacturer of luxury motorhomes and RVs.'],
+  ['AUHS', 'American University of Health Sciences in Signal Hill, California.'],
+  ['GEICO', 'National auto insurer owned by Berkshire Hathaway.'],
+  ['Wells Fargo', 'One of the largest U.S. banks.'],
+  ['K Line', 'Kawasaki Kisen Kaisha, a Japanese shipping company.'],
+  ['Meridiam', 'Global investor in long-term public infrastructure.'],
+  ['Patagonia', 'Outdoor apparel company based in Ventura, California.'],
+  ['CMA CGM', 'French container shipping and logistics group.'],
+  ['COSCO', 'China COSCO Shipping, China\u2019s state-owned shipping group.'],
+  ['Hamburg S\u00fcd', 'German container line, now part of Maersk.'],
+  ['Silent Radio', 'Film and television production company.'],
+  ['CareMore', 'Medicare Advantage health-care provider founded in Southern California.'],
+  ['Caterpillar', 'World\u2019s largest maker of construction and mining equipment.'],
+  ['Gavilon', 'Agricultural commodities and grain trading company.'],
+  ['Mars, Incorporated', 'Global maker of confectionery, pet food and food products.'],
+  ['ZIM', 'Israeli international container shipping company.'],
+  ['Yang Ming', 'Taiwanese container shipping line.'],
+  ['FlexiVan', 'Chassis leasing company for intermodal transport.'],
+  ['Vons', 'Southern California supermarket chain (Albertsons Companies).'],
+  ['Joe Hand Promotions', 'Commercial distributor of pay-per-view boxing and UFC broadcasts.'],
+  ['Carmenita Truck Center', 'Commercial truck dealership in Santa Fe Springs, California.'],
+  ['DoubleTree by Hilton', 'Hilton\u2019s upscale hotel brand.'],
+  ['Anheuser-Busch', 'America\u2019s largest brewer, maker of Budweiser.'],
+  ['MSC', 'Mediterranean Shipping Company, the world\u2019s largest container line.'],
+  ['LBUSD', 'Long Beach Unified School District.'],
+  ['Adecco', 'Global staffing and workforce solutions company.'],
+  ['NYK Line', 'Nippon Yusen Kaisha, a Japanese shipping company.'],
+  ['Kia', 'South Korean automaker.'],
+  ['George Harrisongs', 'Music publishing company of the late George Harrison.'],
+  ['Hapag-Lloyd', 'German container shipping company.'],
+  ['Nifty After Fifty', 'Fitness and wellness centers for older adults.']
+];
+
+/* 3.4: official Facebook page(s). Add each URL and the links render in the
+   header, the contact details and the footer; with an empty list nothing shows. */
+const FACEBOOK_PAGES = [
+  // { label: 'O\u2019Reilly Law Associates', url: 'https://www.facebook.com/your-page' }
+];
+
 (function buildAssets() {
   const mkImg = (id, alt, cls) => {
     const img = new Image();
@@ -1034,14 +1350,54 @@ const OPPOSING = [
       });
     }
   });
-  // Opposing parties grid
+  // Opposing parties grid: full-color logos + slide-up descriptor (hover, keyboard focus or tap)
   const grid = document.getElementById('opGrid');
-  OPPOSING.forEach(id => {
-    const tile = document.createElement('div');
+  OPPOSING.forEach((id, i) => {
+    const [name, desc] = OPP_INFO[i] || ['Opposing party', ''];
+    const tile = document.createElement('button');
+    tile.type = 'button';
     tile.className = 'op-tile';
-    tile.appendChild(mkImg(id, 'Opposing party logo'));
+    tile.setAttribute('aria-expanded', 'false');
+    tile.setAttribute('aria-label', name + (desc ? ': ' + desc : ''));
+    tile.appendChild(mkImg(id, name));
+    const info = document.createElement('span');
+    info.className = 'op-info';
+    info.setAttribute('aria-hidden', 'true');
+    info.innerHTML = '<b></b>';
+    info.firstChild.textContent = name;
+    info.appendChild(document.createTextNode(desc));
+    tile.appendChild(info);
     grid.appendChild(tile);
   });
+  // Tap / click toggles the descriptor (touch screens have no hover); one open at a time
+  const closeAll = except => grid.querySelectorAll('.op-tile.is-open').forEach(t => { if (t !== except) { t.classList.remove('is-open'); t.setAttribute('aria-expanded', 'false'); } });
+  grid.addEventListener('click', e => {
+    const tile = e.target.closest('.op-tile'); if (!tile) return;
+    closeAll(tile);
+    const open = tile.classList.toggle('is-open');
+    tile.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('#opGrid')) closeAll(null); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(null); });
+})();
+
+(function facebookLinks() {
+  const pages = FACEBOOK_PAGES.filter(p => p && /^https:\/\/(www\.|m\.)?facebook\.com\//.test(p.url));
+  if (!pages.length) return;
+  const ICON = '<svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.5H8v3h2.4V21z"/></svg>';
+  document.querySelectorAll('[data-fb-slot]').forEach(slot => {
+    const compact = slot.dataset.fbSlot === 'header';
+    pages.forEach(p => {
+      const a = document.createElement('a');
+      a.className = 'fb-link';
+      a.href = p.url; a.target = '_blank'; a.rel = 'noopener';
+      a.setAttribute('aria-label', (p.label || 'Facebook') + ' on Facebook');
+      a.innerHTML = ICON + (compact ? '' : '<span></span>');
+      if (!compact) a.lastChild.textContent = p.label || 'Facebook';
+      slot.appendChild(a);
+    });
+  });
+  document.querySelectorAll('[data-fb-wrap]').forEach(w => { w.hidden = false; });
 })();
 
 /* ============================================================
@@ -1075,7 +1431,7 @@ const COMMUNITY = [3, 9, 15, 16, 17, 28, 27, 34, 40, 43, 45, 53, 4, 65, 86, 19, 
   COURTS.forEach(([n, name, sub], i) => {
     const f = document.createElement('figure'); f.className = 'court';
     f.innerHTML = `<div class="court-img"><img src="${PHOTO(n)}" alt="${name}" loading="lazy"></div>
-      <figcaption><span class="num">${String(i + 1).padStart(2, '0')}</span><span><strong class="block font-serif text-[1.45rem] font-semibold leading-tight text-navy">${name}</strong><span class="mt-1 block text-[12px] font-semibold uppercase tracking-[.14em] text-mute">${sub}</span></span></figcaption>`;
+      <figcaption><span class="cdot" aria-hidden="true"></span><span><strong class="block font-serif text-[1.45rem] font-semibold leading-tight text-navy">${name}</strong><span class="mt-1 block text-[12px] font-semibold uppercase tracking-[.14em] text-mute">${sub}</span></span></figcaption>`;
     ct.appendChild(f);
   });
   const cg = document.getElementById('comGrid');
@@ -1251,7 +1607,7 @@ const STRIPE_LINKS = {
   const areaOut = document.getElementById('qceArea');
   function go(n) {
     panes.forEach(p => { p.hidden = Number(p.dataset.step) !== n; });
-    stepLbl.textContent = n === 3 ? 'Received' : `Step ${n} of 2`;
+    stepLbl.textContent = n === 3 ? 'Received' : (n === 1 ? 'Your matter' : 'Your details');
     seg2.classList.toggle('on', n >= 2);
     const shown = qce.querySelector(`[data-step="${n}"]`);
     if (window.gsap && !reduceMotion) gsap.from(shown, { x: 18, opacity: 0, duration: .45, ease: 'power3.out' });
@@ -1357,57 +1713,11 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: self => { boost = Math.max(boost, 1 + Math.min(Math.abs(self.getVelocity()) / 260, 7)); } });
   gsap.ticker.add(() => { boost += (1 - boost) * 0.06; loops.forEach(t => t.timeScale(boost)); });
 
-  /* --- Practice areas --- */
-  const cards = gsap.utils.toArray('.pa-card');
-  const paNum = document.getElementById('paNum');
-  const paName = document.getElementById('paName');
-  const segs = document.querySelectorAll('.pa-seg');
-  let current = -1;
-  function setActive(i) {
-    if (i === current || i < 0) return;
-    current = i;
-    segs.forEach((s, k) => s.classList.toggle('on', k <= i));
-    gsap.to(paNum, { yPercent: -40, opacity: 0, duration: .18, ease: 'power2.in', onComplete: () => {
-      paNum.textContent = String(i + 1).padStart(2, '0');
-      paName.textContent = cards[i].dataset.name;
-      gsap.fromTo(paNum, { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .35, ease: 'power3.out' });
-    }});
-  }
-  setActive(0);
-
+  /* --- Areas of law + investigations + awards + links: staggered reveals --- */
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 768px)', () => {
-    // Pin the 35% sidebar for the length of the card stack
-    const pin = document.getElementById('paPin');
-    ScrollTrigger.create({
-      trigger: pin,
-      start: 'top 124px',
-      endTrigger: '#paCards',
-      end: () => `bottom ${124 + pin.offsetHeight}px`,
-      pin: true,
-      pinSpacing: false,
-      invalidateOnRefresh: true
-    });
-    // Counter follows the card in view
-    cards.forEach((card, i) => {
-      ScrollTrigger.create({ trigger: card, start: 'top 62%', onEnter: () => setActive(i), onLeaveBack: () => setActive(i - 1) });
-    });
-    // Stacked-card transition: each card recedes as the next one slides over it
-    cards.forEach((card, i) => {
-      if (i === cards.length - 1) return;
-      const shade = document.createElement('span');
-      shade.className = 'pa-shade';
-      card.appendChild(shade);
-      const st = { trigger: cards[i + 1], start: 'top bottom', end: () => `top ${124 + (i + 1) * 14}px`, scrub: true, invalidateOnRefresh: true };
-      gsap.to(card, { scale: 0.93, ease: 'none', scrollTrigger: st });
-      gsap.to(shade, { opacity: 0.35, ease: 'none', scrollTrigger: { ...st } });
-    });
-  });
-  mm.add('(max-width: 767px)', () => {
-    cards.forEach((card, i) => {
-      ScrollTrigger.create({ trigger: card, start: 'top 60%', onEnter: () => setActive(i), onLeaveBack: () => setActive(i - 1) });
-      gsap.from(card, { y: 40, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
-    });
+  [['.pa-card', 0.08], ['.reveal-aw', 0.07], ['.inv-strip', 0]].forEach(([sel, stg]) => {
+    gsap.set(sel, { opacity: 0, y: 36 });
+    ScrollTrigger.batch(sel, { start: 'top 90%', once: true, onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: .8, stagger: stg, ease: 'power3.out', clearProps: 'transform' }) });
   });
 
   /* --- Heritage: tunnel parallax, scrubbed metrics, timeline fill --- */
@@ -1423,13 +1733,8 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   gsap.fromTo('#tlFill', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top 62%', end: 'bottom 62%', scrub: true } });
   gsap.utils.toArray('.chapter').forEach(ch => {
-    const body = ch.querySelector('.ch-body');
-    gsap.set(body, { opacity: 0.35 });
-    ScrollTrigger.create({
-      trigger: ch, start: 'top 62%',
-      onEnter: () => { ch.classList.add('is-lit'); gsap.to(body, { opacity: 1, duration: .5 }); },
-      onLeaveBack: () => { ch.classList.remove('is-lit'); gsap.to(body, { opacity: 0.35, duration: .4 }); }
-    });
+    ScrollTrigger.create({ trigger: ch, start: 'top 62%', toggleClass: { targets: ch, className: 'is-lit' } });
+    gsap.from(ch.querySelector('.ch-body'), { y: 30, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: ch, start: 'top 82%', once: true } });
   });
 
   /* --- Opposing parties: staggered tile reveal --- */
