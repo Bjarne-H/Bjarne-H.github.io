@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>O'Reilly Law Associates LLP | Long Beach Attorneys | Edward J. O'Reilly</title>
+<!-- Revision 4.2: 3D emblem made translucent (navy keyline) so it blends into the hero -->
+<!-- Revision 4.1: removed the Foltz courthouse photo (no longer with the practice); office hours filled in -->
 <!-- Revision 4.0: softer biography (less law-enforcement emphasis); no investigation / background-check services; Partition Actions folded into Real Estate Law -->
 <!-- Revision 3.9: referral quote in the hero; practice-area pages from the original site (hover previews on the Practice Areas buttons, full pages in an overlay) -->
 <!-- Revision 3.8: referral quote updated everywhere to the firm’s approved wording -->
@@ -960,19 +962,12 @@
         </div>
       </aside>
     </div>
-    <div class="mt-16 grid gap-8 md:grid-cols-2">
+    <div class="mx-auto mt-16 max-w-[640px]">
       <figure class="cred-fig reveal">
         <div class="cred-img p-4"><img src="https://nebula.wsimg.com/76949dd68f91c59a2cf4b9ea7ad13c1a?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Certificate admitting Edward J. O&rsquo;Reilly to practice before the U.S. District Court, Central District of California" class="object-contain" loading="lazy"></div>
         <figcaption class="mt-4 flex items-baseline gap-4 border-t border-rule pt-4">
           <span class="font-serif text-[1.4rem] italic text-brass-ink">2008</span>
           <span><strong class="block font-serif text-[1.5rem] font-semibold leading-tight text-navy">Admitted to federal court</strong><span class="text-[14px] text-mute">U.S. District Court, Central District of California &mdash; December 29, 2008</span></span>
-        </figcaption>
-      </figure>
-      <figure class="cred-fig reveal">
-        <div class="cred-img"><img src="https://nebula.wsimg.com/872800546f7e05cb8102809455013de5?AccessKeyId=6F15694DD1094AB6F454&disposition=0&alloworigin=1" alt="Edward J. O&rsquo;Reilly outside the Clara Shortridge Foltz courthouse of the Los Angeles Superior Court" class="object-cover" loading="lazy"></div>
-        <figcaption class="mt-4 flex items-baseline gap-4 border-t border-rule pt-4">
-          <span class="font-serif text-[1.4rem] italic text-brass-ink">L.A.</span>
-          <span><strong class="block font-serif text-[1.5rem] font-semibold leading-tight text-navy">Los Angeles Superior Court</strong><span class="text-[14px] text-mute">Clara Shortridge Foltz Courthouse, downtown Los Angeles</span></span>
         </figcaption>
       </figure>
     </div>
@@ -1290,7 +1285,7 @@
           </div>
           <div class="flex gap-5 border-b border-parch/12 py-5">
             <dt class="eyebrow w-24 flex-none pt-1 text-brass-lt">Hours</dt>
-            <dd class="text-[15px] text-parch/80"><span class="border border-dashed border-parch/35 px-2.5 py-1">[Insert office hours]</span></dd>
+            <dd class="text-[16px] leading-relaxed">Open 7 days a week<br><span class="text-parch/80">Monday &ndash; Sunday &middot; 9:00 a.m. &ndash; 5:00 p.m.</span></dd>
           </div>
           <div class="flex gap-5 border-b border-parch/12 py-5">
             <dt class="eyebrow w-24 flex-none pt-1 text-brass-lt">Languages</dt>
@@ -2475,7 +2470,7 @@ function boot() {
   };
   const enamel = (hex, rough) => new THREE.MeshPhysicalMaterial({ color: hex, metalness: 0, roughness: rough, clearcoat: .7, clearcoatRoughness: .12, envMapIntensity: .72 });
   const MATS = [enamel(0xC00812, .38), enamel(0xFAFAF8, .4), enamel(0x0B18BE, .38)];   // emblem red, white, blue
-  const EDGE_MAT = new THREE.MeshBasicMaterial({ color: 0x05070d, side: THREE.BackSide });  // the emblem's black keyline
+  const EDGE_MAT = new THREE.MeshBasicMaterial({ color: 0x0B1630, side: THREE.BackSide });  // keyline in the site's navy so the pin blends in
   const capGeo = r => new THREE.SphereGeometry(r, radSeg, Math.max(8, radSeg / 2));
   function piece(k, span, mat, withCaps) {
     const g = new THREE.Group(), morph = [], caps = [];
@@ -2532,7 +2527,7 @@ function boot() {
   scene.add(dust);
 
   /* ---- State: scroll timeline writes S; intro writes I ---- */
-  const S = { xf: .5, yf: 0, ry: -.65, rx: .34, rz: .1, scale: .92, e: 0, cz: 680, lab: 0, p: 0 };
+  const S = { xf: .5, yf: 0, ry: -.65, rx: .34, rz: .1, scale: .92, e: 0, cz: 680, lab: 0, p: 0, a: .5 };  // a = translucency of the whole mark
   const I = { e: reduce ? 0 : 1.7, s: reduce ? 1 : .55, spin: reduce ? 0 : -2.4, o: reduce ? 1 : 0 };
   const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
 
@@ -2540,8 +2535,8 @@ function boot() {
   const line = document.getElementById('knotLine');
 
   function layoutForViewport() {
-    if (isDesk()) { S.xf = .5; S.yf = -.03; S.scale = 1.3; }
-    else { S.xf = .56; S.yf = .46; S.scale = 1; }
+    if (isDesk()) { S.xf = .5; S.yf = -.03; S.scale = 1.3; S.a = .5; }
+    else { S.xf = .56; S.yf = .46; S.scale = 1; S.a = .42; }
   }
   layoutForViewport();
 
@@ -2555,11 +2550,12 @@ function boot() {
         .to(S, { ry: Math.PI * .95, rx: .14, rz: 0, duration: .30, ease: 'sine.inOut' }, 0)
         .to(S, { xf: 0, yf: -.07, scale: 1.0, duration: .26, ease: 'power2.inOut' }, .08)
         .to(S, { ry: Math.PI * 2, rx: 0, duration: .14, ease: 'power2.out' }, .30)
+        .to(S, { a: .78, duration: .2, ease: 'sine.inOut' }, .14)
         .to(S, { e: 1, cz: 940, yf: -.17, duration: .16, ease: 'power3.inOut' }, .38)
         .to(S, { lab: 1, duration: .06 }, .50)
         .to(S, { lab: 0, duration: .05 }, .70)
         .to(S, { e: 0, cz: 660, duration: .14, ease: 'power3.inOut' }, .72)
-        .to(S, { ry: Math.PI * 2.22, rx: .16, yf: .1, scale: .82, duration: .18, ease: 'sine.inOut' }, .80)
+        .to(S, { ry: Math.PI * 2.22, rx: .16, yf: .1, scale: .82, a: .66, duration: .18, ease: 'sine.inOut' }, .80)
         .fromTo(line, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .08, ease: 'power2.out' }, .86)
         .set({}, {}, 1);
       return () => { S.e = 0; S.lab = 0; S.cz = 680; S.ry = -.65; S.rx = .34; S.rz = .1; S.p = 0; layoutForViewport(); };
@@ -2610,7 +2606,7 @@ function boot() {
     halo.scale.setScalar(620 * S.scale * (1 + Math.min(e, 1) * .3));
     halo.material.opacity = .5 * I.o;
     dust.position.z = S.p * 340; dust.rotation.y = t * .012;
-    host.style.opacity = String(I.o);
+    host.style.opacity = String(I.o * S.a);
     renderer.render(scene, camera);
 
     // Labels track the tips of the separated bands
@@ -2642,7 +2638,7 @@ function boot() {
   resize();
   frame(0);
   document.documentElement.classList.add('has-3d');
-  if (reduce) host.style.opacity = '1';
+  if (reduce) host.style.opacity = String(S.a);
   window.__knot3d = { S, I, best, frame, renderer };
 }
 
